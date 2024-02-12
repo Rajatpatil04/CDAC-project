@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 export default function AdminApproval(){
   const[customers, setCustomers] = useState([]);
   const[hosts, setHosts] = useState([]);
+  const[approve,setApprove] = useState([]);
 
    useEffect(()=>
    {
@@ -27,16 +28,20 @@ export default function AdminApproval(){
         })
         .catch((error) => console.error('Error fetching hosts:', error));
     };
-    const handleApproval=()=>{
-      fetch('http://localhost:8081/changestatus')
-      .then((res)=>res.json())
-      .then((data)=>{
-              
-              console.log(data);
-     })
-         .catch((error) => console.error('Error in changing status:',error));
+    const handleApproval = (username) => {
+      fetch(`http://localhost:8081/changestatus?username=${username}`, {
+        method: 'PUT',
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        setApprove((prevApprove) => ({
+          ...prevApprove,
+          [username]: data.status === 'approved', // Assuming 'approved' is the status received
+        }));
+        console.log(data);
+      })
+      .catch((error) => console.error('Error in changing status:', error));
     };
-  
   return(
     <div>
             <h2>Customers</h2>
@@ -70,7 +75,15 @@ export default function AdminApproval(){
               <td>{customer.adhar_card}</td>
               <td>{customer.address}</td>
               <td>{customer.email_id}</td>
-              <button type="button" className="btn btn-success" onClick={() => handleApproval(customer.customer_idid)}>Approve</button>
+              <td>
+              <button
+                  type="button"
+                  className={`btn ${approve[customer.email_id] ? 'btn-success' : 'btn-primary'}`}
+                  onClick={() => handleApproval(customer.email_id)}
+                  >
+                  {approve[customer.email_id] ? 'Approved' : 'Approve'}
+                </button>
+                </td>
             </tr>
           ))}
         </tbody>
@@ -103,7 +116,15 @@ export default function AdminApproval(){
               <td>{host.pancard_number}</td>
               <td>{host.adharcard_number}</td>
               <td>{host.address}</td>
-              <button type="button" className="btn btn-success" onClick={() => handleApproval(host.id)}>Approve</button>
+              <td>
+              <button
+                  type="button"
+                  className={`btn ${approve[host.email_id] ? 'btn-success' : 'btn-primary'}`}
+                  onClick={() => handleApproval(host.email_id)}
+                  >
+                  {approve[host.email_id] ? 'Approved' : 'Approve'}
+                </button>
+                  </td>
             </tr>
           ))}
         </tbody>

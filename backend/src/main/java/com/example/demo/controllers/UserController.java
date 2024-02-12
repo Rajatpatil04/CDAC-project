@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entities.Area;
@@ -42,4 +44,10 @@ public class UserController {
 	public List<User> getAll() {
         return uservice.getAllUsers();
     }
+	
+	@PutMapping("/changestatus")
+	public int updateStatus(@RequestParam String username) {
+	    return uservice.updateStatus(username);
+	}
+
 }
