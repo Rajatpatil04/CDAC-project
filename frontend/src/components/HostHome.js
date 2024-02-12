@@ -22,14 +22,13 @@ export default function HostHome(){
             
             <Nav className="ml-auto">
               {/* <NavLink to ="/" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink> */}
-              <NavLink to ="/showcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
+              <NavLink to ="/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
               <NavLink to ="/logout" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGOUT</b></h5></NavLink>
             </Nav>
           </Navbar.Collapse>
         </div>
       </Navbar>
         <h1>Host Home</h1>
-        <p> Login status: {mystate.loggedIn.toString()}</p>
         <Outlet/>
       </div>
   )
