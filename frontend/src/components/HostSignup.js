@@ -491,7 +491,7 @@ function HostSignup() {
         <button
           type="submit"
           className="text-white p-2 rounded bg-dark"
-          disabled={!formData.formValid} 
+          disabled={formData.formValid} 
         >
           Register
         </button>

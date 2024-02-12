@@ -3,21 +3,21 @@ import {  useNavigate } from 'react-router-dom';
 
 const init = {
 
-  Fname: {value:'',valid: false, touched: false, error:""},
-  Lname: {value:"",valid: false, touched: false, error:""},
-  email_id: {value:'',valid: false, touched: false, error:""},
-  contact: {value:'',valid: false, touched: false, error:""},
-  emergency_contact: {value:'',valid: false, touched: false, error:""},
-  dob: {value:'',valid: false, touched: false, error:""},
-  license_no: {value:'',valid: false, touched: false, error:""},
-  pancard_no: {value:'',valid: false, touched: false, error:""},
-  adhar_card: {value:'',valid: false, touched: false, error:""},
-  address: {value:'',valid: false, touched: false, error:""},
-  username: {value:'',valid: false, touched: false, error:""},
-  password: {value:'',valid: false, touched: false, error:""},
-  confirmPassword: {value:'',valid: false, touched: false, error:""},
-  area_id: { value: '', valid: false, touched: false, error: '' },
-  formValid: true
+    fname: { value: '', valid: false, touched: false, error: '' },
+    lname: { value: '', valid: false, touched: false, error: '' },
+    email_id: { value: '', valid: false, touched: false, error: '' },
+    contact: { value: '', valid: false, touched: false, error: '' },
+    dob: { value: '', valid: false, touched: false, error: '' },
+    pancard_number: { value: '', valid: false, touched: false, error: '' },
+    adharcard_number: { value: '', valid: false, touched: false, error: '' },
+    upi_id: { value: '', valid: false, touched: false, error: '' },
+    area_id: { value: '', valid: false, touched: false, error: '' },
+    address: { value: '', valid: false, touched: false, error: '' },
+    username: {value:'',valid: false, touched: false, error:""},
+    password: {value:'',valid: false, touched: false, error:""},
+    confirmPassword: {value:'',valid: false, touched: false, error:""},
+    area_id: { value: '', valid: false, touched: false, error: '' },
+    formValid: true,
   
 }
 
@@ -39,16 +39,16 @@ const reducer = (state, action) => {
   }
 };
 
-function CustomerSignup() {
+function Hostsignup1() {
   let navigate = useNavigate();
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [areas, setAreas] = useState([]);
-  const[customers, setCustomers] = useState([]);
+  const[hosts, setHosts] = useState([]);
   const[users, setUsers] = useState([]);
   
   useEffect(() => {
     fetchAreas();
-    fetchCustomers();
+    fetchHosts();
     fetchUsers();
   }, []);
 
@@ -61,14 +61,14 @@ function CustomerSignup() {
       })
       .catch((error) => console.error('Error fetching areas:', error));
   };
-  const fetchCustomers = () => {
-    fetch('http://localhost:8081/getallcustomers')
+  const fetchHosts = () => {
+    fetch('http://localhost:8081/getallhosts')
       .then((res) => res.json())
       .then((data) => {
-        setCustomers(data);
+        setHosts(data);
         console.log(data);
       })
-      .catch((error) => console.error('Error fetching Customers:', error));
+      .catch((error) => console.error('Error fetching hosts:', error));
   };
   const fetchUsers = () => {
     fetch('http://localhost:8081/getallusers')
@@ -79,23 +79,23 @@ function CustomerSignup() {
       })
       .catch((error) => console.error('Error fetching users:', error));
   };
-  const [customer, dispatch] = useReducer(reducer, init);
+  const [host, dispatch] = useReducer(reducer, init);
   const validate1 = (key,value)=>{  
     let valid = true;
     let error = "";
     
     
     switch (key) {
-      case 'Fname':
-        var Fnameregex = /^[A-Z]{1}[a-z]+/;
-        if(!Fnameregex.test(value)){
+      case 'fname':
+        var fnameregex = /^[A-Z]{1}[a-z]+/;
+        if(!fnameregex.test(value)){
             valid = false;
             error = "First Name not valid!!!"
         }
         break;
-      case 'Lname':
-              var Lnameregex = /^[A-Z]{1}[a-z]+/;
-              if(!Lnameregex.test(value)){
+      case 'lname':
+              var lnameregex = /^[A-Z]{1}[a-z]+/;
+              if(!lnameregex.test(value)){
                   valid = false;
                   error = "Last Name not valid!!!"
               }
@@ -114,30 +114,24 @@ function CustomerSignup() {
                     error = "Contact not valid!!!"
                 }
                 break;   
-      case 'emergency_contact' :
-          const econRegex = /^[0-9]{10}$/;
-          if(!econRegex.test(value)){
-               valid = false;
-               error = "Contact not valid!!!"
-           }
-            break;  
-      case 'license_no' :
-           const license_noregex=/^[A-Z0-9]{1,10}$/;   
-           if(!license_noregex.test(value)){
-                   valid=false;
-                  error="License number is Invalid!!!"
-          }
-          break;
-      case 'pancard_no' :
-              const pancard_noRegex =/^[A-Z]{5}[0-9]{4}[A-Z]$/;
-              if(!pancard_noRegex.test(value)){
+      case 'pancard_number' :
+              const pancard_numberRegex =/^[A-Z]{5}[0-9]{4}[A-Z]$/;
+              if(!pancard_numberRegex.test(value)){
                 valid=false;
-               error="pancard_no number is Invalid!!!"
+               error="pancard_number number is Invalid!!!"
               }
               break;
-       case 'adhar_card' :
-                const adhar_cardRegex =/^\d{12}$/;
-                if(!adhar_cardRegex.test(value)){
+
+      case 'upi_id' :
+              const upi_idRegex =/^[a-zA-Z0-9._-]+@[a-zA-Z]{3,}$/;
+              if(!upi_idRegex.test(value)){
+                valid=false;
+               error="upi_id number is Invalid!!!"
+              }
+              break;
+       case 'adharcard_number' :
+                const adharcard_numberRegex =/^\d{12}$/;
+                if(!adharcard_numberRegex.test(value)){
                   valid=false;
                  error="Adhar number is Invalid!!!"
                 }
@@ -186,7 +180,7 @@ function CustomerSignup() {
 
                   break; 
                   case 'confirmpassword':
-                    if(value !== customer.confirmPassword.value){
+                    if(value !== host.confirmPassword.value){
                         valid = false;
                         error = "Both Password Dont Match. Re-Enter Pass!!!";
                     }
@@ -200,8 +194,8 @@ function CustomerSignup() {
         setMsg("");
         const { valid, error } = validate1(key, value);
         let formValid = true;
-        for (let field in customer) {
-          if (field !== 'formValid' && customer[field].valid === false) {
+        for (let field in host) {
+          if (field !== 'formValid' && host[field].valid === false) {
             formValid = false;
             break;
           }
@@ -215,16 +209,16 @@ function CustomerSignup() {
       //   .then((data) => {
       //       if(data.length > 0){
       //           setMsg("User Already Present!!!")
-      //           customer.email_id.valid=false;
+      //           host.email_id.valid=false;
       //       }else{
       //           setMsg("");
-      //           customer.email_id.valid=true;
+      //           host.email_id.valid=true;
       //       }
       //   })
       //   console.log(msg);
       // }
       const checkemail_id = (value) => {
-        const isemail_idTaken = customers.some((customer) => customer.email_id === value);
+        const isemail_idTaken = hosts.some((host) => host.email_id === value);
       
         if (isemail_idTaken) {
           setMsg("email_id is already registered!");
@@ -248,10 +242,11 @@ function CustomerSignup() {
       };
       
       const checkContact = (value) => {
-        const isContactTaken = customers.some((customer) => customer.contact === value);
+        const isContactTaken = hosts.some((host) => host.contact === value);
       
         if (isContactTaken) {
-            dispatch({
+          setMsg("Contact number is already registered!");
+          dispatch({
             type: 'update',
             field: 'contact',
             value,
@@ -270,12 +265,13 @@ function CustomerSignup() {
         }
       };
       const checkAdharCard = (value) => {
-        const isAdharCardTaken = customers.some((customer) => customer.adhar_card === value);
+        const isAdharCardTaken = hosts.some((host) => host.adharcard_number === value);
     
         if (isAdharCardTaken) {
+          setMsg('Adhar Card is already registered!');
           dispatch({
             type: 'update',
-            field: 'adhar_card',
+            field: 'adharcard_number',
             value,
             valid: false,
             error: 'Adhar Card is already registered!',
@@ -284,7 +280,7 @@ function CustomerSignup() {
           setMsg('');
           dispatch({
             type: 'update',
-            field: 'adhar_card',
+            field: 'adharcard_number',
             value,
             valid: true,
             error: '',
@@ -293,12 +289,13 @@ function CustomerSignup() {
       };
     
       const checkPancardNo = (value) => {
-        const isPancardNoTaken = customers.some((customer) => customer.pancard_no === value);
+        const isPancardNoTaken = hosts.some((host) => host.pancard_number === value);
     
         if (isPancardNoTaken) {
+          setMsg('Pancard No is already registered!');
           dispatch({
             type: 'update',
-            field: 'pancard_no',
+            field: 'pancard_number',
             value,
             valid: false,
             error: 'Pancard No is already registered!',
@@ -307,40 +304,44 @@ function CustomerSignup() {
           setMsg('');
           dispatch({
             type: 'update',
-            field: 'pancard_no',
+            field: 'pancard_number',
             value,
             valid: true,
             error: '',
           });
         }
       };
+
+      const checkUpiId = (value) => {
+        const isUpiIdtaken = hosts.some((host) => host.upi_id === value);
     
-      const checkLicenseNo = (value) => {
-        const isLicenseNoTaken = customers.some((customer) => customer.license_no === value);
-    
-        if (isLicenseNoTaken) {
+        if (isUpiIdtaken) {
+          setMsg('UPI Id is already registered!');
           dispatch({
             type: 'update',
-            field: 'license_no',
+            field: 'upi_id',
             value,
             valid: false,
-            error: 'License No is already registered!',
+            error: 'UpI Id is already registered!',
           });
         } else {
           setMsg('');
           dispatch({
             type: 'update',
-            field: 'license_no',
+            field: 'upi_id',
             value,
             valid: true,
             error: '',
           });
         }
       };
+    
+      
       const checkUsername = (value) => {
         const isUsernameTaken = users.some((user) => user.username === value);
       
         if (isUsernameTaken) {
+          setMsg('Username is already taken!');
           dispatch({
             type: 'update',
             field: 'username',
@@ -367,28 +368,27 @@ function CustomerSignup() {
       method : "POST",
       headers : {"content-type":"application/json"},
       body : JSON.stringify({
-          fname : customer.Fname.value,
-          lname : customer.Lname.value,
-          email_id : customer.email_id.value,
-          contact:customer.contact.value,
-          emergency_contact:customer.emergency_contact.value,
+          fname : host.fname.value,
+          lname : host.lname.value,
+          email_id : host.email_id.value,
+          contact:host.contact.value,
           dob : date,
-          license_no: customer.license_no.value,
-          pancard_no: customer.pancard_no.value,
-          adhar_card: customer.adhar_card.value,
-          username : customer.username.value,
-          password : customer.password.value,
-          area_id : customer.area_id.value,
-          address : customer.address.value
+          pancard_number: host.pancard_number.value,
+          adharcard_number: host.adharcard_number.value,
+          username : host.username.value,
+          password : host.password.value,
+          area_id : host.area_id.value,
+          address : host.address.value,
+          upi_id : host.upi_id.value
       })
   }
   console.log(reqOption);
-  fetch("http://localhost:8081/registercustomer",reqOption)
+  fetch("http://localhost:8081/registerhost",reqOption)
   .then((res)=>{return res.text()})
   .then((msg)=>{setRegistrationSuccess(true);})
 
       navigate("/login");  
-    console.log('Form submitted:', customer);
+    console.log('Form submitted:', host);
   };
   const[date,setDate] = useState("");
 
@@ -399,33 +399,33 @@ function CustomerSignup() {
 
         <div className="col-md-4">
           <label className="form-label">First Name: </label>
-          <input type="text" id="Fname" name="Fname"
-            value={customer.Fname.value}
-            onChange={(e)=>{handleChange("Fname",e.target.value)}}
-            onBlur={(e)=>{handleChange("Fname",e.target.value)}}
+          <input type="text" id="fname" name="fname"
+            value={host.fname.value}
+            onChange={(e)=>{handleChange("fname",e.target.value)}}
+            onBlur={(e)=>{handleChange("fname",e.target.value)}}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required/>
-          <div style={{display: (!customer.Fname.valid && customer.Fname.touched)?"block":"none"}}><p className="text-danger">{customer.Fname.error}</p></div>
+          <div style={{display: (!host.fname.valid && host.fname.touched)?"block":"none"}}><p className="text-danger">{host.fname.error}</p></div>
         </div>
 
         <div className="col-md-4">
           <label className="form-label">Last Name:</label>
-            <input type="text" id="Lname" name="Lname"
-            value={customer.Lname.value}
-            onChange={(e)=>{handleChange("Lname",e.target.value)}}
-            onBlur={(e)=>{handleChange("Lname",e.target.value)}}
+            <input type="text" id="lname" name="lname"
+            value={host.lname.value}
+            onChange={(e)=>{handleChange("lname",e.target.value)}}
+            onBlur={(e)=>{handleChange("lname",e.target.value)}}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-danger-300 form-control" required/>
-          <div style={{display: (!customer.Lname.valid && customer.Lname.touched)?"block":"none"}}><p className="text-danger">{customer.Lname.error}</p></div>
+          <div style={{display: (!host.lname.valid && host.lname.touched)?"block":"none"}}><p className="text-danger">{host.lname.error}</p></div>
         </div>
 
         <div className="col-md-4">
           <label className="form-label"> EMAIL ID: </label>
           <input type="email_id" id="email_id" name="email_id"
-            value={customer.email_id.value}
+            value={host.email_id.value}
             onChange={(e)=>{handleChange("email_id",e.target.value)}}
              onBlur={(e)=>{handleChange("email_id",e.target.value); 
              checkemail_id(e.target.value)}}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required />
-            <div style={{display: (!customer.email_id.valid && customer.email_id.touched)?"block":"none"}}><p className="text-danger">{customer.email_id.error}</p></div>
+            <div style={{display: (!host.email_id.valid && host.email_id.touched)?"block":"none"}}><p className="text-danger">{host.email_id.error}</p></div>
             <div style={{display: (true)?"block":"none"}}><p className="text-danger">{msg}</p></div>
         </div>
 
@@ -435,7 +435,7 @@ function CustomerSignup() {
           type="text"
           id="contact"
           name="contact"
-          value={customer.contact.value}
+          value={host.contact.value}
           onChange={(e) => {
             handleChange("contact", e.target.value);
           }}
@@ -446,19 +446,10 @@ function CustomerSignup() {
           className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
           required
         />
-        <div style={{ display: !customer.contact.valid && customer.contact.touched ? "block" : "none" }}>
-          <p className="text-danger">{customer.contact.error}</p>
+        <div style={{ display: !host.contact.valid && host.contact.touched ? "block" : "none" }}>
+          <p className="text-danger">{host.contact.error}</p>
         </div>
       </div>
-
-        <div className="col-md-4">
-          <label className="form-label"> Emergency Contact No: </label>
-          <input type="text" id="emergency_contact" name="emergency_contact"
-            value={customer.emergency_contact.value}
-            onChange={(e)=>{handleChange("emergency_contact",e.target.value)}} onBlur={(e)=>{handleChange("emergency_contact",e.target.value)}}
-            className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required />
-           <div style={{display: (!customer.emergency_contact.valid && customer.emergency_contact.touched)?"block":"none"}}><p className="text-danger">{customer.emergency_contact.error}</p></div>
-        </div>
 
         <h2 className="text-2xl font-bold mb-4">Personal Details</h2>
 
@@ -470,46 +461,46 @@ function CustomerSignup() {
         </div>
 
         <div className="col-md-4">
-          <label className="form-label"> License no:</label>
-          <input
-            type="text"
-            id="license_no"
-            name="license_no"
-            value={customer.license_no.value}
-            onChange={(e) => {
-              handleChange('license_no', e.target.value);
-            }}
-            onBlur={(e) => {
-              handleChange('license_no', e.target.value);
-              checkLicenseNo(e.target.value);
-            }}
-            className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
-            required
-          />
-          <div style={{ display: !customer.license_no.valid && customer.license_no.touched ? 'block' : 'none' }}>
-            <p className="text-danger">{customer.license_no.error}</p>
-          </div>
-        </div>
-
-        <div className="col-md-4">
           <label className="form-label"> Pan Card: </label>
           <input
             type="text"
-            id="pancard_no"
-            name="pancard_no"
-            value={customer.pancard_no.value}
+            id="pancard_number"
+            name="pancard_number"
+            value={host.pancard_number.value}
             onChange={(e) => {
-              handleChange('pancard_no', e.target.value);
+              handleChange('pancard_number', e.target.value);
             }}
             onBlur={(e) => {
-              handleChange('pancard_no', e.target.value);
+              handleChange('pancard_number', e.target.value);
               checkPancardNo(e.target.value);
             }}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
             required
           />
-          <div style={{ display: !customer.pancard_no.valid && customer.pancard_no.touched ? 'block' : 'none' }}>
-            <p className="text-danger">{customer.pancard_no.error}</p>
+          <div style={{ display: !host.pancard_number.valid && host.pancard_number.touched ? 'block' : 'none' }}>
+            <p className="text-danger">{host.pancard_number.error}</p>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <label className="form-label"> UPI Id: </label>
+          <input
+            type="text"
+            id="upi_id"
+            name="upi_id"
+            value={host.upi_id.value}
+            onChange={(e) => {
+              handleChange('upi_id', e.target.value);
+            }}
+            onBlur={(e) => {
+              handleChange('upi_id', e.target.value);
+              checkUpiId(e.target.value);
+            }}
+            className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
+            required
+          />
+          <div style={{ display: !host.upi_id.valid && host.upi_id.touched ? 'block' : 'none' }}>
+            <p className="text-danger">{host.upi_id.error}</p>
           </div>
         </div>
 
@@ -517,21 +508,21 @@ function CustomerSignup() {
           <label className="form-label"> Adhar Card No: </label>
           <input
             type="text"
-            id="adhar_card"
-            name="adhar_card"
-            value={customer.adhar_card.value}
+            id="adharcard_number"
+            name="adharcard_number"
+            value={host.adharcard_number.value}
             onChange={(e) => {
-              handleChange('adhar_card', e.target.value);
+              handleChange('adharcard_number', e.target.value);
             }}
             onBlur={(e) => {
-              handleChange('adhar_card', e.target.value);
+              handleChange('adharcard_number', e.target.value);
               checkAdharCard(e.target.value);
             }}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
             required
           />
-          <div style={{ display: !customer.adhar_card.valid && customer.adhar_card.touched ? 'block' : 'none' }}>
-            <p className="text-danger">{customer.adhar_card.error}</p>
+          <div style={{ display: !host.adharcard_number.valid && host.adharcard_number.touched ? 'block' : 'none' }}>
+            <p className="text-danger">{host.adharcard_number.error}</p>
           </div>
         </div>
 
@@ -541,7 +532,7 @@ function CustomerSignup() {
         <select
           id="area_id"
           name="area_id"
-          value={customer.area_id.value}
+          value={host.area_id.value}
           onChange={(e) => {
             handleChange('area_id', e.target.value);
           }}
@@ -560,8 +551,8 @@ function CustomerSignup() {
             </option>
           ))}
         </select>
-        <div style={{ display: (!customer.area_id.valid && customer.area_id.touched) ? 'block' : 'none' }}>
-          <p className="text-danger">{customer.area_id.error}</p>
+        <div style={{ display: (!host.area_id.valid && host.area_id.touched) ? 'block' : 'none' }}>
+          <p className="text-danger">{host.area_id.error}</p>
         </div>
       </div>
 
@@ -570,10 +561,10 @@ function CustomerSignup() {
         <div className="">
           <label className="form-label">Address:</label>
           <input type="text" id="address" name="address"
-            value={customer.address.value}
+            value={host.address.value}
             onChange={(e)=>{handleChange("address",e.target.value)}} onBlur={(e)=>{handleChange("address",e.target.value)}}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required />
-           <div style={{display: (!customer.address.valid && customer.address.touched)?"block":"none"}}><p className="text-danger">{customer.address.error}</p></div>
+           <div style={{display: (!host.address.valid && host.address.touched)?"block":"none"}}><p className="text-danger">{host.address.error}</p></div>
         </div>
 
         <h2 className="text-2xl font-bold mb-4">Login Details</h2>
@@ -581,10 +572,10 @@ function CustomerSignup() {
         {/* <div className="col-md-4">
           <label className="form-label"> User Name: </label>
           <input type="text" id="username" name="username" 
-            value={customer.username.value}
+            value={host.username.value}
             onChange={(e)=>{handleChange("username",e.target.value)}} onBlur={(e)=>{handleChange("username",e.target.value)}}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"required />
-           <div style={{display: (!customer.username.valid && customer.username.touched)?"block":"none"}}><p className="text-danger">{customer.username.error}</p></div>
+           <div style={{display: (!host.username.valid && host.username.touched)?"block":"none"}}><p className="text-danger">{host.username.error}</p></div>
         </div> */}
 
         <div className="col-md-4">
@@ -593,7 +584,7 @@ function CustomerSignup() {
             type="text"
             id="username"
             name="username"
-            value={customer.username.value}
+            value={host.username.value}
             onChange={(e) => {
               handleChange('username', e.target.value);
             }}
@@ -604,27 +595,27 @@ function CustomerSignup() {
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
             required
           />
-          <div style={{ display: !customer.username.valid && customer.username.touched ? 'block' : 'none' }}>
-            <p className="text-danger">{customer.username.error}</p>
+          <div style={{ display: !host.username.valid && host.username.touched ? 'block' : 'none' }}>
+            <p className="text-danger">{host.username.error}</p>
           </div>
         </div>
 
         <div className="col-md-4">
           <label className="form-label"> Password: </label>
           <input type="password" id="password" name="password"
-            value={customer.password.value}
+            value={host.password.value}
             onChange={(e)=>{handleChange("password",e.target.value)}} onBlur={(e)=>{handleChange("password",e.target.value)}}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required />
-           <div style={{display: (!customer.password.valid && customer.password.touched)?"block":"none"}}><p className="text-danger">{customer.password.error}</p></div>
+           <div style={{display: (!host.password.valid && host.password.touched)?"block":"none"}}><p className="text-danger">{host.password.error}</p></div>
         </div>
 
         <div className="col-md-4">
           <label className="form-label">Confirm Password:</label>
           <input type="password" id="confirmPassword" name="confirmPassword"
-            value={customer.confirmPassword.value}
+            value={host.confirmPassword.value}
             onChange={(e)=>{handleChange("confirmPassword",e.target.value)}} onBlur={(e)=>{handleChange("confirmPassword",e.target.value)}}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required/>
-          <div style={{display: (!customer.confirmPassword.valid && customer.confirmPassword.touched)?"block":"none"}}><p className="text-danger">{customer.confirmPassword.error}</p></div>
+          <div style={{display: (!host.confirmPassword.valid && host.confirmPassword.touched)?"block":"none"}}><p className="text-danger">{host.confirmPassword.error}</p></div>
         </div>
 
         <div className="col-md-4">
@@ -638,7 +629,7 @@ function CustomerSignup() {
         {registrationSuccess && (<div className="alert alert-success" role="alert">Registered successfully!</div>)}
         
       <div className='container '>
-        <button type=" button" className="text-white p-2 col-md-6 rounded bg-dark bd" onClick={(e)=>{handleSubmit(e)}} disabled={customer.formValid}>Register</button>
+        <button type=" button" className="text-white p-2 col-md-6 rounded bg-dark bd" onClick={(e)=>{handleSubmit(e)}} disabled={host.formValid}>Register</button>
         <button type="reset" value={"Reset"} className="btn p-2 col-md-6 btn-danger bd">Reset</button>
       </div>
       </form>
@@ -646,4 +637,4 @@ function CustomerSignup() {
   );
 }
 
-export default CustomerSignup;
+export default Hostsignup1;

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { login } from '../loggedslice';
 
 const Login = () => {
@@ -26,28 +26,47 @@ const Login = () => {
          fetch('http://localhost:8081/login',req)
          .then( resp=>resp.json())
          .then(data=>{
-             if(data.password==password)
-                {
-                  console.log("login successful")
-                   dispatch(login());
-                  navigate("/customerhome");
+            //  if(data.password===password )
+            //     {
+              console.log(data);
+                  if(data.userid === -1 ){
+                    setError('You are not registered');
+                  }
+                  else{
+                    if(data.role.role_id === 1){                    
+                      console.log("login successful")
+                      dispatch(login());
+                      navigate("/AdminHome");
+
+                    }else if(data.role.role_id === 2){                    
+                      console.log("login successful")
+                      dispatch(login());
+                      navigate("/HostHome");
+
+                    }
+                    else if(data.role.role_id === 3){                    
+                      console.log("login successful")
+                      dispatch(login());
+                      navigate("/customerhome");
+                    }
                 }
-                else{
-                  setError('You are not registered');
-                }             
+               // }
+                // else{
+                //   setError('You are not registered');
+                // }             
          })
         }
         
 
-    const handleClick = () => {
-        navigate('/forgotPassword');
-      };
+    // const handleClick = () => {
+    //     navigate('/forgotPassword');
+    //   };
       const cross = () => {
         navigate('/');
       };
-      const Registerclick = () => {
-        navigate('/customersignup');
-      };
+      // const Registerclick = () => {
+      //   navigate('/customersignup');
+      // };
     
         return (
       <div className='body' >
@@ -68,8 +87,6 @@ const Login = () => {
                 <br />
                 <button type="submit" className='btn btn-block btn-primary'>Login</button>
                 <span> </span>
-                <button type="button" className='btn btn-block btn-secondary' onClick={Registerclick}>Register</button> 
-                <button type="button" className='btn btn-block text-dark' onClick={handleClick}>Forgot Password?</button>
                 
             </form>
             {error && <div style={{ color: 'red' }}>{error}</div>}
@@ -80,3 +97,7 @@ const Login = () => {
 }
 
 export default Login;
+
+{/* <button type="button" className='btn btn-block btn-secondary' onClick={Registerclick}>Register</button> 
+                <button type="button" className='btn btn-block text-dark' onClick={handleClick}>Forgot Password?</button>
+                 */}
