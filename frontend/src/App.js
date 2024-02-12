@@ -15,6 +15,7 @@ import Logout from './components/logout';
 import { useSelector } from 'react-redux';
 import HostSignup from './components/HostSignup';
 import Hostsignup1 from './components/HostSignnup1';
+import ViewCars from './components/ViewCars';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
@@ -35,7 +36,7 @@ function App() {
             
             <Nav className="ml-auto">
               <NavLink to ="/" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
-              <NavLink to ="/Adminlogin" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
+              <NavLink to ="/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
               <NavDropdown title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>} id="basic-nav-dropdown" className="text-danger">
                 <NavLink to ="/customersignup" className="dropdown-item">Customer</NavLink>
                 <NavLink to ="/hostsignup1" className="dropdown-item">Host</NavLink>
@@ -55,6 +56,7 @@ function App() {
         <Route path="/hostsignup1" element={<Hostsignup1/>}/>
         <Route path="/adminhome" element={<AdminHome/>}/>
         <Route path="/hosthome" element={<HostHome/>}/>
+        <Route path="/viewcars" element={<ViewCars/>}/>
       </Routes>
 
     </div>
