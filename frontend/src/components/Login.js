@@ -11,6 +11,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [err , setErr] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -26,11 +27,11 @@ const Login = () => {
          fetch('http://localhost:8081/login',req)
          .then( resp=>resp.json())
          .then(data=>{
-            //  if(data.password===password )
-            //     {
               console.log(data);
                   if(data.userid === -1 ){
-                    setError('You are not registered');
+                    console.log("Login Failed...!")
+                    setErr("You are not registered");
+                    setError("You are not registered");
                   }
                   else{
                     if(data.role.role_id === 1){                    
@@ -49,11 +50,7 @@ const Login = () => {
                       dispatch(login());
                       navigate("/customerhome");
                     }
-                }
-               // }
-                // else{
-                //   setError('You are not registered');
-                // }             
+                }            
          })
         }
         
@@ -91,7 +88,8 @@ const Login = () => {
             </form>
             {error && <div style={{ color: 'red' }}>{error}</div>}
         </div>
-        <p> Logged in : {mystate.loggedIn.toString()} </p>
+        <p> Logged in : {err} </p>
+        {err && <div style={{ color: 'red' }}>{error}</div>}
       </div>
     );
 }
