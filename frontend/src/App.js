@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux';
 import HostSignup from './components/HostSignup';
 import Hostsignup1 from './components/HostSignnup1';
 import ViewCars from './components/ViewCars';
+import AdminApproval from './components/AdminApproval';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
@@ -57,6 +58,7 @@ function App() {
         <Route path="/adminhome" element={<AdminHome/>}/>
         <Route path="/hosthome" element={<HostHome/>}/>
         <Route path="/viewcars" element={<ViewCars/>}/>
+        <Route path="/requests" element={<AdminApproval/>}/>
       </Routes>
 
     </div>
