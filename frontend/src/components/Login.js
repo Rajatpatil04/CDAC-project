@@ -11,7 +11,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const [err , setErr] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -28,9 +27,8 @@ const Login = () => {
          .then( resp=>resp.json())
          .then(data=>{
               console.log(data);
-                  if(data.userid === -1 ){
+                  if(data.uid === -1 ){
                     console.log("Login Failed...!")
-                    setErr("You are not registered");
                     setError("You are not registered");
                   }
                   else{
@@ -88,8 +86,6 @@ const Login = () => {
             </form>
             {error && <div style={{ color: 'red' }}>{error}</div>}
         </div>
-        <p> Logged in : {err} </p>
-        {err && <div style={{ color: 'red' }}>{error}</div>}
       </div>
     );
 }
