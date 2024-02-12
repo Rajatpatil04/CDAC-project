@@ -35,13 +35,13 @@ function App() {
             </div>
             
             <Nav className="ml-auto">
-              <NavLink to ="/" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
-              <NavLink to ="/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
-              <NavDropdown title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>} id="basic-nav-dropdown" className="text-danger">
-                <NavLink to ="/customersignup" className="dropdown-item">Customer</NavLink>
-                <NavLink to ="/hostsignup1" className="dropdown-item">Host</NavLink>
+              <NavLink to ="/" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
+              <NavLink to ="/viewcars" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
+              <NavDropdown title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>} id="basic-nav-dropdown" className="text-dark">
+                <NavLink to ="/customersignup" className="dropdown-item"><h6>Customer</h6></NavLink>
+                <NavLink to ="/hostsignup1" className="dropdown-item"><h6>Host</h6></NavLink>
               </NavDropdown>
-              <NavLink to ="/login" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGIN</b></h5></NavLink>
+              <NavLink to ="/login" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>LOGIN</b></h5></NavLink>
             </Nav>
           </Navbar.Collapse>
         </div>
