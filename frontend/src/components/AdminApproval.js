@@ -17,7 +17,7 @@ export default function AdminApproval(){
     fetchHosts();
    },[])
    const fetchCustomers = () => {
-    fetch('http://localhost:8081/getallcustomers')
+    fetch('http://localhost:8081/getcustomerrequests')
       .then((res) => res.json())
       .then((data) => {
         setCustomers(data);

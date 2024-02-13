@@ -26,10 +26,10 @@ public class CustomerController {
 	public List<Customer> getAllRoles() {
         return cservice.getAllCustomers();
     }
-//	 @GetMapping("/getcustomerrequests")
-//	    public List<Customer> getCustomersWithStatusZero() {
-//	        return cservice.getCustomersWithStatusZero();
-//	 }
+	 @GetMapping("/getcustomerrequests")
+	    public List<Customer> getCustomersWithStatusZero() {
+	        return cservice.getCustomersWithStatusZero();
+	 }
 	
 	@PostMapping("/registercustomer")
     public ResponseEntity<String> registerUser(@RequestBody DummyCustomer dummyCustomer) {
