@@ -83,8 +83,8 @@ export default function AdminApproval(){
               <td>{customer.license_no}</td>
               <td>{customer.contact}</td>
               <td>{customer.emergency_contact}</td>
-              <td>{customer.dob }</td>
-              <td>{customer.reg_date}</td>
+              <td>{new Date(customer.dob).toLocaleDateString() }</td>
+              <td>{new Date(customer.reg_date).toLocaleDateString()}</td>
               <td>{customer.pancard_no}</td>
               <td>{customer.adhar_card}</td>
               <td>{customer.address}</td>
@@ -126,8 +126,8 @@ export default function AdminApproval(){
               <td>{host.lname}</td>
               <td>{host.email_id}</td>
               <td>{host.contact}</td>
-              <td>{host.dob}</td>
-              <td>{host.reg_date}</td>
+              <td>{new Date(host.dob).toLocaleDateString() }</td>
+              <td>{new Date(host.reg_date).toLocaleDateString()}</td>
               <td>{host.pancard_number}</td>
               <td>{host.adharcard_number}</td>
               <td>{host.address}</td>
