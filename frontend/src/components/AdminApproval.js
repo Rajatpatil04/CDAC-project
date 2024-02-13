@@ -3,11 +3,14 @@ import { useSelector } from "react-redux";
 
 export default function AdminApproval(){
   const mystate =useSelector(state=>state.logged)
-
   const[customers, setCustomers] = useState([]);
   const[hosts, setHosts] = useState([]);
   const[approve,setApprove] = useState([]);
 
+  const formatDate = (milliseconds) => {
+    const date = new Date(milliseconds);
+    return date.toLocaleDateString(); 
+  };
    useEffect(()=>
    {
     fetchCustomers();
