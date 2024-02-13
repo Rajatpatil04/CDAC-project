@@ -27,6 +27,7 @@ public class CustomerController {
         return cservice.getAllCustomers();
     }
 	
+	
 	@PostMapping("/registercustomer")
     public ResponseEntity<String> registerUser(@RequestBody DummyCustomer dummyCustomer) {
 		try {

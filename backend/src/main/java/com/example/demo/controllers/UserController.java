@@ -46,8 +46,8 @@ public class UserController {
     }
 	
 	@PutMapping("/changestatus")
-	public int updateStatus(@RequestParam String username) {
-	    return uservice.updateStatus(username);
+	public int updateStatus(@RequestParam int uid) {
+	    return uservice.updateStatus(uid);
 	}
 
 }

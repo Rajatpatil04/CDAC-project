@@ -1,38 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-
-// function ViewCars() {
-//   const [cars, setCars] = useState([]);
-
-//   useEffect(() => {
-//     fetch('your-backend-url/viewCars')
-//       .then(response => response.json())
-//       .then(data => setCars(data))
-//       .catch(error => console.error('Error fetching cars:', error));
-//   }, []);
-
-//   return (
-//     <div className="container mt-4">
-//       <h2 className="text-2xl font-bold mb-4">Available Cars</h2>
-//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-//         {cars.map(car => (
-//           <div key={car.id} className="border rounded p-4">
-//             <img src={car.image} alt={car.name} className="w-full h-40 object-cover mb-4" />
-//             <h3 className="text-lg font-semibold mb-2">{car.name}</h3>
-//             <p className="text-gray-700 mb-2">{`Price per hour: ${car.pricePerHour}`}</p>
-//             <p className="text-gray-700 mb-2">{`Transmission: ${car.transmission}`}</p>
-//             <p className="text-gray-700 mb-2">{`Fuel Type: ${car.fuelType}`}</p>
-//             {/* Add more details as needed */}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default ViewCars;
-
-
-
 
 
 
@@ -44,8 +9,10 @@ import mustang from '../images/mustang.jpg';
 import creta from '../images/creta.jpg';
 import wagonR from '../images/wagonR.jpg';
 import harrier from '../images/harrier.jpg'
+import { useSelector } from 'react-redux';
 
 function ViewCars() {
+   useSelector(state=>state.logged)
   const cars = [
     {
       id: 1,

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux";
 
 export default function AdminApproval(){
+  useSelector(state=>state.logged)
   const[customers, setCustomers] = useState([]);
   const[hosts, setHosts] = useState([]);
   const[approve,setApprove] = useState([]);
@@ -28,17 +30,21 @@ export default function AdminApproval(){
         })
         .catch((error) => console.error('Error fetching hosts:', error));
     };
-    const handleApproval = (username) => {
-      fetch(`http://localhost:8081/changestatus?username=${username}`, {
-        method: 'PUT',
-      })
+    const handleApproval = (uid) => {
+      //const userId = parseInt(uid, 10);
+      fetch(`http://localhost:8081/changestatus?uid=${uid}`, {method:'PUT'})
       .then((res) => res.json())
       .then((data) => {
-        setApprove((prevApprove) => ({
-          ...prevApprove,
-          [username]: data.status === 'approved', // Assuming 'approved' is the status received
-        }));
-        console.log(data);
+        console.log(data)
+        if (data === 1) {
+          // Update the state based on a successful approval
+          setApprove((prevApprove) => ({
+            ...prevApprove,
+            [uid]: true, // Assuming 'true' represents 'approved'
+          }));
+        } else {
+          console.error('Failed to update status.....');
+        }
       })
       .catch((error) => console.error('Error in changing status:', error));
     };
@@ -68,8 +74,8 @@ export default function AdminApproval(){
               <td>{customer.lname}</td>
               <td>{customer.license_no}</td>
               <td>{customer.contact}</td>
-              <td>{customer.emergency ? customer.emergency.contact : 'N/A'}</td>
-              <td>{customer.dob}</td>
+              <td>{customer.emergency_contact}</td>
+              <td>{customer.dob }</td>
               <td>{customer.reg_date}</td>
               <td>{customer.pancard_no}</td>
               <td>{customer.adhar_card}</td>
@@ -78,10 +84,10 @@ export default function AdminApproval(){
               <td>
               <button
                   type="button"
-                  className={`btn ${approve[customer.email_id] ? 'btn-success' : 'btn-primary'}`}
-                  onClick={() => handleApproval(customer.email_id)}
+                  className={`btn ${approve[customer.user.uid] ? 'btn-success' : 'btn-primary'}`}
+                  onClick={() => handleApproval(customer.user.uid)}
                   >
-                  {approve[customer.email_id] ? 'Approved' : 'Approve'}
+                  {approve[customer.user.uid] ? 'Approved' : 'Approve'}
                 </button>
                 </td>
             </tr>
@@ -119,10 +125,10 @@ export default function AdminApproval(){
               <td>
               <button
                   type="button"
-                  className={`btn ${approve[host.email_id] ? 'btn-success' : 'btn-primary'}`}
-                  onClick={() => handleApproval(host.email_id)}
+                  className={`btn ${approve[host.user.uid] ? 'btn-success' : 'btn-primary'}`}
+                  onClick={() => handleApproval(host.user.uid)}
                   >
-                  {approve[host.email_id] ? 'Approved' : 'Approve'}
+                  {approve[host.user.uid] ? 'Approved' : 'Approve'}
                 </button>
                   </td>
             </tr>
