@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 
 export default function AdminApproval(){
-  useSelector(state=>state.logged)
+  const mystate =useSelector(state=>state.logged)
+
   const[customers, setCustomers] = useState([]);
   const[hosts, setHosts] = useState([]);
   const[approve,setApprove] = useState([]);
@@ -48,12 +49,15 @@ export default function AdminApproval(){
       })
       .catch((error) => console.error('Error in changing status:', error));
     };
+    var indexc = 1;
+    var indexh=1;
   return(
-    <div>
-            <h2>Customers</h2>
+    <div className="container">
+            <h2 style={{fontFamily:"initial"}}>Customers</h2>
       <table border="1" className="table">
         <thead>
           <tr>
+            <th>Sr. no</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>License</th>
@@ -70,6 +74,7 @@ export default function AdminApproval(){
         <tbody>
           {customers.map((customer) => (
               <tr key={customer.customer_id}>
+                <td>{indexc++}</td>
               <td>{customer.fname}</td>
               <td>{customer.lname}</td>
               <td>{customer.license_no}</td>
@@ -85,8 +90,7 @@ export default function AdminApproval(){
               <button
                   type="button"
                   className={`btn ${approve[customer.user.uid] ? 'btn-success' : 'btn-primary'}`}
-                  onClick={() => handleApproval(customer.user.uid)}
-                  >
+                  onClick={() => handleApproval(customer.user.uid)} >
                   {approve[customer.user.uid] ? 'Approved' : 'Approve'}
                 </button>
                 </td>
@@ -95,10 +99,11 @@ export default function AdminApproval(){
         </tbody>
       </table>
       <br/><br/><br/>
-      <h2>Hosts</h2>
+      <h2 style={{fontFamily:"initial"}}>Hosts</h2>
       <table border="1" className="table">
         <thead>
           <tr>
+            <th>Sr. no</th>
             <th>First Name</th>
             <th>Last Name</th> 
             <th>Email ID</th>  
@@ -113,6 +118,7 @@ export default function AdminApproval(){
         <tbody>
           {hosts.map((host) => (
               <tr key={host.id}>
+                <td>{indexh++}</td>
               <td>{host.fname}</td>
               <td>{host.lname}</td>
               <td>{host.email_id}</td>
