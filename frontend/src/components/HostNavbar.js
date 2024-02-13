@@ -1,13 +1,14 @@
-import { Navbar, Nav } from 'react-bootstrap';
-import { useSelector } from "react-redux"
-import { Link, NavLink, Outlet } from "react-router-dom"
+import { Nav, Navbar } from "react-bootstrap";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import favicon from '../images/favicon-removebg-preview.png';
+import { useSelector } from "react-redux";
 
-export default function AdminHome(){
-  
+export default function HostNavbar(){
+  const mystate = useSelector((state) => state.logged)
   return(
-      <div>
-        {/* <Navbar bg="light" expand="lg" className='navcol'>
+    <div>
+
+    <Navbar bg="light" expand="lg" className='navcol' style={{display: mystate.loggedIn?"block":"none"}}>
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <img src={favicon} alt="Book My Car Logo" width="90" height="40" className="d-inline-block align-text-top"/>
@@ -22,15 +23,14 @@ export default function AdminHome(){
             
             <Nav className="ml-auto">
               {/* <NavLink to ="/" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink> */}
-              {/* <NavLink to ="/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
+              <NavLink to ="/host/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
               <NavLink to ="/logout" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGOUT</b></h5></NavLink>
-              <NavLink to ="/requests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>REQUESTS</b></h5></NavLink>
-            </Nav> */}
-          {/* </Navbar.Collapse> */}
-        {/* </div> */}
-      {/* </Navbar> */} 
-        <h1>Admin Home</h1>
-        <Outlet/>
-      </div>
+            </Nav>
+          </Navbar.Collapse>
+        </div>
+      </Navbar>
+      <Outlet/>
+    </div>
+
   )
 }

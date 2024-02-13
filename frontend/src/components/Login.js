@@ -86,17 +86,17 @@ const Login = () => {
             console.log('Admin login successful');
             dispatch(login());
             localStorage.setItem('loggeduser', JSON.stringify(data));
-            navigate('/AdminHome');
+            navigate('/admin/adminHome');
           } else if (role_id === 2) {
             console.log('Host login successful');
             dispatch(login());
             localStorage.setItem('loggeduser', JSON.stringify(data));
-            navigate('/HostHome');
+            navigate('/host/hostHome');
           } else if (role_id === 3) {
             console.log('Customer login successful');
             dispatch(login());
             localStorage.setItem('loggeduser', JSON.stringify(data));
-            navigate('/customerhome');
+            navigate('/customer/customerhome');
           }
         }
       } catch (error) {

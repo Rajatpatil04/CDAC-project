@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.Area;
-import com.example.demo.entities.Customer;
+
 import com.example.demo.entities.DummyHost;
 import com.example.demo.entities.Host;
 import com.example.demo.entities.Role;
@@ -36,7 +36,7 @@ public class HostService {
 	public List<Host> getAllHosts() {
         return hrepo.findAll();
     }
-	 public List<Host> getCustomersWithStatusZero() {
+	 public List<Host> getHostsWithStatusZero() {
 	        return hrepo.findAllByStatusIsZero();
 	}
 	

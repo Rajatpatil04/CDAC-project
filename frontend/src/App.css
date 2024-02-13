@@ -7,6 +7,35 @@
     border-width: 2px;
 }
 
+#r1{
+    font-size: 120px;
+    color: black;
+}
+#r2{
+   font-size: 60px;
+}
+#r3{
+     font-size: 120px;
+     color: black;
+}
+.rent{
+     height: 200px;
+     width: 400px;
+      margin-left: 100px;
+      margin-top: 100px;
+      position:absolute;
+}
+#r1:hover{
+      font-size: 160px; 
+      transition: 0.5s; 
+}
+
+
+
+#r3:hover{
+   font-size: 150px;
+   transition: 0.5s;
+}
 .crosss{
   display: flex;
   justify-content: right; 

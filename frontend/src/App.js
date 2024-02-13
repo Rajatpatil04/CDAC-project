@@ -17,6 +17,9 @@ import HostSignup from './components/HostSignup';
 import Hostsignup1 from './components/HostSignnup1';
 import ViewCars from './components/ViewCars';
 import AdminApproval from './components/AdminApproval';
+import CustomerNavbar from './components/CustomerNavbar';
+import AdminNavbar from './components/AdminNavbar';
+import HostNavbar from './components/HostNavbar';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
@@ -47,41 +50,35 @@ function App() {
           </Navbar.Collapse>
         </div>
       </Navbar>
-      {/* admin home navbar */}
-      <Navbar bg="light" expand="lg" className='navcol' style={{display: mystate.loggedIn?"block":"none"}}>
-        <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
-            <img src={favicon} alt="Book My Car Logo" width="90" height="40" className="d-inline-block align-text-top"/>
-          </Link>
-          <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <div className="input-group search">
-              <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-              <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
-            </div>
-            
-            <Nav className="ml-auto">
-              {/* <NavLink to ="/" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink> */}
-              <NavLink to ="/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
-              <NavLink to ="/logout" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGOUT</b></h5></NavLink>
-              <NavLink to ="/requests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>REQUESTS</b></h5></NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </div>
-      </Navbar>
+   
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout/>} />
         <Route path="/customersignup" element={<CustomerSignup />} />
         <Route path="/hostsignup" element={<HostSignup />} />
-        <Route path="/customerhome" element={<CustomerHome />} />
         <Route path="/hostsignup1" element={<Hostsignup1/>}/>
-        <Route path="/adminhome" element={<AdminHome/>}/>
-        <Route path="/hosthome" element={<HostHome/>}/>
         <Route path="/viewcars" element={<ViewCars/>}/>
-        <Route path="/requests" element={<AdminApproval/>}/>
+    {/* Customer side */}
+        <Route path ="/customer" element={<CustomerNavbar/>}>
+             <Route path="customerhome" element={<CustomerHome />} />
+             <Route path="viewcars" element={<ViewCars/>}/>
+        </Route>
+     {/* Admin side    */}
+     <Route path ="/admin" element={<AdminNavbar/>}>
+             <Route path="adminhome" element={<AdminHome />} />
+             <Route path="viewcars" element={<ViewCars/>}/>
+             <Route path="requests" element={<AdminApproval/>}/>
+        </Route>
+      {/* Host side    */}
+      <Route path ="/host" element={<HostNavbar/>}>
+             <Route path="hosthome" element={<HostHome />} />
+             <Route path="viewcars" element={<ViewCars/>}/>
+          
+        </Route>
+        
+
+
       </Routes>
 
     </div>

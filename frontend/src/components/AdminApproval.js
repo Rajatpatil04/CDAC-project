@@ -26,7 +26,7 @@ export default function AdminApproval(){
       .catch((error) => console.error('Error fetching Customers:', error));
     };
     const fetchHosts = () => {
-      fetch('http://localhost:8081/getallhosts')
+      fetch('http://localhost:8081/gethostrequests')
         .then((res) => res.json())
         .then((data) => {
           setHosts(data);
@@ -52,12 +52,12 @@ export default function AdminApproval(){
       })
       .catch((error) => console.error('Error in changing status:', error));
     };
-    var indexc = 1;
+    var indexc =1;
     var indexh=1;
   return(
     <div className="container">
             <h2 style={{fontFamily:"initial"}}>Customers</h2>
-      <table border="1" className="table">
+      <table border="1" className="table table-striped">
         <thead>
           <tr>
             <th>Sr. no</th>
@@ -71,7 +71,8 @@ export default function AdminApproval(){
             <th>Pan card</th>
             <th>Adhar card</th>
             <th>Address</th>
-            <th>Email ID</th>    
+            <th>Email ID</th>  
+            <th></th>  
           </tr>
         </thead>
         <tbody>
@@ -115,7 +116,8 @@ export default function AdminApproval(){
             <th>Date of Registration</th>
             <th>Pan card</th>
             <th>Adhar card</th>
-            <th>Address</th>   
+            <th>Address</th>  
+            <th></th> 
           </tr>
         </thead>
         <tbody>

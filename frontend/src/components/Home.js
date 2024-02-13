@@ -6,6 +6,14 @@ export default function Home() {
   return (
     <div>
       <div className="Home" >
+
+        <div className="rent"><h1  id="r1">RENT</h1>
+                      <h1 id="r2">AND</h1>
+                      <h1 id="r3">RIDE.</h1>
+        </div>
+       
+       
+        
         <div className="outercircle">
           <div className="start" ><br></br><b>START <br /> SEARCH<br /></b></div>
         </div>
