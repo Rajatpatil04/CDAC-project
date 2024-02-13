@@ -85,14 +85,17 @@ const Login = () => {
           if (role_id === 1) {
             console.log('Admin login successful');
             dispatch(login());
+            localStorage.setItem('loggeduser', JSON.stringify(data));
             navigate('/AdminHome');
           } else if (role_id === 2) {
             console.log('Host login successful');
             dispatch(login());
+            localStorage.setItem('loggeduser', JSON.stringify(data));
             navigate('/HostHome');
           } else if (role_id === 3) {
             console.log('Customer login successful');
             dispatch(login());
+            localStorage.setItem('loggeduser', JSON.stringify(data));
             navigate('/customerhome');
           }
         }
