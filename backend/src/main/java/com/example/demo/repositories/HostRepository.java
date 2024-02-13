@@ -12,6 +12,6 @@ import com.example.demo.entities.Host;
 @Repository
 public interface HostRepository extends JpaRepository<Host, Integer> {
 
-	@Query("SELECT h FROM host h WHERE h.user.uid = (select u.uid from User u where u.status =0)")
-    List<Host> findAllByStatusIsZero();
+	@Query("SELECT h FROM Host h WHERE h.user.uid IN (SELECT u.uid FROM User u WHERE u.status = 0)")
+	List<Host> findAllByStatusIsZero();
 }
