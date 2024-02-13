@@ -29,7 +29,7 @@ const Login = () => {
             //  if(data.password===password )
             //     {
               console.log(data);
-                  if(data.userid === -1 ){
+                  if(data.uid === -1 ){
                     setError('You are not registered');
                   }
                   else{
@@ -91,7 +91,6 @@ const Login = () => {
             </form>
             {error && <div style={{ color: 'red' }}>{error}</div>}
         </div>
-        <p> Logged in : {mystate.loggedIn.toString()} </p>
       </div>
     );
 }
