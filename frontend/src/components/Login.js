@@ -12,50 +12,96 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-            const req = {
-              method: 'POST',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({ 
-                username : username, 
-                password : password
-              })
-          }
+    // const handleLogin = async (e) => {
+    //     e.preventDefault();
+    //         const req = {
+    //           method: 'POST',
+    //           headers: {'Content-Type': 'application/json'},
+    //           body: JSON.stringify({ 
+    //             username : username, 
+    //             password : password
+    //           })
+    //       }
    
-         fetch('http://localhost:8081/login',req)
-         .then( resp=>resp.json())
-         .then(data=>{
-            //  if(data.password===password )
-            //     {
-              console.log(data);
-                  if(data.uid === -1 ){
-                    setError('You are not registered');
-                  }
-                  else{
-                    if(data.role.role_id === 1){                    
-                      console.log("login successful")
-                      dispatch(login());
-                      navigate("/AdminHome");
+    //      fetch('http://localhost:8081/login',req)
+    //      .then( resp=>resp.json())
+    //      .then(data=>{
+    //         //  if(data.password===password )
+    //         //     {
+    //           console.log(data);
+    //               if(data === -1 ){
+    //                 setError('You are not registered');
+    //               }
+    //               else{
+    //                 if(data.role.role_id === 1){                    
+    //                   console.log("login successful")
+    //                   dispatch(login());
+    //                   navigate("/AdminHome");
 
-                    }else if(data.role.role_id === 2){                    
-                      console.log("login successful")
-                      dispatch(login());
-                      navigate("/HostHome");
+    //                 }else if(data.role.role_id === 2){                    
+    //                   console.log("login successful")
+    //                   dispatch(login());
+    //                   navigate("/HostHome");
 
-                    }
-                    else if(data.role.role_id === 3){                    
-                      console.log("login successful")
-                      dispatch(login());
-                      navigate("/customerhome");
-                    }
-                }
-               // }
-                // else{
-                //   setError('You are not registered');
-                // }             
-         })
+    //                 }
+    //                 else if(data.role.role_id === 3){                    
+    //                   console.log("login successful")
+    //                   dispatch(login());
+    //                   navigate("/customerhome");
+    //                 }
+    //             }
+    //            // }
+    //             // else{
+    //             //   setError('You are not registered');
+    //             // }             
+    //      })
+    //     }
+
+
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      try {
+        const req = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        };
+    
+        const response = await fetch('http://localhost:8081/login', req);
+        const data = await response.json();
+    
+        console.log(data);
+    
+        if (data === -1) {
+          setError('You are not registered');
+        } else {
+          const role_id = data.role.role_id;
+    
+          if (role_id === 1) {
+            console.log('Admin login successful');
+            dispatch(login());
+            navigate('/AdminHome');
+          } else if (role_id === 2) {
+            console.log('Host login successful');
+            dispatch(login());
+            navigate('/HostHome');
+          } else if (role_id === 3) {
+            console.log('Customer login successful');
+            dispatch(login());
+            navigate('/customerhome');
+          }
         }
+      } catch (error) {
+        // Handle network or other errors
+        console.error('Login failed:', error.message);
+      }
+    };
+    
         
 
     // const handleClick = () => {
