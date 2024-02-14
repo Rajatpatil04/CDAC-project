@@ -27,24 +27,27 @@ const Login = () => {
          .then( resp=>resp.json())
          .then(data=>{
               console.log(data);
-                  if(data.uid === -1 ){
+                  if(data == null ){
                     console.log("Login Failed...!")
                     setError("You are not registered");
                   }
                   else{
-                    if(data.role.role_id === 1){                    
+                    if(data.role_id === 1){                    
                       console.log("login successful")
+                      localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
                       navigate("/AdminHome");
 
-                    }else if(data.role.role_id === 2){                    
+                    }else if(data.role_id === 2){                    
                       console.log("login successful")
+                      localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
                       navigate("/HostHome");
 
                     }
-                    else if(data.role.role_id === 3){                    
+                    else if(data.role_id === 3){                    
                       console.log("login successful")
+                      localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
                       navigate("/customerhome");
                     }

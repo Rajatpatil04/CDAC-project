@@ -104,7 +104,7 @@ function CustomerSignup() {
                 const email_idRegex=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 if(!email_idRegex.test(value)){
                   valid = false;
-                  error = "email_id Name not valid!!!"
+                  error = "email_id not valid!!!"
               }
               break;
       case 'contact' :
@@ -426,7 +426,6 @@ function CustomerSignup() {
              checkemail_id(e.target.value)}}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required />
             <div style={{display: (!customer.email_id.valid && customer.email_id.touched)?"block":"none"}}><p className="text-danger">{customer.email_id.error}</p></div>
-            <div style={{display: (true)?"block":"none"}}><p className="text-danger">{msg}</p></div>
         </div>
 
         <div className="col-md-4">
