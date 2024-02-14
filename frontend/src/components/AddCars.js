@@ -5,7 +5,7 @@ export default function AddCars(){
     <div >
       <div className="border rounded container col-mb-6 mt-4 contain">
 
-         <h1 className="text-2xl font-bold mb-4">Adding Cars</h1>
+         <h1 className="text-2xl font-bold mb-4" style={{fontFamily:""}}>Adding Cars</h1>
          <form className="row g-3 needs-validation"  noValidate>
 
           <div className="col-md-4">

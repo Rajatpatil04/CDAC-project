@@ -110,20 +110,20 @@ const Login = () => {
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
-                      navigate("/AdminHome");
+                      navigate("/admin/adminhome");
 
                     }else if(data.role_id === 2){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
-                      navigate("/HostHome");
+                      navigate("/host/hosthome");
 
                     }
                     else if(data.role_id === 3){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
-                      navigate("/customerhome");
+                      navigate("/customer/customerhome");
                     }
                }            
         })
