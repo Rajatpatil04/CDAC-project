@@ -46,32 +46,32 @@ INSERT INTO `area` VALUES (1,'Deccan',411004,1),(2,'Shivajinagar',411005,1);
 UNLOCK TABLES;
 
 --
--- Table structure for table `car_img`
+-- Table structure for table `car_models`
 --
 
-DROP TABLE IF EXISTS `car_img`;
+DROP TABLE IF EXISTS `car_models`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `car_img` (
-  `img_id` int NOT NULL AUTO_INCREMENT,
-  `car_id` int NOT NULL,
-  `front_view` blob,
-  `side_view` blob,
-  `back_view` blob,
-  `interior_view` blob,
-  PRIMARY KEY (`img_id`),
-  KEY `car_id` (`car_id`),
-  CONSTRAINT `car_img_ibfk_1` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`)
+CREATE TABLE `car_models` (
+  `model_id` int NOT NULL AUTO_INCREMENT,
+  `model_name` varchar(50) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `seats` int DEFAULT NULL,
+  `transmission` varchar(50) DEFAULT NULL,
+  `fuel_type` varchar(20) DEFAULT NULL,
+  `package_a` int DEFAULT NULL,
+  `package_b` int DEFAULT NULL,
+  PRIMARY KEY (`model_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `car_img`
+-- Dumping data for table `car_models`
 --
 
-LOCK TABLES `car_img` WRITE;
-/*!40000 ALTER TABLE `car_img` DISABLE KEYS */;
-/*!40000 ALTER TABLE `car_img` ENABLE KEYS */;
+LOCK TABLES `car_models` WRITE;
+/*!40000 ALTER TABLE `car_models` DISABLE KEYS */;
+/*!40000 ALTER TABLE `car_models` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -83,22 +83,16 @@ DROP TABLE IF EXISTS `cars`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cars` (
   `car_id` int NOT NULL AUTO_INCREMENT,
-  `host_id` int NOT NULL,
-  `brand` varchar(50) NOT NULL,
-  `model` varchar(50) NOT NULL,
-  `year` int NOT NULL,
-  `price_per_hour` decimal(10,2) NOT NULL,
-  `transmission` varchar(50) NOT NULL,
-  `fuel_type` varchar(50) NOT NULL,
-  `seats` int NOT NULL,
-  `mileage` decimal(10,2) DEFAULT NULL,
+  `model_id` int DEFAULT NULL,
   `color` varchar(50) DEFAULT NULL,
-  `description` text,
-  `availability` tinyint(1) NOT NULL DEFAULT '1',
+  `rc_no` varchar(20) DEFAULT NULL,
+  `insurance_exp_date` date DEFAULT NULL,
+  `reg_date` date DEFAULT NULL,
+  `car_img` blob,
   PRIMARY KEY (`car_id`),
-  KEY `host_id` (`host_id`),
-  CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`host_id`) REFERENCES `hosts` (`host_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `model_id` (`model_id`),
+  CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`model_id`) REFERENCES `car_models` (`model_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +101,6 @@ CREATE TABLE `cars` (
 
 LOCK TABLES `cars` WRITE;
 /*!40000 ALTER TABLE `cars` DISABLE KEYS */;
-INSERT INTO `cars` VALUES (1,1,'Toyota','Camry',2022,2000.00,'Automatic','Petrol',5,18.00,'Burning Black',NULL,1),(2,1,'Honda','Civic',2020,1800.00,'Automatic','Petrol',5,18.00,'Platinum White Pearl',NULL,1),(3,1,'Ford','Mustang',2019,2500.00,'Manual','Petrol',5,8.00,'Red',NULL,1),(4,1,'Hyundai','Creta',2023,1500.00,'Manual','Petrol',5,22.00,'Abyss Black Pearl',NULL,1),(5,1,'Suzuki','Wagon R',2015,1000.00,'Manual','Petrol',5,20.00,'Poolside Blue',NULL,1),(6,1,'Tata','Harrier',2018,1500.00,'Manual','Petrol',5,17.00,'Sunlit Yellow',NULL,1);
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-12  8:24:23
+-- Dump completed on 2024-02-14 23:11:19
