@@ -17,7 +17,7 @@ const init = {
   password: {value:'',valid: false, touched: false, error:""},
   confirmPassword: {value:'',valid: false, touched: false, error:""},
   area_id: { value: '', valid: false, touched: false, error: '' },
-  formValid: true
+  formValid: false
   
 }
 
@@ -186,7 +186,7 @@ function CustomerSignup() {
 
                   break; 
                   case 'confirmpassword':
-                    if(value !== customer.confirmPassword.value){
+                    if(value !== customer.password.value){
                         valid = false;
                         error = "Both Password Dont Match. Re-Enter Pass!!!";
                     }
@@ -201,28 +201,20 @@ function CustomerSignup() {
         const { valid, error } = validate1(key, value);
         let formValid = true;
         for (let field in customer) {
-          if (field !== 'formValid' && customer[field].valid === false) {
-            formValid = false;
+          // if (field !== 'formValid' && customer[field].valid === false) {
+          //   formValid = false;
+          //   break;
+          // }
+          if(customer[field].valid===false)
+          {
+            formValid=false;
             break;
           }
         }
-        dispatch({type: 'update',field: key,value,valid,error,});};
+        dispatch({type: 'update',field: key,value,valid,error,formValid});};
       
       const[msg,setMsg] = useState("");
-      // const checkemail_id = (value) =>{
-      //   fetch("http://localhost:8081/getemail_idverification?email_id="+value) 
-      //   .then((res)=>{return res.json()})
-      //   .then((data) => {
-      //       if(data.length > 0){
-      //           setMsg("User Already Present!!!")
-      //           customer.email_id.valid=false;
-      //       }else{
-      //           setMsg("");
-      //           customer.email_id.valid=true;
-      //       }
-      //   })
-      //   console.log(msg);
-      // }
+
       const checkemail_id = (value) => {
         const isemail_idTaken = customers.some((customer) => customer.email_id === value);
       
@@ -637,7 +629,7 @@ function CustomerSignup() {
         {registrationSuccess && (<div className="alert alert-success" role="alert">Registered successfully!</div>)}
         
       <div className='container '>
-        <button type=" button" className="text-white p-2 col-md-6 rounded bg-dark bd" onClick={(e)=>{handleSubmit(e)}} disabled={customer.formValid}>Register</button>
+        <button type=" button" className="text-white p-2 col-md-6 rounded bg-dark bd" onClick={(e)=>{handleSubmit(e)}} disabled={!customer.formValid}>Register</button>
         <button type="reset" value={"Reset"} className="btn p-2 col-md-6 btn-danger bd">Reset</button>
       </div>
       </form>

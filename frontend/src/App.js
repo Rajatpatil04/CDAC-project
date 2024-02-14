@@ -20,6 +20,7 @@ import AdminApproval from './components/AdminApproval';
 import CustomerNavbar from './components/CustomerNavbar';
 import AdminNavbar from './components/AdminNavbar';
 import HostNavbar from './components/HostNavbar';
+import AddCars from './components/AddCars';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
@@ -74,6 +75,7 @@ function App() {
       <Route path ="/host" element={<HostNavbar/>}>
              <Route path="hosthome" element={<HostHome />} />
              <Route path="viewcars" element={<ViewCars/>}/>
+             <Route path="addcars" element={<AddCars/>}/>
           
         </Route>
         
