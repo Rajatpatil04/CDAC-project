@@ -22,5 +22,9 @@ public class UserService {
 	 public List<User> getAllUsers() {
 		 return urepo.findAll();
 	 } 
+	 public int updateStatus(int uid) {
+		    return urepo.updateStatus(uid);
+		}
+
 	
 }

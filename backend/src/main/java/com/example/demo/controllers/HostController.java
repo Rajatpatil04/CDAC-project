@@ -26,6 +26,11 @@ public class HostController {
         return hservice.getAllHosts();
     }
 	
+	@GetMapping("/gethostrequests")
+    public List<Host> getCustomersWithStatusZero() {
+        return hservice.getCustomersWithStatusZero();
+	}
+	
 	@PostMapping("/registerhost")
     public ResponseEntity<String> registerHost(@RequestBody DummyHost dummyHost) {        
         try {
