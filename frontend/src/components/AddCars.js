@@ -38,12 +38,13 @@ export default function AddCars(){
           </div>
           </div>
 
-           <div className="col-md-4">
-           <div class="input-group col-sm-3">
-                <input type="file" class="form-control" id="inputGroupFile02"></input>
-                <label class="input-group-text" for="inputGroupFile02">Upload</label>
-              </div>
-           </div>
+          <div class="col-md-4">
+            <div class="input-group col-sm-3 h-100">
+              <label class="input-group-text" for="inputGroupFile02">Car Color:</label>
+              <input type="color" class="form-control h-100" id="inputGroupFile02"></input>
+            </div>
+          </div>
+
        
             
                          
