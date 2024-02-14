@@ -24,21 +24,21 @@ public class UserController {
 	@Autowired
 	private UserService uservice;
 	
-	@PostMapping("/login")
-	public User login(@RequestBody DummyUser u) {
-
-        Optional<User> user = uservice.checkCredentials(u.getUsername(), u.getPassword());
-        User u1 = null;
-        try {
-			 u1 = user.get();
-			 System.out.println(u1);
-		} catch (Exception e) {
-			u1 = new User();
-			u1.setUid(-1);
-		}
-        return u1;
-        
-    }
+//	@PostMapping("/login")
+//	public User login(@RequestBody DummyUser u) {
+//
+//        Optional<User> user = uservice.checkCredentials(u.getUsername(), u.getPassword());
+//        User u1 = null;
+//        try {
+//			 u1 = user.get();
+//			 System.out.println(u1);
+//		} catch (Exception e) {
+//			u1 = new User();
+//			u1.setUid(-1);
+//		}
+//        return u1;
+//        
+//    }
 	
 	@GetMapping("/getallusers")
 	public List<User> getAll() {
@@ -49,5 +49,8 @@ public class UserController {
 	public int updateStatus(@RequestParam int uid) {
 	    return uservice.updateStatus(uid);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> aditya
 }

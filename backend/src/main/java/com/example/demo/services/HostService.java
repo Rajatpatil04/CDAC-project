@@ -5,10 +5,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.Area;
+<<<<<<< HEAD
 
+=======
+import com.example.demo.entities.Customer;
+>>>>>>> aditya
 import com.example.demo.entities.DummyHost;
 import com.example.demo.entities.Host;
 import com.example.demo.entities.Role;
@@ -33,19 +38,27 @@ public class HostService {
 	@Autowired
 	RoleRepository rrepo;
 	
+	@Autowired
+	private PasswordEncoder passwordencoder;
+	
 	public List<Host> getAllHosts() {
         return hrepo.findAll();
     }
+<<<<<<< HEAD
 	 public List<Host> getHostsWithStatusZero() {
+=======
+	 public List<Host> getCustomersWithStatusZero() {
+>>>>>>> aditya
 	        return hrepo.findAllByStatusIsZero();
 	}
 	
 	public void registerHost(DummyHost dummyHost) {
         User user = new User();
         user.setUsername(dummyHost.getUsername());
-        user.setPassword(dummyHost.getPassword());
+        user.setPassword(passwordencoder.encode(dummyHost.getPassword()));
+        System.out.println(passwordencoder.encode(dummyHost.getPassword()));
         user.setStatus(false);
-        Role r = rrepo.getById(2);
+        Role r = rrepo.findById(2).get();
         user.setRole(r);
         urepo.save(user);
 
@@ -53,7 +66,7 @@ public class HostService {
      //   host.setHost_id(0);
         host.setFname(dummyHost.getFname());
         host.setLname(dummyHost.getLname());
-        Area a = arepo.getById(dummyHost.getArea_id());
+        Area a = arepo.findById(dummyHost.getArea_id()).get();
         host.setArea(a);
         host.setEmail_id(dummyHost.getEmail_id());
         host.setContact(dummyHost.getContact());
