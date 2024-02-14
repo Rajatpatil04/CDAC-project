@@ -23,6 +23,7 @@ const Login = () => {
     //           })
     //       }
    
+<<<<<<< HEAD
     //      fetch('http://localhost:8081/login',req)
     //      .then( resp=>resp.json())
     //      .then(data=>{
@@ -98,6 +99,38 @@ const Login = () => {
             localStorage.setItem('loggeduser', JSON.stringify(data));
             navigate('/customer/customerhome');
           }
+=======
+         fetch('http://localhost:8081/login',req)
+         .then( resp=>resp.json())
+         .then(data=>{
+              console.log(data);
+                  if(data == null ){
+                    console.log("Login Failed...!")
+                    setError("You are not registered");
+                  }
+                  else{
+                    if(data.role_id === 1){                    
+                      console.log("login successful")
+                      localStorage.setItem("loggedUser",JSON.stringify(data));
+                      dispatch(login());
+                      navigate("/AdminHome");
+
+                    }else if(data.role_id === 2){                    
+                      console.log("login successful")
+                      localStorage.setItem("loggedUser",JSON.stringify(data));
+                      dispatch(login());
+                      navigate("/HostHome");
+
+                    }
+                    else if(data.role_id === 3){                    
+                      console.log("login successful")
+                      localStorage.setItem("loggedUser",JSON.stringify(data));
+                      dispatch(login());
+                      navigate("/customerhome");
+                    }
+                }            
+         })
+>>>>>>> aditya
         }
       } catch (error) {
         // Handle network or other errors
