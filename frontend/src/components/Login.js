@@ -71,32 +71,32 @@ const Login = () => {
           }),
         };
     
-        const response = await fetch('http://localhost:8081/login', req);
-        const data = await response.json();
+        // const response = await fetch('http://localhost:8081/login', req);
+        // const data = await response.json();
     
-        console.log(data);
+        // console.log(data);
     
-        if (data === -1) {
-          setError('You are not registered');
-        } else {
-          const role_id = data.role.role_id;
+        // if (data === -1) {
+        //   setError('You are not registered');
+        // } else {
+        //   const role_id = data.role_id;
     
-          if (role_id === 1) {
-            console.log('Admin login successful');
-            dispatch(login());
-            localStorage.setItem('loggeduser', JSON.stringify(data));
-            navigate('/admin/adminHome');
-          } else if (role_id === 2) {
-            console.log('Host login successful');
-            dispatch(login());
-            localStorage.setItem('loggeduser', JSON.stringify(data));
-            navigate('/host/hostHome');
-          } else if (role_id === 3) {
-            console.log('Customer login successful');
-            dispatch(login());
-            localStorage.setItem('loggeduser', JSON.stringify(data));
-            navigate('/customer/customerhome');
-          }
+        //   if (role_id === 1) {
+        //     console.log('Admin login successful');
+        //     dispatch(login());
+        //     localStorage.setItem('loggeduser', JSON.stringify(data));
+        //     navigate('/admin/adminhome');
+        //   } else if (role_id === 2) {
+        //     console.log('Host login successful');
+        //     dispatch(login());
+        //     localStorage.setItem('loggeduser', JSON.stringify(data));
+        //     navigate('/host/hosthome');
+        //   } else if (role_id === 3) {
+        //     console.log('Customer login successful');
+        //     dispatch(login());
+        //     localStorage.setItem('loggeduser', JSON.stringify(data));
+        //     navigate('/customer/customerhome');
+        //   }
          fetch('http://localhost:8081/login',req)
          .then( resp=>resp.json())
          .then(data=>{
@@ -125,26 +125,20 @@ const Login = () => {
                       dispatch(login());
                       navigate("/customerhome");
                     }
-                }            
-         })
+               }            
+        })
         }
-      } catch (error) {
+       catch (error) {
         // Handle network or other errors
         console.error('Login failed:', error.message);
       }
     };
     
         
-
-    // const handleClick = () => {
-    //     navigate('/forgotPassword');
-    //   };
       const cross = () => {
         navigate('/');
       };
-      // const Registerclick = () => {
-      //   navigate('/customersignup');
-      // };
+  
     
         return (
       <div className='body' >
