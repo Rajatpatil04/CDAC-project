@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  useNavigate } from 'react-router-dom';
@@ -23,7 +22,6 @@ const Login = () => {
     //           })
     //       }
    
-<<<<<<< HEAD
     //      fetch('http://localhost:8081/login',req)
     //      .then( resp=>resp.json())
     //      .then(data=>{
@@ -99,7 +97,6 @@ const Login = () => {
             localStorage.setItem('loggeduser', JSON.stringify(data));
             navigate('/customer/customerhome');
           }
-=======
          fetch('http://localhost:8081/login',req)
          .then( resp=>resp.json())
          .then(data=>{
@@ -130,7 +127,6 @@ const Login = () => {
                     }
                 }            
          })
->>>>>>> aditya
         }
       } catch (error) {
         // Handle network or other errors
