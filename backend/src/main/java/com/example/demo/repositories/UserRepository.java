@@ -24,12 +24,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("UPDATE User u SET u.status = 1 WHERE u.uid = :uid")
 	int updateStatus( int uid);
 
-<<<<<<< HEAD
-=======
+
 	@Query("SELECT u FROM User u WHERE u.username = ?1")
 	User getUser(String username);
 
->>>>>>> aditya
 	
 	
 	

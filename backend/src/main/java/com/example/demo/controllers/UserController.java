@@ -49,8 +49,5 @@ public class UserController {
 	public int updateStatus(@RequestParam int uid) {
 	    return uservice.updateStatus(uid);
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> aditya
 }

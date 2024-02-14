@@ -9,11 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.Area;
-<<<<<<< HEAD
 
-=======
-import com.example.demo.entities.Customer;
->>>>>>> aditya
+
+
 import com.example.demo.entities.DummyHost;
 import com.example.demo.entities.Host;
 import com.example.demo.entities.Role;
@@ -44,11 +42,8 @@ public class HostService {
 	public List<Host> getAllHosts() {
         return hrepo.findAll();
     }
-<<<<<<< HEAD
+
 	 public List<Host> getHostsWithStatusZero() {
-=======
-	 public List<Host> getCustomersWithStatusZero() {
->>>>>>> aditya
 	        return hrepo.findAllByStatusIsZero();
 	}
 	

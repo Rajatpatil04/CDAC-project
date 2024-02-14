@@ -13,14 +13,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	@Query("SELECT COUNT(c) > 0 FROM Customer c WHERE c.email_id = :email")
     boolean isEmailExists(String email);
 	
-<<<<<<< HEAD
+
 	@Query("SELECT c FROM Customer c WHERE c.user.uid IN (SELECT u.uid FROM User u WHERE u.status = 0)")
 	List<Customer> findAllByStatusIsZero();
 
-=======
-	 @Query("SELECT c FROM Customer c WHERE c.user.uid = (select u.uid from User u where u.status =0)")
-	    List<Customer> findAllByStatusIsZero();
->>>>>>> aditya
-	 
+
 
 }
