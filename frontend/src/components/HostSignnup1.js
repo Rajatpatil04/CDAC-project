@@ -179,8 +179,8 @@ function Hostsignup1() {
                 }
 
                   break; 
-                  case 'confirmpassword':
-                    if(value !== host.confirmPassword.value){
+                  case 'confirmPassword':
+                    if(value !== host.password.value){
                         valid = false;
                         error = "Both Password Dont Match. Re-Enter Pass!!!";
                     }

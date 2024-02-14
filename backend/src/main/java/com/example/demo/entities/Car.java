@@ -35,9 +35,9 @@ public class Car{
 	  @Column(name = "model_id")
 	  private int model_id;
 
-	  @ManyToOne
-	  @JoinColumn(name = "model_id")
-	  private CarModel model;
+//	  @ManyToOne
+//	  @JoinColumn(name = "model_id")
+//	  private CarModel model;
 
 	  @Column(name = "color")
 	  private String color;

@@ -24,7 +24,7 @@ import lombok.ToString;
 public class CarModel {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "model_id")
   private int model_id;
 

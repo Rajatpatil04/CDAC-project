@@ -31,7 +31,7 @@ import lombok.ToString;
 public class Area {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="area_id")
     private int area_id;
     

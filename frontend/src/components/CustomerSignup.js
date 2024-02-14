@@ -10,20 +10,22 @@ const init = {
   emergency_contact: {value:'',valid: false, touched: false, error:""},
   dob: {value:'',valid: false, touched: false, error:""},
   license_no: {value:'',valid: false, touched: false, error:""},
+  formValid: true,
   pancard_no: {value:'',valid: false, touched: false, error:""},
   adhar_card: {value:'',valid: false, touched: false, error:""},
   address: {value:'',valid: false, touched: false, error:""},
   username: {value:'',valid: false, touched: false, error:""},
   password: {value:'',valid: false, touched: false, error:""},
   confirmPassword: {value:'',valid: false, touched: false, error:""},
-  area_id: { value: '', valid: false, touched: false, error: '' },
-  formValid: false
+  area_id: { value: '', valid: false, touched: false, error: '' }
   
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'update':
+      const formValid = Object.values(state).every((field) => field.valid);
+      console.log(formValid); // Add this line
       return {
         ...state,[action.field]: {...state[action.field],
           value: action.value,
@@ -31,7 +33,7 @@ const reducer = (state, action) => {
           touched: true,
           error: action.error,
         },
-        formValid: Object.values(state).every((field) => field.valid),
+        formValid: formValid,
       };
 
     default:
@@ -185,7 +187,7 @@ function CustomerSignup() {
                 }
 
                   break; 
-                  case 'confirmpassword':
+                  case 'confirmPassword':
                     if(value !== customer.password.value){
                         valid = false;
                         error = "Both Password Dont Match. Re-Enter Pass!!!";
@@ -201,10 +203,6 @@ function CustomerSignup() {
         const { valid, error } = validate1(key, value);
         let formValid = true;
         for (let field in customer) {
-          // if (field !== 'formValid' && customer[field].valid === false) {
-          //   formValid = false;
-          //   break;
-          // }
           if(customer[field].valid===false)
           {
             formValid=false;
@@ -629,7 +627,7 @@ function CustomerSignup() {
         {registrationSuccess && (<div className="alert alert-success" role="alert">Registered successfully!</div>)}
         
       <div className='container '>
-        <button type=" button" className="text-white p-2 col-md-6 rounded bg-dark bd" onClick={(e)=>{handleSubmit(e)}} disabled={!customer.formValid}>Register</button>
+        <button type=" button" className="text-white p-2 col-md-6 rounded bg-dark bd" onClick={(e)=>{handleSubmit(e)}} disabled={customer.formValid}>Register</button>
         <button type="reset" value={"Reset"} className="btn p-2 col-md-6 btn-danger bd">Reset</button>
       </div>
       </form>
