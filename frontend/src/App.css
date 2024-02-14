@@ -13,6 +13,7 @@
 }
 #r2{
    font-size: 60px;
+   color: black;
 }
 #r3{
      font-size: 120px;
@@ -26,16 +27,16 @@
       position:absolute;
 }
 #r1:hover{
-      font-size: 160px; 
+      font-size: 180px; 
       transition: 0.5s; 
 }
+/* .rent:hover{
+      font-size: 160px;
+} */
 
 
 
-#r3:hover{
-   font-size: 150px;
-   transition: 0.5s;
-}
+
 .crosss{
   display: flex;
   justify-content: right; 
