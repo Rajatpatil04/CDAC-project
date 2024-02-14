@@ -12,6 +12,55 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+<<<<<<< Updated upstream
+=======
+    // const handleLogin = async (e) => {
+    //     e.preventDefault();
+    //         const req = {
+    //           method: 'POST',
+    //           headers: {'Content-Type': 'application/json'},
+    //           body: JSON.stringify({ 
+    //             username : username, 
+    //             password : password
+    //           })
+    //       }
+   
+    //      fetch('http://localhost:8081/login',req)
+    //      .then( resp=>resp.json())
+    //      .then(data=>{
+    //         //  if(data.password===password )
+    //         //     {
+    //           console.log(data);
+    //               if(data === -1 ){
+    //                 setError('You are not registered');
+    //               }
+    //               else{
+    //                 if(data.role.role_id === 1){                    
+    //                   console.log("login successful")
+    //                   dispatch(login());
+    //                   navigate("/AdminHome");
+
+    //                 }else if(data.role.role_id === 2){                    
+    //                   console.log("login successful")
+    //                   dispatch(login());
+    //                   navigate("/HostHome");
+
+    //                 }
+    //                 else if(data.role.role_id === 3){                    
+    //                   console.log("login successful")
+    //                   dispatch(login());
+    //                   navigate("/customerhome");
+    //                 }
+    //             }
+    //            // }
+    //             // else{
+    //             //   setError('You are not registered');
+    //             // }             
+    //      })
+    //     }
+
+
+>>>>>>> Stashed changes
     const handleLogin = async (e) => {
         e.preventDefault();
             const req = {
@@ -22,7 +71,10 @@ const Login = () => {
                 password : password
               })
           }
+<<<<<<< Updated upstream
    
+=======
+>>>>>>> Stashed changes
          fetch('http://localhost:8081/login',req)
          .then( resp=>resp.json())
          .then(data=>{
