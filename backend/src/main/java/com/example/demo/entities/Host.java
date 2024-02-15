@@ -27,7 +27,7 @@ import lombok.ToString;
 public class Host {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="hostId")
     private int host_id;
     

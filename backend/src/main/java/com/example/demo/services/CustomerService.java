@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.Area;
@@ -18,8 +17,6 @@ import com.example.demo.repositories.AreaRepository;
 import com.example.demo.repositories.CustomerRepository;
 import com.example.demo.repositories.RoleRepository;
 import com.example.demo.repositories.UserRepository;
-
-import lombok.experimental.PackagePrivate;
 
 @Service
 public class CustomerService {
@@ -36,23 +33,16 @@ public class CustomerService {
 	@Autowired
 	private AreaRepository arepo;
 	
-	@Autowired
-	private PasswordEncoder passwordencoder;
-	
 	public List<Customer> getAllCustomers() {
         return crepo.findAll();
     }
-	 public List<Customer> getCustomersWithStatusZero() {
-	        return crepo.findAllByStatusIsZero();
-	}
 
     public void registerCustomer(DummyCustomer dummyCustomer) {
         User user = new User();
         user.setUsername(dummyCustomer.getUsername());
-        user.setPassword(passwordencoder.encode(dummyCustomer.getPassword()));
-        System.out.println(passwordencoder.encode(dummyCustomer.getPassword()));
+        user.setPassword(dummyCustomer.getPassword());
         user.setStatus(false);
-        Role r = rrepo.findById(3).get();
+        Role r = rrepo.getById(3);
         user.setRole(r);
         urepo.save(user);
 
@@ -70,7 +60,7 @@ public class CustomerService {
         customer.setAdhar_card(dummyCustomer.getAdhar_card());
         customer.setEmail_id(dummyCustomer.getEmail_id());
         customer.setUser(user);
-        Area a = arepo.findById(dummyCustomer.getArea_id()).get();
+        Area a = arepo.getById(dummyCustomer.getArea_id());
         customer.setArea(a);
         customer.setAddress(dummyCustomer.getAddress());
         crepo.save(customer);
