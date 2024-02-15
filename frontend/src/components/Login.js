@@ -118,20 +118,20 @@ const Login = () => {
                     setError("You are not registered");
                   }
                   else{
-                    if(data.role.role_id === 1){                    
+                    if(data.role_id === 1){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
                       navigate("/admin/adminhome");
 
-                    }else if(data.role.role_id === 2){                    
+                    }else if(data.role_id === 2){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
                       navigate("/host/hosthome");
 
                     }
-                    else if(data.role.role_id === 3){                    
+                    else if(data.role_id === 3){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());

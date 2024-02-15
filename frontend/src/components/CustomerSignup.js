@@ -10,7 +10,7 @@ const init = {
   emergency_contact: {value:'',valid: false, touched: false, error:""},
   dob: {value:'',valid: false, touched: false, error:""},
   license_no: {value:'',valid: false, touched: false, error:""},
-  formValid: true,
+  formValid: false,
   pancard_no: {value:'',valid: false, touched: false, error:""},
   adhar_card: {value:'',valid: false, touched: false, error:""},
   address: {value:'',valid: false, touched: false, error:""},
