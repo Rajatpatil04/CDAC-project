@@ -22,9 +22,9 @@ export default function AdminNavbar(){
             </div>
             
             <Nav className="ml-auto">
-              {/* <NavLink to ="/" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink> */}
               <NavLink to ="/admin/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
-              <NavLink to ="/admin/requests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>REQUESTS</b></h5></NavLink>
+              <NavLink to ="/admin/carrequests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CAR Requests</b></h5></NavLink>
+              <NavLink to ="/admin/loginrequests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGIN Requests</b></h5></NavLink>
               <NavLink to ="/logout" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGOUT</b></h5></NavLink>
             </Nav>
           </Navbar.Collapse>

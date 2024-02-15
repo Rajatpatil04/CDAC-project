@@ -38,15 +38,23 @@ export default function Home() {
         <h4>MEET OUR FLEET : UNREVALED, FULLY EQUIPPED AND LOW MILENGE</h4>
       </div>
       <br /><br />
-     
-      <div className="container">
+
+    
+
+      <div className="container-fuild scroll-container demopics">
         <div className="row">
           <div className="col-sm-3 carhome car1"></div>
           <div className="col-sm-3 carhome car2"></div>
           <div className="col-sm-3 carhome car3" ></div>
-        </div>
+        </div><br/><br/> */
+      
+       </div>
+      <footer className="footer">
+          <div>
 
-      </div>
+          
+          </div>
+      </footer>
     </div>
   )
 }

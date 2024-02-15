@@ -21,11 +21,12 @@ import CustomerNavbar from './components/CustomerNavbar';
 import AdminNavbar from './components/AdminNavbar';
 import HostNavbar from './components/HostNavbar';
 import AddCars from './components/AddCars';
+import ApproveCar from './components/Approvecars';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
   return (
-    <div className='' >
+    <div  >
       <Navbar className='navcol'  style={{display: mystate.loggedIn?"none":"block"}}>
         <div className="container ">
           <Link to="/" className="navbar-brand">
@@ -39,7 +40,7 @@ function App() {
               <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
             </div> */}
             
-            <Nav className="ml-auto routes" >
+            <Nav className="ml-auto " >
               <NavLink to ="/" className="nav-link text-dark "><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
               <NavLink to ="/viewcars" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
               <NavDropdown title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>} id="basic-nav-dropdown" className="text-dark">
@@ -68,8 +69,9 @@ function App() {
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>
              <Route path="adminhome" element={<AdminHome />} />
+             <Route path='carrequests' element={<ApproveCar/>}/> 
              <Route path="viewcars" element={<ViewCars/>}/>
-             <Route path="requests" element={<AdminApproval/>}/>
+             <Route path="loginrequests" element={<AdminApproval/>}/>
         </Route>
       {/* Host side    */}
       <Route path ="/host" element={<HostNavbar/>}>
