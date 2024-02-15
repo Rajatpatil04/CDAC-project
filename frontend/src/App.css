@@ -7,6 +7,12 @@
     border-width: 2px;
 }
 
+.routes{
+  float: right;
+  margin-right: 0px;
+  margin-left: 60%;
+}
+
 #r1{
     font-size: 120px;
     color: black;
