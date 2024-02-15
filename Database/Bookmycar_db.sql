@@ -46,62 +46,62 @@ INSERT INTO `area` VALUES (1,'Deccan',411004,1),(2,'Shivajinagar',411005,1);
 UNLOCK TABLES;
 
 --
--- Table structure for table `car_models`
+-- Table structure for table `car`
 --
 
-DROP TABLE IF EXISTS `car_models`;
+DROP TABLE IF EXISTS `car`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `car_models` (
-  `model_id` int NOT NULL AUTO_INCREMENT,
-  `model_name` varchar(50) DEFAULT NULL,
-  `category` varchar(50) DEFAULT NULL,
-  `seats` int DEFAULT NULL,
-  `transmission` varchar(50) DEFAULT NULL,
-  `fuel_type` varchar(20) DEFAULT NULL,
-  `package_a` int DEFAULT NULL,
-  `package_b` int DEFAULT NULL,
-  PRIMARY KEY (`model_id`)
+CREATE TABLE `car` (
+  `car_id` int NOT NULL AUTO_INCREMENT,
+  `model_id` int NOT NULL,
+  `year_of_manufacture` int NOT NULL,
+  `mileage` int DEFAULT NULL,
+  `rental_price_per_day` decimal(10,2) NOT NULL,
+  `color` varchar(50) DEFAULT NULL,
+  `license_plate_number` varchar(20) NOT NULL,
+  `insurance_information` varchar(255) DEFAULT NULL,
+  `car_description` text,
+  `car_image` blob,
+  `host_id` int NOT NULL,
+  PRIMARY KEY (`car_id`),
+  KEY `model_id` (`model_id`),
+  KEY `host_id` (`host_id`),
+  CONSTRAINT `car_ibfk_1` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`),
+  CONSTRAINT `car_ibfk_2` FOREIGN KEY (`host_id`) REFERENCES `hosts` (`host_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `car_models`
+-- Dumping data for table `car`
 --
 
-LOCK TABLES `car_models` WRITE;
-/*!40000 ALTER TABLE `car_models` DISABLE KEYS */;
-/*!40000 ALTER TABLE `car_models` ENABLE KEYS */;
+LOCK TABLES `car` WRITE;
+/*!40000 ALTER TABLE `car` DISABLE KEYS */;
+/*!40000 ALTER TABLE `car` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `cars`
+-- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `cars`;
+DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cars` (
-  `car_id` int NOT NULL AUTO_INCREMENT,
-  `model_id` int DEFAULT NULL,
-  `color` varchar(50) DEFAULT NULL,
-  `rc_no` varchar(20) DEFAULT NULL,
-  `insurance_exp_date` date DEFAULT NULL,
-  `reg_date` date DEFAULT NULL,
-  `car_img` blob,
-  PRIMARY KEY (`car_id`),
-  KEY `model_id` (`model_id`),
-  CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`model_id`) REFERENCES `car_models` (`model_id`)
+CREATE TABLE `categories` (
+  `category_id` int NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cars`
+-- Dumping data for table `categories`
 --
 
-LOCK TABLES `cars` WRITE;
-/*!40000 ALTER TABLE `cars` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cars` ENABLE KEYS */;
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -238,6 +238,38 @@ INSERT INTO `hosts` VALUES (1,1,'Smith','L',1,'abcd@gmail.com','1234567890','200
 UNLOCK TABLES;
 
 --
+-- Table structure for table `model`
+--
+
+DROP TABLE IF EXISTS `model`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `model` (
+  `model_id` int NOT NULL AUTO_INCREMENT,
+  `brand` varchar(255) NOT NULL,
+  `transmission_type` varchar(50) DEFAULT NULL,
+  `fuel_type` varchar(50) DEFAULT NULL,
+  `seating_capacity` int DEFAULT NULL,
+  `gps_navigation` tinyint(1) DEFAULT NULL,
+  `entertainment_system` tinyint(1) DEFAULT NULL,
+  `child_seats` tinyint(1) DEFAULT NULL,
+  `category_id` int NOT NULL,
+  PRIMARY KEY (`model_id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `model_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `model`
+--
+
+LOCK TABLES `model` WRITE;
+/*!40000 ALTER TABLE `model` DISABLE KEYS */;
+/*!40000 ALTER TABLE `model` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `roles`
 --
 
@@ -300,4 +332,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-14 23:11:19
+-- Dump completed on 2024-02-15  8:48:41
