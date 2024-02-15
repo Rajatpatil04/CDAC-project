@@ -376,9 +376,10 @@ function CustomerSignup() {
   fetch("http://localhost:8081/registercustomer",reqOption)
   .then((res)=>{return res.text()})
   .then((msg)=>{setRegistrationSuccess(true);})
-
+    if(customer.formValid == true){
       navigate("/login");  
     console.log('Form submitted:', customer);
+    }
   };
   const[date,setDate] = useState("");
 
