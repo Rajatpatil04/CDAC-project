@@ -36,6 +36,10 @@ public class HostService {
         return hrepo.findAll();
     }
 	
+	public List<Host> getHostsWithStatusZero() {
+        return hrepo.findAllByStatusIsZero();
+    }
+	
 	public void registerHost(DummyHost dummyHost) {
         User user = new User();
         user.setUsername(dummyHost.getUsername());

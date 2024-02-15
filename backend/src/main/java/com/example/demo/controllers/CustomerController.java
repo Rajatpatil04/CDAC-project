@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.entities.Customer;
 import com.example.demo.entities.DummyCustomer;
 import com.example.demo.services.CustomerService;
@@ -26,7 +25,12 @@ public class CustomerController {
 	public List<Customer> getAllRoles() {
         return cservice.getAllCustomers();
     }
+	 @GetMapping("/getcustomerrequests")
+	    public List<Customer> getCustomersWithStatusZero() {
+	        return cservice.getCustomersWithStatusZero();
+	 }
 	
+		
 	@PostMapping("/registercustomer")
     public ResponseEntity<String> registerUser(@RequestBody DummyCustomer dummyCustomer) {
 		try {

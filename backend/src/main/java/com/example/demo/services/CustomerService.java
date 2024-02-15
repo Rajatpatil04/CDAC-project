@@ -36,6 +36,10 @@ public class CustomerService {
 	public List<Customer> getAllCustomers() {
         return crepo.findAll();
     }
+	
+	public List<Customer> getCustomersWithStatusZero() {
+        return crepo.findAllByStatusIsZero();
+	}
 
     public void registerCustomer(DummyCustomer dummyCustomer) {
         User user = new User();

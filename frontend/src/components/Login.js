@@ -71,33 +71,45 @@ const Login = () => {
           }),
         };
     
-        // const response = await fetch('http://localhost:8081/login', req);
-        // const data = await response.json();
-    
-        // console.log(data);
-    
-        // if (data === -1) {
-        //   setError('You are not registered');
-        // } else {
-        //   const role_id = data.role_id;
-    
-        //   if (role_id === 1) {
-        //     console.log('Admin login successful');
-        //     dispatch(login());
-        //     localStorage.setItem('loggeduser', JSON.stringify(data));
-        //     navigate('/admin/adminhome');
-        //   } else if (role_id === 2) {
-        //     console.log('Host login successful');
-        //     dispatch(login());
-        //     localStorage.setItem('loggeduser', JSON.stringify(data));
-        //     navigate('/host/hosthome');
-        //   } else if (role_id === 3) {
-        //     console.log('Customer login successful');
-        //     dispatch(login());
-        //     localStorage.setItem('loggeduser', JSON.stringify(data));
-        //     navigate('/customer/customerhome');
-        //   }
-         fetch('http://localhost:8081/login',req)
+    //For Security 
+    //      fetch('http://localhost:8081/login',req)
+    //      .then( resp=>resp.json())
+    //      .then(data=>{
+    //           console.log(data);
+    //               if(data == null ){
+    //                 console.log("Login Failed...!")
+    //                 setError("You are not registered");
+    //               }
+    //               else{
+    //                 if(data.role_id === 1){                    
+    //                   console.log("login successful")
+    //                   localStorage.setItem("loggedUser",JSON.stringify(data));
+    //                   dispatch(login());
+    //                   navigate("/admin/adminhome");
+
+    //                 }else if(data.role_id === 2){                    
+    //                   console.log("login successful")
+    //                   localStorage.setItem("loggedUser",JSON.stringify(data));
+    //                   dispatch(login());
+    //                   navigate("/host/hosthome");
+
+    //                 }
+    //                 else if(data.role_id === 3){                    
+    //                   console.log("login successful")
+    //                   localStorage.setItem("loggedUser",JSON.stringify(data));
+    //                   dispatch(login());
+    //                   navigate("/customer/customerhome");
+    //                 }
+    //            }            
+    //     })
+    //     }
+    //    catch (error) {
+    //     // Handle network or other errors
+    //     console.error('Login failed:', error.message);
+    //   }
+    // };
+
+    fetch('http://localhost:8081/login',req)
          .then( resp=>resp.json())
          .then(data=>{
               console.log(data);
@@ -106,20 +118,20 @@ const Login = () => {
                     setError("You are not registered");
                   }
                   else{
-                    if(data.role_id === 1){                    
+                    if(data.role.role_id === 1){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
                       navigate("/admin/adminhome");
 
-                    }else if(data.role_id === 2){                    
+                    }else if(data.role.role_id === 2){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
                       navigate("/host/hosthome");
 
                     }
-                    else if(data.role_id === 3){                    
+                    else if(data.role.role_id === 3){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());

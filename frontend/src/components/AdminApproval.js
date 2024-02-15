@@ -122,7 +122,7 @@ export default function AdminApproval(){
         </thead>
         <tbody>
           {hosts.map((host) => (
-              <tr key={host.id}>
+              <tr key={host.host_id}>
                 <td>{indexh++}</td>
               <td>{host.fname}</td>
               <td>{host.lname}</td>

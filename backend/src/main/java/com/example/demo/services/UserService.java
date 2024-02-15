@@ -23,4 +23,7 @@ public class UserService {
 		 return urepo.findAll();
 	 } 
 	
+	 public int updateStatus(int uid) {
+		    return urepo.updateStatus(uid);
+	 }
 }

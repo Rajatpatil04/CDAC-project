@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.entities.DummyHost;
 import com.example.demo.entities.Host;
 import com.example.demo.services.HostService;
@@ -25,6 +24,12 @@ public class HostController {
 	public List<Host> getAllRoles() {
         return hservice.getAllHosts();
     }
+	 @GetMapping("/gethostrequests")
+	    public List<Host> getHostsWithStatusZero() {
+	        return hservice.getHostsWithStatusZero();
+	 }
+	
+	
 	
 	@PostMapping("/registerhost")
     public ResponseEntity<String> registerHost(@RequestBody DummyHost dummyHost) {        
