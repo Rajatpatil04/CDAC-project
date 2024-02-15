@@ -48,13 +48,14 @@
 .crosss{
   display: flex;
   justify-content: right; 
+
 }
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 .body{
-    background-image: url("images/lance-asper-N9Pf2J656aQ-unsplash.jpg");
+    background-image: url("images/daniele-buso-dS0wCPjeBwM-unsplash.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -64,8 +65,9 @@
                
 }
 .navcol{
-  background-color: antiquewhite;
-  border-radius: 2%;
+  background-color: rgb(244, 239, 232);
+  height: 75px;
+
 }
 .car1{
   background-image: url("images/sven-d-a4S6KUuLeoM-unsplash.jpg");
@@ -109,18 +111,18 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
-  opacity: 70%;
-  background-color: rgba(255, 255, 255, 0.5);
+  opacity: 80%;
+ 
 
 }
 .admin{
-  border: solid black;
+  border: solid rgb(0, 0, 0);
   border-radius: 10px;
   height: 400px;
     padding: 30px;
     margin-left: 150px;
     margin-top: 70px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.4);
 }
 .App-header {
   background-color: #282c34;
@@ -168,9 +170,7 @@
   outline-offset: 10px;
 }
 
-.start:visited {
-  border-style: dotted;
-}
+
 
 
 .App-link {

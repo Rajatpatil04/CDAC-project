@@ -25,9 +25,9 @@ import AddCars from './components/AddCars';
 function App() {
   const mystate = useSelector(state=> state.logged)
   return (
-    <div >
-      <Navbar bg="light" expand="lg" className='navcol' style={{display: mystate.loggedIn?"none":"block"}}>
-        <div className="container-fluid">
+    <div className='' >
+      <Navbar className='navcol'  style={{display: mystate.loggedIn?"none":"block"}}>
+        <div className="container ">
           <Link to="/" className="navbar-brand">
             <img src={favicon} alt="Book My Car Logo" width="90" height="40" className="d-inline-block align-text-top"/>
           </Link>

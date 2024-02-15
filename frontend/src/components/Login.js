@@ -158,14 +158,15 @@ const Login = () => {
             <div className='crosss'>
                 <button type="button" className='btn btn-danger' onClick={cross}>X</button>
                 </div>
-            <h2>User Login</h2>
+            <h2 >User Login</h2><br/>
             <form onSubmit={handleLogin}>
             <div>
                     <label >Username:</label>
                      <input type="text" id="username" name='username' className='form-control' value={username} onChange={(e) => setUsername(e.target.value)} required />
                 </div>
+                <br/>
                 <div> 
-                   <label >Password:</label>
+                   <label  >Password:</label>
                      <input type="password" id="password" name='password' className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <br />

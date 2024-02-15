@@ -8,12 +8,12 @@ export default function HostNavbar(){
   return(
     <div>
 
-    <Navbar bg="light" expand="lg" className='navcol' style={{display: mystate.loggedIn?"block":"none"}}>
+    <Navbar className='navcol' style={{display: mystate.loggedIn?"block":"none"}}>
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
-            <img src={favicon} alt="Book My Car Logo" width="90" height="40" className="d-inline-block align-text-top"/>
+            <img src={favicon} alt="Book My Car Logo" width="90" height="40"  className="d-inline-block align-text-top"/>
           </Link>
-          <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
+          <h1 className="text-dark text-bd" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <div className="input-group search">
