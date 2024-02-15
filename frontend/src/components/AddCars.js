@@ -16,13 +16,6 @@ export default function AddCars(){
           </select>
           </div>
 
-          <div className="col-md-4">
-           <select class="form-select">
-            <option selected>CAR MODEL</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-          </select>
-          </div>
 
           <div className="col-md-4">
            <select class="form-select">
@@ -31,10 +24,28 @@ export default function AddCars(){
             <option value="2">Two</option>
           </select>
           </div>
+
+          {/* <div className="col-md-4">
+           <select class="form-select">
+            <option selected>CATEGORY</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+          </select>
+          </div> */}
+
+          <div className="col-md-4">
+          <input class="form-control" type="text" placeholder="RC NUMBER" >
+           </input>
+          </div>
+
+          <div className="col-md-4">
+          <input class="form-control" type="text" placeholder="LICENCE PLATE NUMBER" >
+           </input>
+          </div>
           <div className="col-md-4">
           <div class="input-group">
-            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"></input>
-            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" placeholder="Car Image"></input>
+            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Upload</button>
           </div>
           </div>
 
