@@ -33,7 +33,7 @@ public class CarService {
 	@Autowired
 	private FuelTypeRepository ftrepo;
 	
-	public void uploadCar(DummyCar dcar) {
+	public Car uploadCar(DummyCar dcar) {
 		System.out.println(dcar);
 		Car c = new Car();
 		c.setCarModel( cmrepo.findById(dcar.getModel_id()).get());
@@ -50,7 +50,7 @@ public class CarService {
 		c.setAc(dcar.getAc());
 		//c.setCar_image(dcar.getCar_image());
 		c.setStatus(false);
-		crepo.save(c);
+		return crepo.save(c);
 	}
 
 //	public boolean updateImg(int id, byte[] arr) {

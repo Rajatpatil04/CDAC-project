@@ -40,7 +40,7 @@ export default function CarRegistrationForm() {
       .then((response) => response.json())
       .then((data) => {
         setFuelTypes(data);
-        console.log(data);
+        //console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching fuel types:", error);
@@ -114,7 +114,7 @@ export default function CarRegistrationForm() {
 
  
   const handleSubmit = (e)=>{
-    console.log(JSON.parse(localStorage.getItem("loggedUser")).uid);
+    //console.log(JSON.parse(localStorage.getItem("loggedUser")).uid);
       e.preventDefault();
       const reqOptions = {
         method :'POST',
@@ -134,7 +134,7 @@ export default function CarRegistrationForm() {
           host_id: JSON.parse(localStorage.getItem("loggedUser")).uid
       })
       }
-      console.log(JSON.stringify(formData))
+      //console.log(JSON.stringify(formData))
       fetch("http://localhost:8081/uploadcar",reqOptions)
       .then(resp=>{
         if(resp.ok)
@@ -143,6 +143,7 @@ export default function CarRegistrationForm() {
            throw new Error("server error");  
       })
       .then(obj => {
+              console.log(JSON.stringify(obj))
               var fd = new FormData();
               fd.append("file",file); 
               const reqOptions1 ={
@@ -354,6 +355,8 @@ export default function CarRegistrationForm() {
             </button>
           </div>
         </form>
+        <p> {file && file.name} </p>
+        <p> {file && file.size}</p>
       </div>
     </div>
   );
