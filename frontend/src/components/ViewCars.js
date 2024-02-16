@@ -2,14 +2,21 @@
 
 
 
+
 import React from 'react';
 import camry from '../images/camry.jpg';
 import civic from '../images/civic.jpg';
 import mustang from '../images/mustang.jpg';
 import creta from '../images/creta.jpg';
 import wagonR from '../images/wagonR.jpg';
+<<<<<<< Updated upstream
 import harrier from '../images/harrier.jpg'
 import { useSelector } from 'react-redux';
+=======
+import harrier from '../images/harrier.jpg';
+import banner from '../images/banner.jpg';
+
+>>>>>>> Stashed changes
 
 function ViewCars() {
    useSelector(state=>state.logged)
@@ -69,8 +76,11 @@ function ViewCars() {
   );
 
   return (
-    <div className="container mt-4">
-      <h2 className="text-2xl font-bold mb-4">  Available Cars for Rent</h2>
+    <div className="container-fluid" style={{backgroundColor:'white',margin:'0%'}}>
+      <div className='m-0'>
+        <img src={banner} className="container-fluid" alt='banner'/>
+      </div>
+      <h2 className="text-2xl font-bold mb-4 mt-3" style={{textAlign:"center"}}>  Available Cars for Rent</h2>
       <div className="row container-fluid">
         {uniqueCars.map(car => (
           <div key={car.id} className="col-md-4 mb-4">
@@ -94,3 +104,6 @@ function ViewCars() {
 }
 
 export default ViewCars;
+
+
+
