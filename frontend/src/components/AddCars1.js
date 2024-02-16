@@ -5,7 +5,6 @@ export default function CarRegistrationForm() {
     const navigate = useNavigate();
     const [ac, setAc] = useState(false);
     const [music_system, setMusicSystem] = useState(false);
-    const [insurance_exp_date, setInsuranceExpDate] = useState("");
     const [fuelTypes, setFuelTypes] = useState([]);
     const [carModels, setCarModels] = useState([]);
 
@@ -108,10 +107,10 @@ export default function CarRegistrationForm() {
     dispatch({ type: "update", data: { key, value, touched: true, valid, error, formValid } });
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    dispatch({ type: "update", data: { key: "carImage", value: file, touched: true, valid: true, error: "" } });
-  };
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   dispatch({ type: "update", data: { key: "carImage", value: file, touched: true, valid: true, error: "" } });
+  // };
 
  
   const handleSubmit = (e)=>{
@@ -159,8 +158,7 @@ export default function CarRegistrationForm() {
 
               navigate('/host/hosthome');
       })
-      .catch((error)=> {alert("Server error.Try later");
-      console.log("Server error:", error);})
+      .catch((error)=> {console.log("Error:" + error)})
 
   }
 
@@ -304,15 +302,15 @@ export default function CarRegistrationForm() {
 
         <div className="col-md-4">
           <label className="form-label">Music System:</label><br />
-          <input type="radio"className="btn-check"name="music_system" value={true}
+          <input type="radio"className="btn-check"name="music_system" 
             id="success-outlined-music"
             autoComplete="off"
-            onChange={(e)=>{setMusicSystem("music_system",e.target.value)}}
+            onClick={(e)=>{setMusicSystem("music_system",e.target.value)}}
             />
 
           <label className="btn btn-outline-success" htmlFor="success-outlined-music"> YES </label><span> </span>
-          <input type="radio" className="btn-check" name="music_system" id="danger-outlined-music" autoComplete="off" value={true}
-           onChange={(e)=>{setMusicSystem("music_system",e.target.value)}} defaultChecked/>
+          <input type="radio" className="btn-check" name="music_system" id="danger-outlined-music" autoComplete="off" 
+           onClick={(e)=>{setMusicSystem("music_system",e.target.value)}} defaultChecked/>
             <label className="btn btn-outline-danger" htmlFor="danger-outlined-music" > NO</label>
         </div>
 

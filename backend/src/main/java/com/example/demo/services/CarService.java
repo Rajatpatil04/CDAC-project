@@ -53,20 +53,29 @@ public class CarService {
 		crepo.save(c);
 	}
 
-	public boolean updateImg(int id, byte[] arr) {
-		{
-			boolean flag = false;
-			try
-			{
-				Car c = crepo.findById(id).get();
-				c.setCar_image(arr);
-				crepo.save(c);
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-			return flag;
+//	public boolean updateImg(int id, byte[] arr) {
+//		{
+//			boolean flag = false;
+//			try
+//			{
+//				Car c = crepo.findById(id).get();
+//				c.setCar_image(arr);
+//				crepo.save(c);
+//			}
+//			catch(Exception e)
+//			{
+//				e.printStackTrace();
+//			}
+//			return flag;
+//		}
+//	}
+	
+	public boolean uploadImg(int id , byte[] photo) {
+		if(crepo.uploadImage(id, photo) == 1) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	
