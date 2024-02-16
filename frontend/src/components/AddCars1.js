@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function CarRegistrationForm() {
     const navigate = useNavigate();
-    const [ac, setAc] = useState(false);
-    const [music_system, setMusicSystem] = useState(false);
+    // const [ac, setAc] = useState(false);
+    // const [music_system, setMusicSystem] = useState(false);
     const [fuelTypes, setFuelTypes] = useState([]);
     const [carModels, setCarModels] = useState([]);
+    const [cars, setCars] = useState([]);
 
 
   const initialFormState = {
@@ -50,6 +51,15 @@ export default function CarRegistrationForm() {
       .then((response) => response.json())
       .then((data) => {
         setCarModels(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching car models:", error);
+      });
+
+      fetch("http://localhost:8081/getallcars")
+      .then((response) => response.json())
+      .then((data) => {
+        setCars(data);
       })
       .catch((error) => {
         console.error("Error fetching car models:", error);
@@ -115,6 +125,8 @@ export default function CarRegistrationForm() {
  
   const handleSubmit = (e)=>{
     //console.log(JSON.parse(localStorage.getItem("loggedUser")).uid);
+    console.log(formData.ac.value);
+    console.log(formData.music_system.value);
       e.preventDefault();
       const reqOptions = {
         method :'POST',
@@ -167,7 +179,7 @@ export default function CarRegistrationForm() {
     <div>
       <div className="border rounded container col-mb-6 mt-4 contain">
         <h1 className="text-2xl font-bold mb-4">Car Registration</h1>
-        <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit} >
+        <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit}  encType="multipart/form-data">
 
           <div className="col-md-4">
             <label className="form-label">Car Model:</label>
@@ -177,9 +189,9 @@ export default function CarRegistrationForm() {
               onChange={(e) => {
                 handleChange("model_id", e.target.value);
               }}
-              required
+              required defaultValue="select"
             >
-              <option selected disabled>
+              <option value="select" disabled>
                 Choose Car Model
               </option>
               {carModels.map((model) => (
@@ -204,20 +216,16 @@ export default function CarRegistrationForm() {
                 type="file"
                 className="form-control"
                 name="carImage"
-                // onChange={handleFileChange}
                 onChange={(e) => setFile(e.target.files[0])} 
                 required
               />
-              <button className="btn btn-outline-secondary" type="button">
-                Upload
-              </button>
             </div>
           </div>
 
           <div className="col-md-4">
             <label className="form-label">Car Color:</label>
-            <select className="form-select" id="carColor" name="color" onChange={(e)=>{handleChange("color",e.target.value)}} required>
-              <option value="" disabled selected>Select Car Color</option>
+            <select className="form-select" id="carColor" name="color" onChange={(e)=>{handleChange("color",e.target.value)}} required defaultValue="select">
+              <option value="select" disabled >Select Car Color</option>
               <option value="red">Red</option>
               <option value="blue">Blue</option>
               <option value="green">Green</option>
@@ -233,8 +241,8 @@ export default function CarRegistrationForm() {
 
           <div className="col-md-4">
             <label className="form-label">Car Insurance Type:</label>
-            <select className="form-select" id="insurance_type" name="insurance_type" onChange={(e)=>{handleChange("insurance_type",e.target.value)}} required>
-              <option value="" disabled selected>Select Car Insurance Type</option>
+            <select className="form-select" id="insurance_type" name="insurance_type" onChange={(e)=>{handleChange("insurance_type",e.target.value)}} required defaultValue="select">
+              <option value="select" disabled >Select Car Insurance Type</option>
               <option value="ownership">Owner</option>
               <option value="comprehensive">Comprehensive Insurance</option>
               <option value="third-party">Third-Party Liability Insurance</option>
@@ -249,7 +257,6 @@ export default function CarRegistrationForm() {
               type="date"
               id="reg_date"
               name="reg_date"
-              //value={date}
               onChange={(e) => {
                 handleChange("reg_date", e.target.value);
               }}
@@ -264,7 +271,6 @@ export default function CarRegistrationForm() {
               type="date"
               id="insurance_exp_date"
               name="insurance_exp_date"
-             // value={insurance_exp_date}
              onChange={(e) => {
               handleChange("insurance_exp_date", e.target.value);
             }}
@@ -281,7 +287,7 @@ export default function CarRegistrationForm() {
               id="success-outlined"
               autoComplete="off"
               defaultChecked
-              onChange={(e)=>{setAc("ac",e.target.value)}}
+              onClick={(e)=>{handleChange("ac",true)}}
               />
             <label className="btn btn-outline-success" htmlFor="success-outlined">
               YES
@@ -294,7 +300,7 @@ export default function CarRegistrationForm() {
               value={true}
               id="danger-outlined"
               autoComplete="off"
-              onChange={(e)=>{setAc("ac",e.target.value)}}
+              onClick={(e)=>{handleChange("ac",false)}}
               />
             <label className="btn btn-outline-danger" htmlFor="danger-outlined">
               NO
@@ -306,13 +312,15 @@ export default function CarRegistrationForm() {
           <input type="radio"className="btn-check"name="music_system" 
             id="success-outlined-music"
             autoComplete="off"
-            onClick={(e)=>{setMusicSystem("music_system",e.target.value)}}
+            // onClick={(e)=>{handleChange("music_system",e.target.value)}}
             />
 
           <label className="btn btn-outline-success" htmlFor="success-outlined-music"> YES </label><span> </span>
           <input type="radio" className="btn-check" name="music_system" id="danger-outlined-music" autoComplete="off" 
-           onClick={(e)=>{setMusicSystem("music_system",e.target.value)}} defaultChecked/>
+           onClick={(e)=>{handleChange("music_system",true)}} />
             <label className="btn btn-outline-danger" htmlFor="danger-outlined-music" > NO</label>
+            <input type="radio" className="btn-check" name="music_system" id="danger-outlined-music" autoComplete="off" 
+           onClick={(e)=>{handleChange("music_system",false)}} />
         </div>
 
         <div className="col-md-4">
@@ -323,9 +331,9 @@ export default function CarRegistrationForm() {
               onChange={(e) => {
                 handleChange("fuel_id", e.target.value);
               }}
-              required
+              required defaultValue="select"
             >
-              <option selected disabled>
+              <option value="select" disabled>
                 Choose Car Fuel Type
               </option>
               {fuelTypes.map((fuel) => (
@@ -335,6 +343,8 @@ export default function CarRegistrationForm() {
               ))}
             </select>
           </div>
+
+
 
         <div className="col-md-4">
           <label className="form-label">Mileage:</label>

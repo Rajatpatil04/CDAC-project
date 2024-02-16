@@ -35,6 +35,7 @@ public class UserController {
 //			u1 = new User();
 //			u1.setUid(-1);
 		}
+        System.out.println(u1);
         return u1;
         
     }

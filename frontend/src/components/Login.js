@@ -112,13 +112,17 @@ const Login = () => {
     fetch('http://localhost:8081/login',req)
          .then( resp=>resp.json())
          .then(data=>{
-              console.log(data);
+              console.log(data + "aaaa");
                   if(data == null ){
-                    console.log("Login Failed...!")
-                    setError("You are not registered");
+                    console.log("Login Failed...");
+                    setError("Login Failed...");
                   }
                   else{
-                    if(data.role.role_id === 1){                    
+                    if(data.status === false){
+                      console.log("Pending Approval...");
+                      setError("Pending Approval...");
+                    }
+                    else if(data.role.role_id === 1){                    
                       console.log("login successful")
                       localStorage.setItem("loggedUser",JSON.stringify(data));
                       dispatch(login());
@@ -142,6 +146,7 @@ const Login = () => {
         }
        catch (error) {
         console.error('Login failed:', error.message);
+        setError("Login failed. Please try again.");     
       }
     };
     
