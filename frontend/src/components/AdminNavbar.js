@@ -16,15 +16,15 @@ export default function AdminNavbar(){
           <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <div className="input-group search">
+            {/* <div className="input-group search">
               <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
               <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
-            </div>
+            </div> */}
             
-            <Nav className="ml-auto">
+            <Nav className="ml-auto aroutes">
               <NavLink to ="/admin/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
-              <NavLink to ="/admin/carrequests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CAR Requests</b></h5></NavLink>
-              <NavLink to ="/admin/loginrequests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGIN Requests</b></h5></NavLink>
+              <NavLink to ="/admin/carrequests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CAR REQUESTS</b></h5></NavLink>
+              <NavLink to ="/admin/loginrequests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGIN REQUESTS</b></h5></NavLink>
               <NavLink to ="/logout" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGOUT</b></h5></NavLink>
             </Nav>
           </Navbar.Collapse>
