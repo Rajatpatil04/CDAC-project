@@ -58,7 +58,7 @@ export default function CarRegistrationForm() {
 
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
   const [file,setFile] = useState();
-  const [date, setDate] = useState("");
+ 
 
   const validateInput = (key, value) => {
     let valid = true;
