@@ -82,8 +82,4 @@ public class CarService {
 	public List<Car> getAllCars() {
 		return crepo.findAll();
 	}
-	
-	public List<Car> getAllCars(int capacity, int category_id) {
-		return crepo.findAll();
-	}
 }
