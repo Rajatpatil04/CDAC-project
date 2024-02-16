@@ -30,7 +30,7 @@ public class CarController {
         return cservice.getAllCars();
     }
 	
-	@PostMapping(value="/uploadimg/{id}", consumes = "multipart/form-data")
+	@PostMapping(value="/uploadimage/{id}", consumes = "multipart/form-data")
 	public boolean updateImg(@PathVariable("id") int id,@RequestBody MultipartFile file)
 	{
 		boolean flag = false;

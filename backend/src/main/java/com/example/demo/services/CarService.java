@@ -13,6 +13,7 @@ import com.example.demo.repositories.CarModelRepository;
 import com.example.demo.repositories.CarRepository;
 import com.example.demo.repositories.FuelTypeRepository;
 import com.example.demo.repositories.HostRepository;
+import com.example.demo.repositories.UserRepository;
 
 @Service
 public class CarService {
@@ -27,13 +28,16 @@ public class CarService {
 	private HostRepository hrepo;
 	
 	@Autowired
+	private UserRepository urepo;
+	
+	@Autowired
 	private FuelTypeRepository ftrepo;
 	
 	public void uploadCar(DummyCar dcar) {
 		System.out.println(dcar);
 		Car c = new Car();
 		c.setCarModel( cmrepo.findById(dcar.getModel_id()).get());
-		c.setHost(hrepo.findById(dcar.getHost_id()).get());
+		c.setHost(hrepo.findByUid(dcar.getHost_id()).get());
 		c.setFuelType(ftrepo.findById(dcar.getFuel_id()).get());
 		c.setMileage(dcar.getMileage());
 		c.setPrice_per_hour(dcar.getPrice_per_hour());
