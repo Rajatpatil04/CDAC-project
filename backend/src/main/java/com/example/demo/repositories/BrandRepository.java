@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entities.Brand;
 
+
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Integer> {
 
