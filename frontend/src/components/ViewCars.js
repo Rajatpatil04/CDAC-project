@@ -9,14 +9,10 @@ import civic from '../images/civic.jpg';
 import mustang from '../images/mustang.jpg';
 import creta from '../images/creta.jpg';
 import wagonR from '../images/wagonR.jpg';
-<<<<<<< Updated upstream
-import harrier from '../images/harrier.jpg'
 import { useSelector } from 'react-redux';
-=======
 import harrier from '../images/harrier.jpg';
 import banner from '../images/banner.jpg';
 
->>>>>>> Stashed changes
 
 function ViewCars() {
    useSelector(state=>state.logged)
