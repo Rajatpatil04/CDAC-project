@@ -18,6 +18,12 @@
   margin-left: 60%;
 }
 
+.pro{
+   height: 30px;
+   width: 30px;
+   margin-left: 10px;
+}
+
 #r1{
     font-size: 120px;
     color: black;
@@ -71,8 +77,14 @@
 }
 .navcol{
   background-color: rgb(234, 231, 227);
+  box-sizing: content-box;
+  color: aqua;
   height: 75px;
+}
 
+.nav-link:hover{
+  text-decoration: underline;
+  transition: 0.9s;
 }
 .car1{
   background-image: url("images/sven-d-a4S6KUuLeoM-unsplash.jpg");
@@ -159,6 +171,21 @@
   margin-left:90px ;
   border-radius: 3%;
 
+}
+.csearch{
+  width: 200px;
+  height: 45px;
+  padding-right: 10px;
+  border-width: 3px;
+  margin-right: 100px;
+  margin-left:120px ;
+  border-radius: 3%;
+  position:absolute;
+
+}
+
+.croutes{
+   margin-right: 70px;
 }
 
 .start {

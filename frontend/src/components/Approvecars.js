@@ -5,6 +5,7 @@ export default function ApproveCar(){
   const mystate =useSelector(state=>state.logged)
   const[cars,setCars]=useState([]);
   const[approve,setApprove] = useState([]);
+  const[reject,setReject]=useState([]);
 
   const formatDate = (milliseconds) => {
     const date = new Date(milliseconds);
@@ -43,13 +44,33 @@ export default function ApproveCar(){
         })
         .catch((error) => console.error('Error in changing status:', error));
     };
+
+    const handleDeletion = (car_id) => {
+      // const userId = parseInt(uid, 10);
+      fetch(`http://localhost:8081/rejectcars?car_id=${car_id}`, { method: 'PUT' })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data === 1) {
+          
+            setReject((prevReject) => {
+              const newReject = [...prevReject];
+              newReject[car_id] = true; // Assuming 'true' represents 'approved'
+              return newReject;
+            });
+          } else {
+            console.error('Failed to update status.....');
+          }
+        })
+        .catch((error) => console.error('Error in changing status:', error));
+    };
     
     var indexc =1;
     
   return(
     <div className="container">
-            <h2 style={{fontFamily:"initial"}}>CARS</h2> 
-      <table border="1" className="table">
+            <h2 style={{fontFamily:"initial" ,textAlign:"center"}}>CARS</h2><br/><br/> 
+      <table border="1" className="table table-striped">
         <thead>
           <tr>
             <th>Sr. no</th>
@@ -65,13 +86,14 @@ export default function ApproveCar(){
             <th>Price per Hour</th>  
             <th>Car Image</th> 
             <th></th> 
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {cars.map((car) => (
               <tr key={car.car_id}>
                 <td>{indexc++}</td>
-              <td>{car.model.model_name}</td>
+              <td>{car.carModel.model_name}</td>
               <td>{car.host.host_id}</td>
               <td>{car.rc_no}</td>
               <td>{new Date(car.reg_date).toLocaleDateString()}</td>
@@ -83,14 +105,19 @@ export default function ApproveCar(){
               <td>{car.price_per_hour}</td>
               <td></td>
               <td>
-              <button
-                  type="button"
-                  className={`btn ${approve[car.car_id] ? 'btn-success' : 'btn-primary'}`}
-                  onClick={() => handleApproval(car.car_id)}
-                  >
+              <button type="button" className={`btn ${approve[car.car_id] ? 'btn-success' : 'btn-primary'}`}
+                  onClick={() => handleApproval(car.car_id)} >
                   {approve[car.car_id] ? 'Approved' : 'Approve'}
                 </button>
                   </td>
+                  <td>
+              <button type="button" className={`btn ${reject[car.car_id] ? 'btn-danger' : 'btn-warning'}`}
+                  onClick={() => handleDeletion(car.car_id)}
+                  >
+                  {reject[car.car_id] ? 'Rejected' : 'Reject'}
+                </button>
+                  </td>  
+                  
             </tr>
           ))}
         </tbody>

@@ -16,7 +16,7 @@ public class CategoryController {
 	@Autowired
 	CategoryService cservice;
 	
-	@GetMapping("/getallfueltypes")
+	@GetMapping("/getallcategories")
 	public List<Category> getAll() {
         return cservice.getAllCatagories();
     }
