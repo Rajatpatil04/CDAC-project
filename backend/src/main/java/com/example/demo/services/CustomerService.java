@@ -46,7 +46,7 @@ public class CustomerService {
         user.setUsername(dummyCustomer.getUsername());
         user.setPassword(dummyCustomer.getPassword());
         user.setStatus(false);
-        Role r = rrepo.getById(3);
+        Role r = rrepo.findById(3).get();
         user.setRole(r);
         urepo.save(user);
 

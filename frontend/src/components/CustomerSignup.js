@@ -25,7 +25,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'update':
       const formValid = Object.values(state).every((field) => field.valid);
-      console.log(formValid); // Add this line
+      console.log(formValid); 
       return {
         ...state,[action.field]: {...state[action.field],
           value: action.value,

@@ -1,47 +1,73 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function AddCars() {
+export default function CarRegistrationForm() {
+    const navigate = useNavigate();
+    const [ac, setAc] = useState(false);
+    const [music_system, setMusicSystem] = useState(false);
+    const [insurance_exp_date, setInsuranceExpDate] = useState("");
+    const [fuelTypes, setFuelTypes] = useState([]);
+    const [carModels, setCarModels] = useState([]);
 
-  let navigate = useNavigate();
 
-  const init = {
-    car_model: { value: "", valid: false, touched: false, error: "" },
-    rc_no: { value: "", valid: false, touched: false, error: "" },
-    reg_date: { value: "", valid: false, touched: false, error: "" },
-    formValid: false,
-    car_image: { value: "", valid: false, touched: false, error: "" },
+  const initialFormState = {
+    carModel: { value: "", valid: false, touched: false, error: "" },
+    rcNo: { value: "", valid: false, touched: false, error: "" },
+    registrationDate: { value: "", valid: false, touched: false, error: "" },
     color: { value: "", valid: false, touched: false, error: "" },
-    insurance_type: { value: "", valid: false, touched: false, error: "" },
-    insurance_exp_date: { value: "", valid: false, touched: false, error: "" },
-    rent_price_per_hour: { value: "", valid: false, touched: false, error: "" },
-    music_system: { value: "", valid: false, touched: false, error: "" },
-    ac: { value: "", valid: false, touched: false, error: "" },
+    insuranceType: { value: "", valid: false, touched: false, error: "" },
+    insuranceExpDate: { value: "", valid: false, touched: false, error: "" },
+    rentPricePerHour: { value: "", valid: false, touched: false, error: "" },
+    musicSystem: { value: false, valid: true, touched: false, error: "" },
+    ac: { value: false, valid: true, touched: false, error: "" },
     mileage: { value: "", valid: false, touched: false, error: "" },
+    carImage: { value: null, valid: false, touched: false, error: "" },
+    formValid: false,
+
   };
-  const reducer = (state,action) =>{
-    switch (action.type){
-        case 'update':
-            const {key,val,touched,valid,error,formValid} = action.data;
-            return {...state,[key]:{value:val,error,touched,valid},formValid}
-        case 'reset':
-            return init;
-        default:
-            break;
+
+  const formReducer = (state, action) => {
+    switch (action.type) {
+      case "update":
+        const { key, value, touched, valid, error, formValid } = action.data;
+        return { ...state, [key]: { value, touched, valid, error }, formValid };
+      case "reset":
+        return initialFormState;
+      default:
+        return state;
     }
-}
-  const[car,dispatch] = useReducer(reducer,init);
+  };
+  useEffect(() => {
+    fetch("http://localhost:8081/getallfueltypes")
+      .then((response) => response.json())
+      .then((data) => {
+        setFuelTypes(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching fuel types:", error);
+      });
+
+    fetch("http://localhost:8081/getallcarmodels")
+      .then((response) => response.json())
+      .then((data) => {
+        setCarModels(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching car models:", error);
+      });
+  }, []);
+
+  const [formData, dispatch] = useReducer(formReducer, initialFormState);
   const [date, setDate] = useState("");
-  const [insurance_exp_date, setinsurance_exp_date] = useState("");
-  const [ac, setac] = useState(false);
-  const[music_system, setmusic_system] = useState(false);
-  const validate1 =(key,val)=>{
-       let valid = true;
+
+  const validateInput = (key, value) => {
+    let valid = true;
        let error = "";
        switch(key){
            case'rc_no': 
                    var  pattern = /^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{1,4}$/;
-                   if(!pattern.test(val))
+                   if(!pattern.test(value))
                    {
                        valid = false;
                        error="Registration Number is not valid!";
@@ -49,7 +75,7 @@ export default function AddCars() {
                    break;
            case'rent_price_per_hour': 
                    var  pattern = /^[0-9]+$ /;
-                   if(!pattern.test(val))
+                   if(!pattern.test(value))
                    {
                        valid = false;
                        error="Rent must be in numberic only!";
@@ -57,7 +83,7 @@ export default function AddCars() {
                    break;
             case 'mileage':
                     var pattern = /^[0-9]+$/;
-                    if(!pattern.test(val))
+                    if(!pattern.test(value))
                     {
                        valid = false;
                        error = "Mileage must be in numeric only"
@@ -67,68 +93,77 @@ export default function AddCars() {
               default:
                    break;
        }
-       return {valid:valid,error:error};
+    return { valid: true, error: "" };
+  };
 
-  }
-
-  
-
-  const handleChange = (key,val)=>{
-      const {valid,error}= validate1(key,val);
-      let formValid = true;
-      for(let c in car){
-          if(car[c].valid === false){
-              formValid = false;
-              break;
-          }  
-        }
-      dispatch({type:"update",data:{key,val,touched:true,valid,error,formValid}}) 
-  }
-  const submitData=(e)=>{
-       e.preventDefault();
-       const reqOption = {
-        method : "POST",
-        headers : {"content-type":"application/json"},
-        body : JSON.stringify({
-          car_model: car.car_model.value,
-          rc_no: car.car_model.value,
-          reg_date: date,
-          car_image:car.car_model.value,
-          color:car.car_model.value,
-          insurance_type:car.car_model.value,
-          insurance_exp_date:insurance_exp_date,
-          rent_price_per_hour:car.car_model.value,
-          music_system:music_system,
-          ac:ac,
-          mileage:car.car_model.value,
-           
-        })
+  const handleChange = (key, value) => {
+    const { valid, error } = validateInput(key, value);
+    let formValid = true;
+    for (const field in formData) {
+      if (field !== key && !formData[field].valid) {
+        formValid = false;
+        break;
       }
-      fetch("http://localhost:8081/uploadcar",reqOption)
-      .then((res)=>{return res.text()})
-      .then((msg)=>{console.log("Data Inserted Successfully!!!")})
-       alert("Car Registered Successfully")
-      navigate("/host/hosthome");
-}
+    }
+    dispatch({ type: "update", data: { key, value, touched: true, valid, error, formValid } });
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    dispatch({ type: "update", data: { key: "carImage", value: file, touched: true, valid: true, error: "" } });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key].value);
+    }
+
+    fetch("http://localhost:8081/uploadcar", {
+      method: "POST",
+      body: formDataToSend,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Car Registered Successfully");
+        navigate("/host/hosthome");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An unexpected error occurred");
+      });
+  };
 
   return (
     <div>
       <div className="border rounded container col-mb-6 mt-4 contain">
-        <h1 className="text-2xl font-bold mb-4" style={{ fontFamily: "" }}>
-           CAR Details
-        </h1>
-        <form className="row g-3 needs-validation" noValidate>
+        <h1 className="text-2xl font-bold mb-4">Car Registration</h1>
+        <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit} encType="multipart/form-data">
+
           <div className="col-md-4">
-          <label className="form-label">Car Model:</label>
-            <select className="form-select" name="car_model" 
-            onChange={(e)=>{handleChange("car_model",e.target.value)}} required>
+            <label className="form-label">Car Model:</label>
+            <select
+              className="form-select"
+              name="car_model"
+              onChange={(e) => {
+                handleChange("car_model", e.target.value);
+              }}
+              required
+            >
               <option selected disabled>
                 Choose Car Model
               </option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
+              {carModels.map((model) => (
+                <option key={model.model_id} value={model.model_name}>
+                  {model.model_name}
+                </option>
+              ))}
             </select>
           </div>
+
 
           <div className="col-md-4">
           <label className="form-label">RC Number:</label>
@@ -137,14 +172,21 @@ export default function AddCars() {
              </div>
 
           <div className="col-md-4">
-          <label className="form-label">Car Image:</label>
+            <label className="form-label">Car Image:</label>
             <div className="input-group">
-              <input type="file"className="form-control" name="car_image" onChange={(e)=>{handleChange("car_image",e.target.value)}} required/>
-                <button className="btn btn-outline-secondary"type="button">
-                  Upload</button>
+              <input
+                type="file"
+                className="form-control"
+                name="carImage"
+                onChange={handleFileChange}
+                required
+              />
+              <button className="btn btn-outline-secondary" type="button">
+                Upload
+              </button>
             </div>
           </div>
-          
+
           <div className="col-md-4">
             <label className="form-label">Car Color:</label>
             <select className="form-select" id="carColor" name="color" onChange={(e)=>{handleChange("color",e.target.value)}} required>
@@ -197,7 +239,7 @@ export default function AddCars() {
               name="insurance_exp_date"
               value={insurance_exp_date}
               onChange={(e) => {
-                setinsurance_exp_date(e.target.value);
+                setInsuranceExpDate(e.target.value);
               }}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
               required/>
@@ -212,7 +254,7 @@ export default function AddCars() {
               id="success-outlined"
               autoComplete="off"
               defaultChecked
-              onChange={(e)=>{setac("ac",e.target.value)}}
+              onChange={(e)=>{setAc("ac",e.target.value)}}
               />
             <label className="btn btn-outline-success" htmlFor="success-outlined">
               YES
@@ -225,7 +267,7 @@ export default function AddCars() {
               value={true}
               id="danger-outlined"
               autoComplete="off"
-              onChange={(e)=>{setac("ac",e.target.value)}}
+              onChange={(e)=>{setAc("ac",e.target.value)}}
               />
             <label className="btn btn-outline-danger" htmlFor="danger-outlined">
               NO
@@ -237,14 +279,35 @@ export default function AddCars() {
           <input type="radio"className="btn-check"name="music_system" value={true}
             id="success-outlined-music"
             autoComplete="off"
-            onChange={(e)=>{setmusic_system("music_system",e.target.value)}}
+            onChange={(e)=>{setMusicSystem("music_system",e.target.value)}}
             />
 
           <label className="btn btn-outline-success" htmlFor="success-outlined-music"> YES </label><span> </span>
           <input type="radio" className="btn-check" name="music_system" id="danger-outlined-music" autoComplete="off" value={true}
-           onChange={(e)=>{setmusic_system("music_system",e.target.value)}} defaultChecked/>
+           onChange={(e)=>{setMusicSystem("music_system",e.target.value)}} defaultChecked/>
             <label className="btn btn-outline-danger" htmlFor="danger-outlined-music" > NO</label>
         </div>
+
+        <div className="col-md-4">
+            <label className="form-label">Car Fuel Type:</label>
+            <select
+              className="form-select"
+              name="fuel_type"
+              onChange={(e) => {
+                handleChange("fuel_type", e.target.value);
+              }}
+              required
+            >
+              <option selected disabled>
+                Choose Car Fuel Type
+              </option>
+              {fuelTypes.map((fuel) => (
+                <option key={fuel.fuel_id} value={fuel.fuel_type}>
+                  {fuel.fuel_type}
+                </option>
+              ))}
+            </select>
+          </div>
 
         <div className="col-md-4">
           <label className="form-label">Mileage:</label>
@@ -259,20 +322,13 @@ export default function AddCars() {
             onChange={(e)=>{handleChange("rent_price_per_hour",e.target.value)}} required/>
              </div>
 
-          <div>
-            </div>   
-          <div>
-          <button type="submit" className="btn btn-primary">UPLOAD</button>
-            
+          <div className="col-12">
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
           </div>
-
         </form>
-      
-    
-
-
       </div>
     </div>
   );
 }
-

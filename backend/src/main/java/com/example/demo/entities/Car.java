@@ -36,7 +36,7 @@ public class Car {
     private CarModel carModel;
 
     @ManyToOne
-    @Column(name = "host_id")
+    @JoinColumn(name = "host_id")
     private Host host;
 
     @ManyToOne
