@@ -12,7 +12,7 @@ export default function CarRegistrationForm() {
 
   const initialFormState = {
     carModel: { value: "", valid: false, touched: false, error: "" },
-    rcNo: { value: "", valid: false, touched: false, error: "" },
+    rc_no: { value: "", valid: false, touched: false, error: "" },
     registrationDate: { value: "", valid: false, touched: false, error: "" },
     color: { value: "", valid: false, touched: false, error: "" },
     insuranceType: { value: "", valid: false, touched: false, error: "" },
@@ -59,6 +59,7 @@ export default function CarRegistrationForm() {
   }, []);
 
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
+  const [file,setFile] = useState();
   const [date, setDate] = useState("");
 
   const validateInput = (key, value) => {
@@ -113,35 +114,46 @@ export default function CarRegistrationForm() {
     dispatch({ type: "update", data: { key: "carImage", value: file, touched: true, valid: true, error: "" } });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key].value);
-    }
-
-    fetch("http://localhost:8081/uploadcar", {
-      method: "POST",
-      body: formDataToSend,
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        console.log("Success:", data);
-        alert("Car Registered Successfully");
-        navigate("/host/hosthome");
+ 
+  const handleSubmit = (e)=>{
+      e.preventDefault();
+      const reqOptions = {
+        method :'POST',
+        headers : {'content-type':'application/json'},
+        body: JSON.stringify(formData)
+      }
+      fetch("http://localhost:8081/uploadcar",reqOptions)
+      .then(resp=>{
+        if(resp.ok)
+           return resp.json();
+        else 
+           throw new Error("server error");  
       })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("An unexpected error occurred");
-      });
-  };
+      .then(obj => {
+              var fd = new FormData();
+              fd.append("file",file); 
+              const reqOptions1 ={
+                method :"post",
+                Headers :{
+                   "content-type":"multipart/form-data"
+                },
+                body:fd
+              }
+              fetch("http://localhost:8081/uploadimage/"+obj.car_id,reqOptions1)
+              .then(resp => resp.json())
+              .then(data => console.log(JSON.stringify(data)))
+
+              navigate('/host/hosthome');
+      })
+      .catch((error)=> alert("Server error.Try later"))
+
+  }
 
   return (
     <div>
       <div className="border rounded container col-mb-6 mt-4 contain">
         <h1 className="text-2xl font-bold mb-4">Car Registration</h1>
-        <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit} encType="multipart/form-data">
+        <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit} >
 
           <div className="col-md-4">
             <label className="form-label">Car Model:</label>
