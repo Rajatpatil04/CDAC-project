@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 
 const SearchCars = () => {
   const [categories, setCategories] = useState([]);
@@ -8,6 +9,8 @@ const SearchCars = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedFuelType, setSelectedFuelType] = useState('');
   const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:8081/categories')
@@ -22,10 +25,19 @@ const SearchCars = () => {
   }, []);
 
   const handleSearch = () => {
+    setLoading(true);
+    setError('');
+
     fetch(`/api/cars?category=${selectedCategory}&fuelType=${selectedFuelType}&seatingCapacity=${seatingCapacity}`)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        return response.json();
+      })
       .then(data => setCars(data))
-      .catch(error => console.error('Error fetching cars: ', error));
+      .catch(error => setError('Error fetching cars: ' + error.message))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -69,6 +81,12 @@ const SearchCars = () => {
           </Form>
         </Col>
       </Row>
+
+      {loading && <Spinner animation="border" role="status" className="mt-4">
+        <span className="sr-only">Loading...</span>
+      </Spinner>}
+
+      {error && <div className="mt-4 text-danger">{error}</div>}
 
       <Row className="mt-4">
         {cars.map(car => (
