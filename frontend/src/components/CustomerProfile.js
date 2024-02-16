@@ -26,9 +26,9 @@ export default function CustomerProfile(){
             console.error('Error fetching customer:', error);
         });
 };
-  const handleclick=()=>{
-        navigate("/customer/updateProfile");
-  }
+const handleUpdateProfile = (customerId) => {
+  navigate(`/customer/updateProfile/${customerId}`);
+};
 
   return(
     <div>
@@ -71,8 +71,8 @@ export default function CustomerProfile(){
               <button
                   type="button"
                  className="btn "
-                  onClick={() => handleclick(customer.customer_id)} >
-                  {/* {approve[customer.user.uid] ? 'Approved' : 'Approve'} */}Update Profile
+                 onClick={() => handleUpdateProfile(customer.customer_id)}
+                  /* {approve[customer.user.uid] ? 'Approved' : 'Approve'} */>Update Profile
                 </button>
                 </td>
             </tr>

@@ -78,15 +78,15 @@ public class CustomerService {
     public Customer getByUid(int uid)
     {
     	 Customer c = null;
-    	Optional<Customer> o= crepo.findById(uid);
-    	try {
-    		c=o.get();
-    	
-    	}
-    	catch(Exception e)
-    	{
-    		e.printStackTrace();
-    	}
+    	 c= crepo.findCustomerByUid(uid);
+//    	try {
+//    		c=o.get();
+//    	
+//    	}
+//    	catch(Exception e)
+//    	{
+//    		e.printStackTrace();
+//    	}
     	return c;
     	
     }

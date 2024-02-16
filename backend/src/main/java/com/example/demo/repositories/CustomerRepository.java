@@ -16,7 +16,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 	@Query("SELECT c FROM Customer c WHERE c.user.uid IN (SELECT u.uid FROM User u WHERE u.status = 0)")
 	List<Customer> findAllByStatusIsZero();
-
-
+     
+	 @Query("SELECT c FROM Customer c WHERE c.user.uid = :uid")
+	   public Customer findCustomerByUid( int uid);
 
 }
