@@ -5,23 +5,21 @@ export default function CarRegistrationForm() {
     const navigate = useNavigate();
     const [ac, setAc] = useState(false);
     const [music_system, setMusicSystem] = useState(false);
-    const [insurance_exp_date, setInsuranceExpDate] = useState("");
     const [fuelTypes, setFuelTypes] = useState([]);
     const [carModels, setCarModels] = useState([]);
 
 
   const initialFormState = {
-    carModel: { value: "", valid: false, touched: false, error: "" },
-    rcNo: { value: "", valid: false, touched: false, error: "" },
-    registrationDate: { value: "", valid: false, touched: false, error: "" },
+    model_id: { value: "", valid: false, touched: false, error: "" },
+    rc_no: { value: "", valid: false, touched: false, error: "" },
+    reg_date: { value: "", valid: false, touched: false, error: "" },
     color: { value: "", valid: false, touched: false, error: "" },
-    insuranceType: { value: "", valid: false, touched: false, error: "" },
-    insuranceExpDate: { value: "", valid: false, touched: false, error: "" },
-    rentPricePerHour: { value: "", valid: false, touched: false, error: "" },
-    musicSystem: { value: false, valid: true, touched: false, error: "" },
+    insurance_type: { value: "", valid: false, touched: false, error: "" },
+    insurance_exp_date: { value: "", valid: false, touched: false, error: "" },
+    price_per_hour: { value: "", valid: false, touched: false, error: "" },
+    music_system: { value: false, valid: true, touched: false, error: "" },
     ac: { value: false, valid: true, touched: false, error: "" },
     mileage: { value: "", valid: false, touched: false, error: "" },
-    carImage: { value: null, valid: false, touched: false, error: "" },
     formValid: false,
 
   };
@@ -42,7 +40,7 @@ export default function CarRegistrationForm() {
       .then((response) => response.json())
       .then((data) => {
         setFuelTypes(data);
-        console.log(data);
+        //console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching fuel types:", error);
@@ -59,6 +57,7 @@ export default function CarRegistrationForm() {
   }, []);
 
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
+  const [file,setFile] = useState();
   const [date, setDate] = useState("");
 
   const validateInput = (key, value) => {
@@ -73,7 +72,7 @@ export default function CarRegistrationForm() {
                        error="Registration Number is not valid!";
                    }
                    break;
-           case'rent_price_per_hour': 
+           case'price_per_hour': 
                    var  pattern = /^[0-9]+$ /;
                    if(!pattern.test(value))
                    {
@@ -108,40 +107,67 @@ export default function CarRegistrationForm() {
     dispatch({ type: "update", data: { key, value, touched: true, valid, error, formValid } });
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    dispatch({ type: "update", data: { key: "carImage", value: file, touched: true, valid: true, error: "" } });
-  };
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   dispatch({ type: "update", data: { key: "carImage", value: file, touched: true, valid: true, error: "" } });
+  // };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key].value);
-    }
-
-    fetch("http://localhost:8081/uploadcar", {
-      method: "POST",
-      body: formDataToSend,
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        console.log("Success:", data);
-        alert("Car Registered Successfully");
-        navigate("/host/hosthome");
+ 
+  const handleSubmit = (e)=>{
+    //console.log(JSON.parse(localStorage.getItem("loggedUser")).uid);
+      e.preventDefault();
+      const reqOptions = {
+        method :'POST',
+        headers : {'content-type':'application/json'},
+        body : JSON.stringify({
+          model_id: formData.model_id.value,
+          fuel_id: formData.fuel_id.value,
+          mileage: parseFloat(formData.mileage.value), 
+          price_per_hour: parseFloat(formData.price_per_hour.value), 
+          color: formData.color.value,
+          rc_no: formData.rc_no.value,
+          reg_date: formData.reg_date.value,
+          insurance_type: formData.insurance_type.value,
+          insurance_exp_date: formData.insurance_exp_date.value,
+          music_system: formData.music_system.value,
+          ac: formData.ac.value,          
+          host_id: JSON.parse(localStorage.getItem("loggedUser")).uid
       })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("An unexpected error occurred");
-      });
-  };
+      }
+      //console.log(JSON.stringify(formData))
+      fetch("http://localhost:8081/uploadcar",reqOptions)
+      .then(resp=>{
+        if(resp.ok)
+           return resp.json();
+        else 
+           throw new Error("server error");  
+      })
+      .then(obj => {
+              console.log(JSON.stringify(obj))
+              var fd = new FormData();
+              fd.append("file",file); 
+              const reqOptions1 ={
+                method :"POST",
+                headers :{
+                   "content-type":"multipart/form-data"
+                },
+                body:fd
+              }
+              fetch("http://localhost:8081/uploadimage/"+obj.car_id,reqOptions1)
+              .then(resp => resp.json())
+              .then(data => console.log(JSON.stringify(data)))
+
+              navigate('/host/hosthome');
+      })
+      .catch((error)=> {console.log("Error:" + error)})
+
+  }
 
   return (
     <div>
       <div className="border rounded container col-mb-6 mt-4 contain">
         <h1 className="text-2xl font-bold mb-4">Car Registration</h1>
-        <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit} encType="multipart/form-data">
+        <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit} >
 
           <div className="col-md-4">
             <label className="form-label">Car Model:</label>
@@ -149,7 +175,7 @@ export default function CarRegistrationForm() {
               className="form-select"
               name="car_model"
               onChange={(e) => {
-                handleChange("car_model", e.target.value);
+                handleChange("model_id", e.target.value);
               }}
               required
             >
@@ -157,7 +183,7 @@ export default function CarRegistrationForm() {
                 Choose Car Model
               </option>
               {carModels.map((model) => (
-                <option key={model.model_id} value={model.model_name}>
+                <option key={model.model_id} value={model.model_id}>
                   {model.model_name}
                 </option>
               ))}
@@ -178,7 +204,8 @@ export default function CarRegistrationForm() {
                 type="file"
                 className="form-control"
                 name="carImage"
-                onChange={handleFileChange}
+                // onChange={handleFileChange}
+                onChange={(e) => setFile(e.target.files[0])} 
                 required
               />
               <button className="btn btn-outline-secondary" type="button">
@@ -222,9 +249,9 @@ export default function CarRegistrationForm() {
               type="date"
               id="reg_date"
               name="reg_date"
-              value={date}
+              //value={date}
               onChange={(e) => {
-                setDate(e.target.value);
+                handleChange("reg_date", e.target.value);
               }}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
               required/>
@@ -237,10 +264,10 @@ export default function CarRegistrationForm() {
               type="date"
               id="insurance_exp_date"
               name="insurance_exp_date"
-              value={insurance_exp_date}
-              onChange={(e) => {
-                setInsuranceExpDate(e.target.value);
-              }}
+             // value={insurance_exp_date}
+             onChange={(e) => {
+              handleChange("insurance_exp_date", e.target.value);
+            }}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
               required/>
           </div>
@@ -276,15 +303,15 @@ export default function CarRegistrationForm() {
 
         <div className="col-md-4">
           <label className="form-label">Music System:</label><br />
-          <input type="radio"className="btn-check"name="music_system" value={true}
+          <input type="radio"className="btn-check"name="music_system" 
             id="success-outlined-music"
             autoComplete="off"
-            onChange={(e)=>{setMusicSystem("music_system",e.target.value)}}
+            onClick={(e)=>{setMusicSystem("music_system",e.target.value)}}
             />
 
           <label className="btn btn-outline-success" htmlFor="success-outlined-music"> YES </label><span> </span>
-          <input type="radio" className="btn-check" name="music_system" id="danger-outlined-music" autoComplete="off" value={true}
-           onChange={(e)=>{setMusicSystem("music_system",e.target.value)}} defaultChecked/>
+          <input type="radio" className="btn-check" name="music_system" id="danger-outlined-music" autoComplete="off" 
+           onClick={(e)=>{setMusicSystem("music_system",e.target.value)}} defaultChecked/>
             <label className="btn btn-outline-danger" htmlFor="danger-outlined-music" > NO</label>
         </div>
 
@@ -294,7 +321,7 @@ export default function CarRegistrationForm() {
               className="form-select"
               name="fuel_type"
               onChange={(e) => {
-                handleChange("fuel_type", e.target.value);
+                handleChange("fuel_id", e.target.value);
               }}
               required
             >
@@ -302,7 +329,7 @@ export default function CarRegistrationForm() {
                 Choose Car Fuel Type
               </option>
               {fuelTypes.map((fuel) => (
-                <option key={fuel.fuel_id} value={fuel.fuel_type}>
+                <option key={fuel.fuel_id} value={fuel.fuel_id}>
                   {fuel.fuel_type}
                 </option>
               ))}
@@ -318,8 +345,8 @@ export default function CarRegistrationForm() {
       
         <div className="col-md-4">
           <label className="form-label">Rent Per Hour:</label>
-            <input className="form-control" name="rent_price_per_hour" type="text"placeholder="Rent Per hour(In Rs)" 
-            onChange={(e)=>{handleChange("rent_price_per_hour",e.target.value)}} required/>
+            <input className="form-control" name="price_per_hour" type="text"placeholder="Rent Per hour(In Rs)" 
+            onChange={(e)=>{handleChange("price_per_hour",e.target.value)}} required/>
              </div>
 
           <div className="col-12">
@@ -328,6 +355,8 @@ export default function CarRegistrationForm() {
             </button>
           </div>
         </form>
+        <p> {file && file.name} </p>
+        <p> {file && file.size}</p>
       </div>
     </div>
   );

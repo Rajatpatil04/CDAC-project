@@ -13,6 +13,7 @@ import com.example.demo.repositories.CarModelRepository;
 import com.example.demo.repositories.CarRepository;
 import com.example.demo.repositories.FuelTypeRepository;
 import com.example.demo.repositories.HostRepository;
+import com.example.demo.repositories.UserRepository;
 
 @Service
 public class CarService {
@@ -27,13 +28,16 @@ public class CarService {
 	private HostRepository hrepo;
 	
 	@Autowired
+	private UserRepository urepo;
+	
+	@Autowired
 	private FuelTypeRepository ftrepo;
 	
-	public void uploadCar(DummyCar dcar) {
+	public Car uploadCar(DummyCar dcar) {
 		System.out.println(dcar);
 		Car c = new Car();
 		c.setCarModel( cmrepo.findById(dcar.getModel_id()).get());
-		c.setHost(hrepo.findById(dcar.getHost_id()).get());
+		c.setHost(hrepo.findByUid(dcar.getHost_id()).get());
 		c.setFuelType(ftrepo.findById(dcar.getFuel_id()).get());
 		c.setMileage(dcar.getMileage());
 		c.setPrice_per_hour(dcar.getPrice_per_hour());
@@ -46,23 +50,32 @@ public class CarService {
 		c.setAc(dcar.getAc());
 		//c.setCar_image(dcar.getCar_image());
 		c.setStatus(false);
-		crepo.save(c);
+		return crepo.save(c);
 	}
 
-	public boolean updateImg(int id, byte[] arr) {
-		{
-			boolean flag = false;
-			try
-			{
-				Car c = crepo.findById(id).get();
-				c.setCar_image(arr);
-				crepo.save(c);
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-			return flag;
+//	public boolean updateImg(int id, byte[] arr) {
+//		{
+//			boolean flag = false;
+//			try
+//			{
+//				Car c = crepo.findById(id).get();
+//				c.setCar_image(arr);
+//				crepo.save(c);
+//			}
+//			catch(Exception e)
+//			{
+//				e.printStackTrace();
+//			}
+//			return flag;
+//		}
+//	}
+	
+	public boolean uploadImg(int id , byte[] photo) {
+		if(crepo.uploadImage(id, photo) == 1) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	

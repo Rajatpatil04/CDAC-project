@@ -7,10 +7,10 @@ export default function AdminApproval(){
   const[hosts, setHosts] = useState([]);
   const[approve,setApprove] = useState([]);
 
-  const formatDate = (milliseconds) => {
-    const date = new Date(milliseconds);
-    return date.toLocaleDateString(); 
-  };
+  // const formatDate = (milliseconds) => {
+  //   const date = new Date(milliseconds);
+  //   return date.toLocaleDateString(); 
+  // };
    useEffect(()=>
    {
     fetchCustomers();

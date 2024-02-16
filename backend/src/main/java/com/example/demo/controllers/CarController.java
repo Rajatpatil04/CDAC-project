@@ -21,8 +21,8 @@ public class CarController {
 	private CarService cservice;
 	
 	@PostMapping("/uploadcar")
-    public void uploadCar(@RequestBody DummyCar dummyCar) {
-		cservice.uploadCar(dummyCar);
+    public Car uploadCar(@RequestBody DummyCar dummyCar) {
+		return cservice.uploadCar(dummyCar);
     }
 	
 	@GetMapping("/getallcars")
@@ -30,13 +30,15 @@ public class CarController {
         return cservice.getAllCars();
     }
 	
-	@PostMapping(value="/uploadimg/{id}", consumes = "multipart/form-data")
-	public boolean updateImg(@PathVariable("id") int id,@RequestBody MultipartFile file)
+	@PostMapping(value="/uploadimage/{car_id}", consumes = "multipart/form-data")
+	public boolean updateImg(@PathVariable("car_id") int id,@RequestBody MultipartFile file)
 	{
+		System.out.println("in controller");
+		System.out.println(id);
 		boolean flag = false;
 		try
 		{
-			flag = cservice.updateImg(id,file.getBytes());
+			flag = cservice.uploadImg(id,file.getBytes());
 		}
 		catch(Exception e)
 		{

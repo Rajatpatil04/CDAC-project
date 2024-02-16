@@ -7,6 +7,11 @@
     border-width: 2px;
 }
 
+.aroutes{
+  float: right;
+  margin-right: 0px;
+  margin-left: 40%;
+}
 .routes{
   float: right;
   margin-right: 0px;
