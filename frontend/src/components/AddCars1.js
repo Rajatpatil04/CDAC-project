@@ -133,7 +133,7 @@ export default function CarRegistrationForm() {
               var fd = new FormData();
               fd.append("file",file); 
               const reqOptions1 ={
-                method :"post",
+                method :"POST",
                 Headers :{
                    "content-type":"multipart/form-data"
                 },
@@ -190,7 +190,8 @@ export default function CarRegistrationForm() {
                 type="file"
                 className="form-control"
                 name="carImage"
-                onChange={handleFileChange}
+                // onChange={handleFileChange}
+                onChange={(e) => setFile(e.target.files[0])} 
                 required
               />
               <button className="btn btn-outline-secondary" type="button">
