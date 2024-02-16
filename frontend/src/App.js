@@ -41,7 +41,7 @@ function App() {
               <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
             </div> */}
             
-            <Nav className="ml-auto " >
+            <Nav className="ml-auto routes" >
               <NavLink to ="/" className="nav-link text-dark "><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
               <NavLink to ="/viewcars" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
               <NavDropdown title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>} id="basic-nav-dropdown" className="text-dark">

@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entities.Area;
 import com.example.demo.entities.Car;
@@ -27,5 +29,20 @@ public class CarController {
 	public List<Car> getAllCars() {
         return cservice.getAllCars();
     }
+	
+	@PostMapping(value="/uploadimg/{id}", consumes = "multipart/form-data")
+	public boolean updateImg(@PathVariable("id") int id,@RequestBody MultipartFile file)
+	{
+		boolean flag = false;
+		try
+		{
+			flag = cservice.updateImg(id,file.getBytes());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return flag;
+	}
 
 }
