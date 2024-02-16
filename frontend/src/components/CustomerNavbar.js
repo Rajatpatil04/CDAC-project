@@ -36,7 +36,7 @@ export default function CustomerNavbar() {
                 onMouseEnter={() => setShowDropdown(true)}
                 onMouseLeave={() => setShowDropdown(false)}
               >
-                <NavLink to="/customer/updateprofile" className="dropdown-item"><h6>Update Profile</h6></NavLink>
+                <NavLink to="/customer/profile" className="dropdown-item"><h6>Profile</h6></NavLink>
                 <NavLink to="/logout" className="dropdown-item"><h6>Logout</h6></NavLink>
               </NavDropdown>
             </Nav>

@@ -3,6 +3,7 @@ package com.example.demo.services;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,5 +73,21 @@ public class CustomerService {
     
     public boolean isEmailExists(String email) {
         return crepo.isEmailExists(email);
+    }
+    
+    public Customer getByUid(int uid)
+    {
+    	 Customer c = null;
+    	Optional<Customer> o= crepo.findById(uid);
+    	try {
+    		c=o.get();
+    	
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	return c;
+    	
     }
 }

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -69,8 +70,9 @@ public class Car {
 
     @Column(name = "ac")
     private Boolean ac;
-
+     
     @Column(name = "car_image")
+    @Lob
     private byte[] car_image;
     
     @Column(name = "status")

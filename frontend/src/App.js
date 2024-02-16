@@ -24,6 +24,7 @@ import AddCars from './components/AddCars';
 import ApproveCar from './components/Approvecars';
 import CarRegistrationForm from './components/AddCars1';
 import SearchCars from './components/SearchCars';
+import CustomerProfile from './components/CustomerProfile';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
@@ -76,6 +77,7 @@ function App() {
         <Route path ="/customer" element={<CustomerNavbar/>}>
              <Route path="customerhome" element={<CustomerHome />} />
              <Route path="viewcars" element={<ViewCars/>}/>
+             <Route path="profile" element={<CustomerProfile/>}/>
         </Route>
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>
