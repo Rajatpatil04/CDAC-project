@@ -4,6 +4,9 @@ import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstra
 
 const SearchCars = () => {
   const [categories, setCategories] = useState([]);
+  const [car_models, setCar_models] = useState([]);
+  const [car_brands, setCar_brands] = useState([]);
+  const [fuel_types, SetFuel_types] = useState([]);
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [cars, setCars] = useState([]);
@@ -15,12 +18,35 @@ const SearchCars = () => {
       .then(response => response.json())
       .then(data => setCategories(data))
       .catch(error => console.error('Error fetching categories: ', error));
+
+      fetch('http://localhost:8081/getallcarmodels')
+      .then(response => response.json())
+      .then(data => setCar_models(data))
+      .catch(error => console.error('Error fetching car models: ', error));
+
+      fetch('http://localhost:8081/getallfueltypes')
+      .then(response => response.json())
+      .then(data => SetFuel_types(data))
+      .catch(error => console.error('Error fetching car models: ', error));
+
+      fetch('http://localhost:8081/getallbrands')
+      .then(response => response.json())
+      .then(data => setCar_brands(data))
+      .catch(error => console.error('Error fetching car models: ', error));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8081/getallcarmodelswithseatingcapacity?seating_capacity='+seatingCapacity)
+      .then(response => response.json())
+      .then(data => setCar_models(data))
+      .catch(error => console.error('Error fetching categories: ', error));
   }, []);
 
   const handleSearch = () => {
-    fetch(`/api/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
+    fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
       .then(response => response.json())
-      .then(data => setCars(data))
+      .then(data => {setCars(data);
+                      console.log(data)})
       .catch(error => setError('Error fetching cars: ' + error.message))
       .finally(() => setLoading(false));
   };
@@ -42,17 +68,6 @@ const SearchCars = () => {
                   </Form.Control>
                 </Form.Group>
               </Col>
-              {/* <Col>
-                <Form.Group controlId="fuelType">
-                  <Form.Label><b>Fuel Type</b></Form.Label>
-                  <Form.Control as="select" onChange={e => setSelectedFuelType(e.target.value)}>
-                    <option value="">Select Fuel Type</option>
-                    {fuelTypes.map(fuelType => (
-                      <option key={fuelType.fuel_id} value={fuelType.fuel_id}>{fuelType.fuel_type}</option>
-                    ))}
-                  </Form.Control>
-                </Form.Group>
-              </Col> */}
               <Col>
                 <Form.Group controlId="seatingCapacity">
                   <Form.Label><b>Seating Capacity</b></Form.Label>
@@ -73,14 +88,14 @@ const SearchCars = () => {
 
       {error && <div className="mt-4 text-danger">{error}</div>}
 
-      <Row className="mt-4">
+      {/* <Row className="mt-4">
         {cars.map(car => (
           <Col key={car.car_id} md={4} className="mb-4">
             <Card>
               <Card.Body>
-                <Card.Title>{car.brand_name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{car.model_id}</Card.Subtitle>
-                <Card.Text>Seating Capacity: {car.seating_capacity}</Card.Text>
+                <Card.Title>{car.carModel.brand.brand_name}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">{car.model_name}</Card.Subtitle>
+                <Card.Text>Seating Capacity: {seatingCapacity}</Card.Text>
                 <Card.Text>Transmission: {car.transmission_type}</Card.Text>
                 <Card.Text>Fuel Type: {car.fuel_type}</Card.Text>
                 <Card.Text>Price per Hour: ₹{car.price_per_hour}</Card.Text>
@@ -88,7 +103,29 @@ const SearchCars = () => {
             </Card>
           </Col>
         ))}
-      </Row>
+      </Row> */}
+
+          <Row className="mt-4">
+            {cars.map(car => (
+              <Col key={car.car_id} md={4} className="mb-4">
+                <Card>
+                  <Card.Body>
+                    <Card.Title>{car.carModel.brand.brand_name}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">{car.carModel.model_name}</Card.Subtitle>
+                    <Card.Text>Seating Capacity: {car.carModel.seating_capacity}</Card.Text>
+                    <Card.Text>Transmission: {car.carModel.transmission_type}</Card.Text>
+                    <Card.Text>Fuel Type: {car.fuelType.fuel_type}</Card.Text>
+                    <Card.Text>Price per Hour: ₹{car.price_per_hour}</Card.Text>
+                    <Card.Text>Color: {car.color}</Card.Text>
+                    {/* Add more details as needed */}
+                    <Card.Text>Host: {car.host.fname} {car.host.lname}</Card.Text>
+                    <Card.Text>Registration Number: {car.rc_no}</Card.Text>
+                    {/* Add more details as needed */}
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
     </Container>
   );
 };

@@ -66,4 +66,10 @@ public class CarController {
 	    return cservice.updateStatusToReject(cid);
      }
      
+     @GetMapping("/cars")
+ 	public List<Car> getSpecificCars(@RequestParam("category") int cat_id, @RequestParam("seatingCapacity") int seating_capacity) {
+    	 System.out.println(cat_id+" : "+ seating_capacity);
+         return cservice.getSpecigicCars(cat_id, seating_capacity);
+     }
+     
 }
