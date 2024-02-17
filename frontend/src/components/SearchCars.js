@@ -11,7 +11,7 @@ const SearchCars = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8081/categories')
+    fetch('http://localhost:8081/getallcategories')
       .then(response => response.json())
       .then(data => setCategories(data))
       .catch(error => console.error('Error fetching categories: ', error));
