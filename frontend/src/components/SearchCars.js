@@ -4,9 +4,9 @@ import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstra
 
 const SearchCars = () => {
   const [categories, setCategories] = useState([]);
-  const [car_models, setCar_models] = useState([]);
-  const [car_brands, setCar_brands] = useState([]);
-  const [fuel_types, SetFuel_types] = useState([]);
+  // const [car_models, setCar_models] = useState([]);
+  // const [car_brands, setCar_brands] = useState([]);
+  // const [fuel_types, SetFuel_types] = useState([]);
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [cars, setCars] = useState([]);
@@ -19,28 +19,28 @@ const SearchCars = () => {
       .then(data => setCategories(data))
       .catch(error => console.error('Error fetching categories: ', error));
 
-      fetch('http://localhost:8081/getallcarmodels')
-      .then(response => response.json())
-      .then(data => setCar_models(data))
-      .catch(error => console.error('Error fetching car models: ', error));
+      // fetch('http://localhost:8081/getallcarmodels')
+      // .then(response => response.json())
+      // .then(data => setCar_models(data))
+      // .catch(error => console.error('Error fetching car models: ', error));
 
-      fetch('http://localhost:8081/getallfueltypes')
-      .then(response => response.json())
-      .then(data => SetFuel_types(data))
-      .catch(error => console.error('Error fetching car models: ', error));
+      // fetch('http://localhost:8081/getallfueltypes')
+      // .then(response => response.json())
+      // .then(data => SetFuel_types(data))
+      // .catch(error => console.error('Error fetching car models: ', error));
 
-      fetch('http://localhost:8081/getallbrands')
-      .then(response => response.json())
-      .then(data => setCar_brands(data))
-      .catch(error => console.error('Error fetching car models: ', error));
+      // fetch('http://localhost:8081/getallbrands')
+      // .then(response => response.json())
+      // .then(data => setCar_brands(data))
+      // .catch(error => console.error('Error fetching car models: ', error));
   }, []);
 
-  useEffect(() => {
-    fetch('http://localhost:8081/getallcarmodelswithseatingcapacity?seating_capacity='+seatingCapacity)
-      .then(response => response.json())
-      .then(data => setCar_models(data))
-      .catch(error => console.error('Error fetching categories: ', error));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:8081/getallcarmodelswithseatingcapacity?seating_capacity='+seatingCapacity)
+  //     .then(response => response.json())
+  //     .then(data => setCar_models(data))
+  //     .catch(error => console.error('Error fetching categories: ', error));
+  // }, []);
 
   const handleSearch = () => {
     fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
@@ -121,6 +121,8 @@ const SearchCars = () => {
                     <Card.Text>Host: {car.host.fname} {car.host.lname}</Card.Text>
                     <Card.Text>Registration Number: {car.rc_no}</Card.Text>
                     {/* Add more details as needed */}
+                    
+                    <Button value={"Submit"}>Book My Ride</Button>
                   </Card.Body>
                 </Card>
               </Col>
