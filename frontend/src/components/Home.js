@@ -11,12 +11,6 @@ export default function Home() {
                       <h1 id="r2">AND</h1>
                       <h1 id="r3">RIDE.</h1>
         </div>
-       
-       
-        
-        <div className="outercircle">
-          <div className="start" ><br></br><b>START <br /> SEARCH<br /></b></div>
-        </div>
       </div>
       <br></br><br></br>
       <div style={{ textAlign: "center" }} className="container">
