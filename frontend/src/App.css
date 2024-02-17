@@ -75,12 +75,27 @@
     background-color: rgba(255, 255, 255, 0.5);
                
 }
-.navcol{
-  background-color: rgb(234, 231, 227);
+.navcol {
+  background-color: rgb(200, 196, 190);
   box-sizing: content-box;
   color: aqua;
   height: 75px;
+  position: fixed;
+  top: 0;
+  z-index: 100;
 }
+
+.cnavcol {
+  background-color: rgb(161, 234, 230);
+  box-sizing: content-box;
+  color: aqua;
+  height: 75px;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+
 
 .nav-link:hover{
   text-decoration: underline;
@@ -178,7 +193,7 @@
   height: 45px;
   padding-right: 10px;
   border-width: 3px;
-  /* margin-right: 100px; */
+  margin-right: 100px;
   margin-left:120px ;
   border-radius: 3%;
  position:absolute;
@@ -186,8 +201,15 @@
 }
 
 .croutes{
-   margin-right: 40px;
-   margin-left: 70%;
+ margin-right: 6%;
+}
+
+.chome{
+   background-image: url("images/jamie-street-jYVnwIc1H-c-unsplash.jpg");
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   height: 100vh;
 }
 
 .start {
@@ -214,6 +236,8 @@
   outline: solid ;
   outline-offset: 10px;
 }
+
+
 
 
 
