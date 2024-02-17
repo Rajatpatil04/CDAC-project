@@ -115,6 +115,32 @@ export default function CarRegistrationForm() {
       }
     }
     dispatch({ type: "update", data: { key, value, touched: true, valid, error, formValid } });
+
+    // if (key === "rc_no") {
+    //   checkRcNo(value);
+    // }
+  };
+
+  const checkRcNo = (value) => {
+    const isRc_No_Taken = cars.some((car) => car.rc_no === value);
+  
+    if (isRc_No_Taken) {
+      dispatch({
+        type: 'update',
+        key: 'rc_no',
+        value,
+        valid: false,
+        error: 'Car is already registered!',
+      });
+    } else {
+      dispatch({
+        type: 'update',
+        key: 'rc_no',
+        value,
+        valid: true,
+        error: '',
+      });
+    }
   };
 
   // const handleFileChange = (event) => {

@@ -81,7 +81,7 @@ function ViewCars() {
         {uniqueCars.map(car => (
           <div key={car.id} className="col-md-4 mb-4">
             <div className="card h-100">
-              <img src={car.image} className="card-img-top" alt={car.name} />
+              <img src={car.car_image} className="card-img-top" alt={car.name} />
               <div className="card-body">
                 <h5 className="card-title">{car.name}</h5>
                 <p className="card-text">Price per hour: {car.pricePerHour}</p>
