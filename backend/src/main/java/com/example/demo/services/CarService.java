@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entities.Area;
 import com.example.demo.entities.Car;
+import com.example.demo.entities.Customer;
 import com.example.demo.entities.DummyCar;
 import com.example.demo.repositories.CarModelRepository;
 import com.example.demo.repositories.CarRepository;
@@ -70,6 +71,9 @@ public class CarService {
 //		}
 //	}
 	
+	public List<Car> getCarWithStatusZero() {
+        return crepo.findAllByStatusIsZero();
+	}
 	public boolean uploadImg(int id , byte[] photo) {
 		if(crepo.uploadImage(id, photo) == 1) {
 			return true;
@@ -79,6 +83,13 @@ public class CarService {
 		}
 	}
 	
+	 public int updateStatus(int cid) {
+		    return crepo.updateStatus(cid);
+	 }
+	 
+	 public int updateStatusToReject(int cid) {
+		    return crepo.updateStatusToNull(cid);
+	 }
 	public List<Car> getAllCars() {
 		return crepo.findAll();
 	}

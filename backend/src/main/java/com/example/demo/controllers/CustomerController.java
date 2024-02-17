@@ -29,6 +29,12 @@ public class CustomerController {
 	    public List<Customer> getCustomersWithStatusZero() {
 	        return cservice.getCustomersWithStatusZero();
 	 }
+	 
+	 @GetMapping("getCustomer")
+	 public Customer getOne(@RequestParam("uid") int  uid)
+	 {
+		 return cservice.getByUid(uid);
+	 }
 	
 		
 	@PostMapping("/registercustomer")

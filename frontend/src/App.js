@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import './App.css';
@@ -23,9 +23,12 @@ import HostNavbar from './components/HostNavbar';
 import AddCars from './components/AddCars';
 import ApproveCar from './components/Approvecars';
 import CarRegistrationForm from './components/AddCars1';
+import SearchCars from './components/SearchCars';
+import CustomerProfile from './components/CustomerProfile';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
+  const [showDropdown, setShowDropdown] = useState(false);
   return (
     <div  >
       <Navbar className='navcol'  style={{display: mystate.loggedIn?"none":"block"}}>
@@ -44,9 +47,16 @@ function App() {
             <Nav className="ml-auto routes" >
               <NavLink to ="/" className="nav-link text-dark "><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
               <NavLink to ="/viewcars" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
-              <NavDropdown title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>} id="basic-nav-dropdown" className="text-dark">
-                <NavLink to ="/customersignup" className="dropdown-item"><h6>Customer</h6></NavLink>
-                <NavLink to ="/hostsignup1" className="dropdown-item"><h6>Host</h6></NavLink>
+              <NavDropdown
+                title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>}
+                id="basic-nav-dropdown"
+                className="text-dark"
+                show={showDropdown}
+                onMouseEnter={() => setShowDropdown(true)}
+                onMouseLeave={() => setShowDropdown(false)}
+              >
+                <NavLink to="/customersignup" className="dropdown-item"><h6>Customer</h6></NavLink>
+                <NavLink to="/hostsignup1" className="dropdown-item"><h6>Host</h6></NavLink>
               </NavDropdown>
               <NavLink to ="/login" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>LOGIN</b></h5></NavLink>
             </Nav>
@@ -62,10 +72,12 @@ function App() {
         <Route path="/hostsignup" element={<HostSignup />} />
         <Route path="/hostsignup1" element={<Hostsignup1/>}/>
         <Route path="/viewcars" element={<ViewCars/>}/>
+        <Route path="/searchcars" element={<SearchCars/>}/>
     {/* Customer side */}
         <Route path ="/customer" element={<CustomerNavbar/>}>
              <Route path="customerhome" element={<CustomerHome />} />
              <Route path="viewcars" element={<ViewCars/>}/>
+             <Route path="profile" element={<CustomerProfile/>}/>
         </Route>
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>
