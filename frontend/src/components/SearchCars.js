@@ -4,10 +4,8 @@ import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstra
 
 const SearchCars = () => {
   const [categories, setCategories] = useState([]);
-  const [fuelTypes, setFuelTypes] = useState([]);
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedFuelType, setSelectedFuelType] = useState('');
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -17,24 +15,11 @@ const SearchCars = () => {
       .then(response => response.json())
       .then(data => setCategories(data))
       .catch(error => console.error('Error fetching categories: ', error));
-
-    fetch('http://localhost:8081/fuel_types')
-      .then(response => response.json())
-      .then(data => setFuelTypes(data))
-      .catch(error => console.error('Error fetching fuel types: ', error));
   }, []);
 
   const handleSearch = () => {
-    setLoading(true);
-    setError('');
-
-    fetch(`/api/cars?category=${selectedCategory}&fuelType=${selectedFuelType}&seatingCapacity=${seatingCapacity}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        return response.json();
-      })
+    fetch(`/api/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
+      .then(response => response.json())
       .then(data => setCars(data))
       .catch(error => setError('Error fetching cars: ' + error.message))
       .finally(() => setLoading(false));
@@ -57,7 +42,7 @@ const SearchCars = () => {
                   </Form.Control>
                 </Form.Group>
               </Col>
-              <Col>
+              {/* <Col>
                 <Form.Group controlId="fuelType">
                   <Form.Label><b>Fuel Type</b></Form.Label>
                   <Form.Control as="select" onChange={e => setSelectedFuelType(e.target.value)}>
@@ -67,7 +52,7 @@ const SearchCars = () => {
                     ))}
                   </Form.Control>
                 </Form.Group>
-              </Col>
+              </Col> */}
               <Col>
                 <Form.Group controlId="seatingCapacity">
                   <Form.Label><b>Seating Capacity</b></Form.Label>
@@ -98,7 +83,7 @@ const SearchCars = () => {
                 <Card.Text>Seating Capacity: {car.seating_capacity}</Card.Text>
                 <Card.Text>Transmission: {car.transmission_type}</Card.Text>
                 <Card.Text>Fuel Type: {car.fuel_type}</Card.Text>
-                <Card.Text>Price per Hour: ${car.price_per_hour}</Card.Text>
+                <Card.Text>Price per Hour: ₹{car.price_per_hour}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
