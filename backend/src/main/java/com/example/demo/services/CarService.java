@@ -93,4 +93,8 @@ public class CarService {
 	public List<Car> getAllCars() {
 		return crepo.findAll();
 	}
+	
+	public List<Car> getSpecigicCars(int cat_id, int seating_capacity) {
+		return crepo.getSpecificCars(cat_id, seating_capacity);
+	}
 }

@@ -101,7 +101,7 @@ CREATE TABLE `cars` (
   CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`host_id`) REFERENCES `hosts` (`host_id`),
   CONSTRAINT `cars_ibfk_2` FOREIGN KEY (`model_id`) REFERENCES `models` (`model_id`),
   CONSTRAINT `cars_ibfk_3` FOREIGN KEY (`fuel_id`) REFERENCES `fuel_types` (`fuel_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `cars` (
 
 LOCK TABLES `cars` WRITE;
 /*!40000 ALTER TABLE `cars` DISABLE KEYS */;
-INSERT INTO `cars` VALUES (4,1,80,1,15.50,300.00,'Red','ABC123','2024-02-16','Full','2025-02-16',1,1,NULL,_binary '\0'),(8,5,52,2,23.00,200.00,'green','MH12CQ4532','2013-10-30','ownership','2031-01-05',0,0,NULL,_binary '\0'),(9,7,52,2,23.00,200.00,'black','MH12CQ4512','2013-09-29','comprehensive','2031-01-05',0,0,NULL,_binary '\0'),(10,2,52,2,23.00,200.00,'blue','MH12CQ4590','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(12,2,52,2,23.00,200.00,'blue','MH12CQ4876','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(13,2,52,2,23.00,200.00,'blue','MH12CQ4823','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(14,2,52,2,23.00,200.00,'blue','MH12CQ4866','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(15,2,52,2,23.00,200.00,'blue','MH12CQ7854','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(16,2,52,2,23.00,200.00,'blue','MH12CQ7859','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(25,4,52,3,12.00,200.00,'blue','MH12CQ4534','2023-09-05','ownership','2024-03-08',0,0,NULL,_binary '\0');
+INSERT INTO `cars` VALUES (4,1,80,1,15.50,300.00,'Red','ABC123','2024-02-16','Full','2025-02-16',1,1,NULL,NULL),(8,5,52,2,23.00,200.00,'green','MH12CQ4532','2013-10-30','ownership','2031-01-05',0,0,NULL,NULL),(9,7,52,2,23.00,200.00,'black','MH12CQ4512','2013-09-29','comprehensive','2031-01-05',0,0,NULL,_binary ''),(10,2,52,2,23.00,200.00,'blue','MH12CQ4590','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(12,2,52,2,23.00,200.00,'blue','MH12CQ4876','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(13,2,52,2,23.00,200.00,'blue','MH12CQ4823','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(14,2,52,2,23.00,200.00,'blue','MH12CQ4866','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(15,2,52,2,23.00,200.00,'blue','MH12CQ7854','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(16,2,52,2,23.00,200.00,'blue','MH12CQ7859','2012-12-30','ownership','2024-01-01',0,0,NULL,_binary '\0'),(25,4,52,3,12.00,200.00,'blue','MH12CQ4534','2023-09-05','ownership','2024-03-08',0,0,NULL,_binary '\0'),(28,2,52,2,25.00,200.00,'blue','MH12AZ2312','2011-12-31','ownership','2038-02-02',0,0,NULL,_binary '\0'),(29,2,52,4,32.00,200.00,'green','MH12CQ4555','2018-12-31','comprehensive','2030-12-01',0,0,NULL,_binary '\0'),(30,4,52,2,32.00,80.00,'blue','MH349876','2023-12-30','comprehensive','2031-12-31',0,0,NULL,_binary '\0'),(31,3,52,2,23.00,200.00,'red','MH12CQ7532','2019-12-31','ownership','2030-01-04',0,0,NULL,_binary '\0'),(32,3,52,2,32.00,200.00,'blue','MH12CQ4577','2023-12-31','comprehensive','2026-01-03',0,0,NULL,_binary '\0'),(33,2,52,2,23.00,200.00,'blue','MH42CQ4590','2024-12-01','comprehensive','2030-01-06',1,0,NULL,_binary '\0'),(34,3,52,4,32.00,200.00,'red','MH12CQ4564','2017-11-30','ownership','2027-12-31',1,1,NULL,_binary '\0'),(35,2,52,4,25.00,200.00,'blue','MH13AJ6666','2020-11-29','ownership','2022-10-02',1,1,NULL,_binary '\0'),(36,3,52,3,23.00,200.00,'blue','MH19CQ4590',NULL,'comprehensive','2051-12-01',1,0,NULL,_binary '\0'),(37,3,52,3,23.00,200.00,'green','MH32CQ4532','2004-10-26','ownership','2029-12-10',NULL,0,NULL,_binary '\0'),(38,4,52,3,32.00,200.00,'blue','MH12CQ4432','2016-11-27','comprehensive','2035-01-03',0,0,NULL,_binary '\0');
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +228,7 @@ CREATE TABLE `fuel_types` (
 
 LOCK TABLES `fuel_types` WRITE;
 /*!40000 ALTER TABLE `fuel_types` DISABLE KEYS */;
-INSERT INTO `fuel_types` VALUES (4,'CNG'),(2,'Diesel'),(3,'Electic'),(1,'Petrol');
+INSERT INTO `fuel_types` VALUES (4,'CNG'),(2,'Diesel'),(3,'Electric'),(1,'Petrol');
 /*!40000 ALTER TABLE `fuel_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -404,7 +404,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'adityam','aditya123',1,_binary ''),(21,'john_doe','password123',3,_binary '\0'),(47,'ajaypatil','Ajay@123',2,_binary ''),(49,'omkar12','Omkar@123',3,_binary ''),(51,'Sandesh12','Sandesh@123',2,_binary ''),(53,'rajat2','Rajat@123',3,_binary ''),(55,'adityaa','Aditya@123',3,_binary ''),(57,'vishwajit123','Vishwajit@123',3,_binary ''),(67,'rajat_patil','$2a$10$5NjSd1sQAJcU5dwqdMumq.W9nxFnIzGgUKVwnxVIW9bRH6EogASm2',3,_binary ''),(68,'rohit123','Rohit@123',3,_binary '\0'),(69,'omkarm','Omkar@123',3,_binary '\0'),(70,'rajat_patil1','$2a$10$6BKftQz0T5CkDVFNVTEvKerX6PxtXxOvITrWP5mhthNJfs4rTLDp.',3,_binary '\0'),(71,'vaibhav12','$2a$10$CdZt1hRI4otXDNTH9bplc.altGZx7HDP6dSN750QfVpNdqUjT3Kmq',3,_binary '\0'),(73,'nilay_waghde','pass123',2,_binary '\0'),(74,'rushi12','Rushi@123',2,_binary '\0'),(76,'aniketc','$2a$10$OQdFiMbF8nr8fFcLqfdrs.pVfhPhcTkue8znfmHeQUW9khqmXM8BC',2,_binary '\0'),(77,'adityaam','$2a$10$RcYf.L06PU/HtRWDTxEnk.hoOSfhEpT4P9pHwj1Q91Ew9hwPDZLjy',3,_binary '\0'),(78,'vijay','$2a$10$yLaRPSvbpc2H05DWjgF9s.eZT.lZ4PSiCZyKKtrVFUYWY8.oge8xy',2,_binary '\0'),(79,'','$2a$10$/0yJU5M6UI6.qAgv/ZVOy.x.KWXvS.q7Djdg0bK15bR/ci0e0nOca',3,_binary '\0'),(80,'Adityaaa','$2a$10$YnwUZAZdISW0dessvt7eLeBIJFzOhYxICAz8e2fI8zYhXz0PtTwre',3,_binary '\0'),(81,'Rajat__','$2a$10$cwo5w1RAtdLpi2SU4hJj/Oh87b16nCbN6k/naRToUGnAq/IaetLbu',2,_binary '\0');
+INSERT INTO `users` VALUES (1,'adityam','aditya123',1,_binary ''),(21,'john_doe','password123',3,_binary '\0'),(47,'ajaypatil','Ajay@123',2,_binary ''),(49,'omkar12','Omkar@123',3,_binary ''),(51,'Sandesh12','Sandesh@123',2,_binary ''),(53,'rajat2','Rajat@123',3,_binary ''),(55,'adityaa','Aditya@123',3,_binary ''),(57,'vishwajit123','Vishwajit@123',3,_binary ''),(67,'rajat_patil','$2a$10$5NjSd1sQAJcU5dwqdMumq.W9nxFnIzGgUKVwnxVIW9bRH6EogASm2',3,_binary ''),(68,'rohit123','Rohit@123',3,_binary ''),(69,'omkarm','Omkar@123',3,_binary '\0'),(70,'rajat_patil1','$2a$10$6BKftQz0T5CkDVFNVTEvKerX6PxtXxOvITrWP5mhthNJfs4rTLDp.',3,_binary '\0'),(71,'vaibhav12','$2a$10$CdZt1hRI4otXDNTH9bplc.altGZx7HDP6dSN750QfVpNdqUjT3Kmq',3,_binary '\0'),(73,'nilay_waghde','pass123',2,_binary '\0'),(74,'rushi12','Rushi@123',2,_binary '\0'),(76,'aniketc','$2a$10$OQdFiMbF8nr8fFcLqfdrs.pVfhPhcTkue8znfmHeQUW9khqmXM8BC',2,_binary '\0'),(77,'adityaam','$2a$10$RcYf.L06PU/HtRWDTxEnk.hoOSfhEpT4P9pHwj1Q91Ew9hwPDZLjy',3,_binary '\0'),(78,'vijay','$2a$10$yLaRPSvbpc2H05DWjgF9s.eZT.lZ4PSiCZyKKtrVFUYWY8.oge8xy',2,_binary '\0'),(79,'','$2a$10$/0yJU5M6UI6.qAgv/ZVOy.x.KWXvS.q7Djdg0bK15bR/ci0e0nOca',3,_binary '\0'),(80,'Adityaaa','$2a$10$YnwUZAZdISW0dessvt7eLeBIJFzOhYxICAz8e2fI8zYhXz0PtTwre',3,_binary '\0'),(81,'Rajat__','$2a$10$cwo5w1RAtdLpi2SU4hJj/Oh87b16nCbN6k/naRToUGnAq/IaetLbu',2,_binary '\0');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -417,4 +417,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-16 15:30:58
+-- Dump completed on 2024-02-17 12:48:52

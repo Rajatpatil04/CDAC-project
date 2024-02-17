@@ -17,4 +17,8 @@ public class CarModelService {
 	public List<CarModel> getAllCarModels() {
 		return crepo.findAll();
 	}
+	
+	public List<CarModel> getAllCarsWithSeatingCapacity( int seating_capacity) {
+		return crepo.getAllCarsWithSeatingCapacity(seating_capacity);
+	}
 }
