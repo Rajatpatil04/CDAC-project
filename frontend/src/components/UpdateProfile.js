@@ -37,7 +37,7 @@ export default function UpdateCustomer() {
   const handleUpdate = () => {
     const uid = JSON.parse(localStorage.getItem("loggedUser")).uid;
 
-    fetch(`http://localhost:8081/updatecustomer?uid=${uid}`, {
+    fetch(`http://localhost:8081/updatecustomerprofile/${uid}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -48,6 +48,7 @@ export default function UpdateCustomer() {
       .then((data) => {
         console.log('Customer updated successfully:', data);
         navigate("/customer/profile");
+        alert("Profile Updated Successfully..!")
       })
       .catch((error) => {
         console.error('Error updating customer:', error);
@@ -89,6 +90,7 @@ export default function UpdateCustomer() {
             name="license_no"
             value={customer.license_no || ""}
             onChange={handleInputChange}
+            disabled
           />
         </Form.Group>
 
@@ -103,7 +105,7 @@ export default function UpdateCustomer() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formDOB">
+        {/* <Form.Group controlId="formDOB">
           <Form.Label>Date of Birth</Form.Label>
           <Form.Control
             type="date"
@@ -112,8 +114,8 @@ export default function UpdateCustomer() {
             value={customer.dob || ""}
             onChange={handleInputChange}
           />
-        </Form.Group>
-        <Form.Group controlId="formRegDate">
+        </Form.Group> */}
+        {/* <Form.Group controlId="formRegDate">
           <Form.Label>Registration Date</Form.Label>
           <Form.Control
             type="date"
@@ -122,7 +124,7 @@ export default function UpdateCustomer() {
             onChange={handleInputChange}
             disabled
           />
-        </Form.Group>
+        </Form.Group> */}
 
         <Form.Group controlId="formpancard">
           <Form.Label>Pancard</Form.Label>
@@ -169,6 +171,17 @@ export default function UpdateCustomer() {
             onChange={handleInputChange}
           />
         </Form.Group>
+
+        {/* <Form.Group controlId="formuserpassword">
+          <Form.Label>New Password</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your New Password "
+            name="user.password"
+            value={customer.user.password}
+            onChange={handleInputChange}
+          />
+        </Form.Group> */}
          <br/>
         <div className="text-center">
           <Button variant="warning" onClick={handleUpdate}>
