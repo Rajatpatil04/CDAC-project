@@ -4,6 +4,7 @@ import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstra
 
 const SearchCars = () => {
   const [categories, setCategories] = useState([]);
+  const [car_models, setCar_models] = useState([]);
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [cars, setCars] = useState([]);
@@ -14,6 +15,13 @@ const SearchCars = () => {
     fetch('http://localhost:8081/getallcategories')
       .then(response => response.json())
       .then(data => setCategories(data))
+      .catch(error => console.error('Error fetching categories: ', error));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8081/getallcarmodelswithseatingcapacity?seating_capacity='+seatingCapacity)
+      .then(response => response.json())
+      .then(data => setCar_models(data))
       .catch(error => console.error('Error fetching categories: ', error));
   }, []);
 
@@ -80,7 +88,7 @@ const SearchCars = () => {
               <Card.Body>
                 <Card.Title>{car.brand_name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{car.model_id}</Card.Subtitle>
-                <Card.Text>Seating Capacity: {car.seating_capacity}</Card.Text>
+                <Card.Text>Seating Capacity: {car_models.car.seating_capacity}</Card.Text>
                 <Card.Text>Transmission: {car.transmission_type}</Card.Text>
                 <Card.Text>Fuel Type: {car.fuel_type}</Card.Text>
                 <Card.Text>Price per Hour: ₹{car.price_per_hour}</Card.Text>
