@@ -29,7 +29,7 @@ export default function CustomerProfile() {
   };
 
   const handleUpdateProfile = (customerId) => {
-    navigate(`/customer/updateProfile/${customerId}`);
+    navigate(`/customer/updatecustomer`);
   };
 
   return (
@@ -38,6 +38,7 @@ export default function CustomerProfile() {
         <table  border='2' style={{textAlign:"center"}} className="table table-striped">
           <thead style={{fontSize:30}}>
             <th>FIELDS</th>
+            
             <th>VALUES</th>
           </thead>
           <tbody>
@@ -71,7 +72,7 @@ export default function CustomerProfile() {
                <td>{customer.pancard_no}</td>
             </tr> 
             <tr>
-               <td>Adhar Card</td>
+               <td>Adhaar Card</td>
                <td>{customer.adhar_card}</td>
             </tr> 
             <tr>

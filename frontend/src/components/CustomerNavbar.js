@@ -12,7 +12,7 @@ export default function CustomerNavbar() {
 
   return (
     <div>
-      <Navbar className='navcol' style={{ display: mystate.loggedIn ? "block" : "none" }}>
+      <Navbar className='navcol container-fuild' style={{ display: mystate.loggedIn ? "block" : "none" }}>
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <img src={favicon} alt="Book My Car Logo" width="90" height="40" className="d-inline-block align-text-top" />
@@ -20,12 +20,12 @@ export default function CustomerNavbar() {
           <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <div className="input-group csearch">
+            <div className="input-group csearch ">
               <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
               <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
             </div>
 
-            <Nav className="ml-auto croutes">
+            <Nav className="ml-auto ">
             <NavLink to="/customer/searchcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>SEARCH CARS</b></h5></NavLink>
               <NavLink to="/customer/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
 

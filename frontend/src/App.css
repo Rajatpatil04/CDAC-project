@@ -106,6 +106,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
+     align-items: center;
 }
 
 
@@ -173,20 +174,20 @@
 
 }
 .csearch{
-  width: 200px;
+  width: 500px;
   height: 45px;
   padding-right: 10px;
   border-width: 3px;
-  margin-right: 100px;
+  /* margin-right: 100px; */
   margin-left:120px ;
   border-radius: 3%;
-  position:absolute;
+ position:absolute;
 
 }
 
 .croutes{
-   margin-right: 70px;
-   margin-left: 170px;
+   margin-right: 40px;
+   margin-left: 70%;
 }
 
 .start {

@@ -46,7 +46,7 @@ export default function Home() {
           <div className="col-sm-3 carhome car1"></div>
           <div className="col-sm-3 carhome car2"></div>
           <div className="col-sm-3 carhome car3" ></div>
-        </div><br/><br/> */
+        </div><br/><br/> 
       
        </div>
       <footer className="footer">

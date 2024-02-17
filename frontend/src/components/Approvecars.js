@@ -38,6 +38,7 @@ export default function ApproveCar(){
               newApprove[car_id] = true; // Assuming 'true' represents 'approved'
               return newApprove;
             });
+            alert('Car Approved successfully!');
           } else {
             console.error('Failed to update status.....');
           }
@@ -57,7 +58,9 @@ export default function ApproveCar(){
               const newReject = [...prevReject];
               newReject[car_id] = true; // Assuming 'true' represents 'approved'
               return newReject;
+
             });
+            alert('Car successfully rejected!');
           } else {
             console.error('Failed to update status.....');
           }
