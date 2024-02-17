@@ -46,7 +46,7 @@ const SearchCars = () => {
     fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
       .then(response => response.json())
       .then(data => {setCars(data);
-                      console.log(data)})
+                      console.log(data);})
       .catch(error => setError('Error fetching cars: ' + error.message))
       .finally(() => setLoading(false));
   };
@@ -87,6 +87,9 @@ const SearchCars = () => {
       </Spinner>}
 
       {error && <div className="mt-4 text-danger">{error}</div>}
+      {cars.length === 0 && !loading && !error && (
+        <div className="mt-4 text-info">No cars available for the selected criteria.</div>
+      )}
 
       {/* <Row className="mt-4">
         {cars.map(car => (
