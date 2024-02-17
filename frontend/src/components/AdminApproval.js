@@ -56,6 +56,7 @@ export default function AdminApproval(){
     var indexh=1;
   return(
     <div className="container">
+        
             <h2 style={{fontFamily:"initial"}}>Customers</h2>
       <table border="1" className="table table-striped">
         <thead>

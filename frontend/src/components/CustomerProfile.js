@@ -1,85 +1,96 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux"
+import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export default function CustomerProfile(){
-  const mystate =useSelector(state=>state.logged)
-  const[customer, setCustomer] = useState([]);
-  let navigate = useNavigate();
-  useEffect(()=>
-  {
-   fetchCustomer();
-  
-  },[])
+export default function CustomerProfile() {
+  const mystate = useSelector((state) => state.logged);
+  const [customer, setCustomer] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchCustomer();
+  }, []);
 
   const fetchCustomer = () => {
-    let uid = localStorage.getItem("loggedUser").uid;
+    // var uid = localStorage.getItem("loggedUser").uid;
+    // console.log(uid);
+    // console.log(localStorage.getItem("loggedUser").uid)
 
-    fetch(`http://localhost:8081/getCustomer?uid=${uid}`, {method:'GET'})
-        .then(res => res.json())
-        .then(data => {
-            
-            console.log(data);
-            setCustomer(data);
-        })
-        .catch(error => {
-            console.error('Error fetching customer:', error);
-        });
-};
-const handleUpdateProfile = (customerId) => {
-  navigate(`/customer/updateProfile/${customerId}`);
-};
+    fetch(`http://localhost:8081/getCustomer?uid=${JSON.parse(localStorage.getItem("loggedUser")).uid}`, { method: 'GET' })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCustomer(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching customer:', error);
+      });
+  };
 
-  return(
-    <div>
-         <div className="container">
-            <h2 style={{fontFamily:"initial"}}>Customers</h2>
-      <table border="1" className="table table-striped">
-        <thead>
-          <tr>
-         
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>License</th>
-            <th>Contact</th>
-            <th>Emergency Contact</th>
-            <th>Date Of Birth</th>
-            <th>Date of Registration</th>
-            <th>Pan card</th>
-            <th>Adhar card</th>
-            <th>Address</th>
-            <th>Email ID</th>  
-            <th></th>  
-          </tr>
-        </thead>
-        <tbody>
-          {customer.map((customer) => (
-              <tr key={customer.customer_id}>
-                
-              <td>{customer.fname}</td>
-              <td>{customer.lname}</td>
-              <td>{customer.license_no}</td>
-              <td>{customer.contact}</td>
-              <td>{customer.emergency_contact}</td>
-              <td>{new Date(customer.dob).toLocaleDateString() }</td>
-              <td>{new Date(customer.reg_date).toLocaleDateString()}</td>
-              <td>{customer.pancard_no}</td>
-              <td>{customer.adhar_card}</td>
-              <td>{customer.address}</td>
-              <td>{customer.email_id}</td>
-              <td>
-              <button
-                  type="button"
-                 className="btn "
-                 onClick={() => handleUpdateProfile(customer.customer_id)}
-                  /* {approve[customer.user.uid] ? 'Approved' : 'Approve'} */>Update Profile
-                </button>
-                </td>
+  const handleUpdateProfile = (customerId) => {
+    navigate(`/customer/updateProfile/${customerId}`);
+  };
+
+  return (
+      <div className="container col-md-6"><br/>
+        <h2 style={{textAlign:"center"}}>MY PROFILE</h2> <br/>
+        <table  border='2' style={{textAlign:"center"}} className="table table-striped">
+          <thead style={{fontSize:30}}>
+            <th>FIELDS</th>
+            <th>VALUES</th>
+          </thead>
+          <tbody>
+
+           <tr>
+               <td>First Name</td>
+               <td>{customer.fname}</td>
             </tr>
-          ))}
-        </tbody>
-      </table>
-     </div>
-    </div>
+            <tr>
+               <td>Last Name</td>
+               <td>{customer.lname}</td>
+            </tr> 
+            <tr>
+               <td>License No</td>
+               <td>{customer.license_no}</td>
+            </tr> 
+            <tr>
+               <td>Contact</td>
+               <td>{customer.contact}</td>
+            </tr> 
+            <tr>
+               <td>Date Of Birth</td>
+               <td>{new Date(customer.dob).toLocaleDateString()}</td>
+            </tr> 
+            <tr>
+               <td>Date Of Registration</td>
+               <td>{new Date(customer.reg_date).toLocaleDateString()}</td>
+            </tr>
+            <tr>
+               <td>Pan Card</td>
+               <td>{customer.pancard_no}</td>
+            </tr> 
+            <tr>
+               <td>Adhar Card</td>
+               <td>{customer.adhar_card}</td>
+            </tr> 
+            <tr>
+               <td>Address</td>
+               <td>{customer.address}</td>
+            </tr> 
+            <tr>
+               <td>Email ID</td>
+               <td>{customer.email_id}</td>
+            </tr>    
+          </tbody>
+        </table>
+        <div className="text-center">
+        <Button variant="primary"
+          onClick={() => handleUpdateProfile(customer.customer_id)} >
+          Update Profile
+        </Button>
+      </div>
+      </div>
+      
   )
 }
