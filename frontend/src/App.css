@@ -19,9 +19,10 @@
 }
 
 .pro{
-   height: 30px;
-   width: 30px;
+   height: 45px;
+   width:45px;
    margin-left: 10px;
+   border-radius: 50%;
 }
 
 #r1{
@@ -76,10 +77,10 @@
                
 }
 .navcol {
-  background-color: rgb(200, 196, 190);
+  background-color: rgb(235, 227, 215);
   box-sizing: content-box;
   color: aqua;
-  height: 75px;
+  height: 60px;
   position: fixed;
   top: 0;
   z-index: 100;
