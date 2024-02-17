@@ -112,8 +112,8 @@ const Login = () => {
     fetch('http://localhost:8081/login',req)
          .then( resp=>resp.json())
          .then(data=>{
-              console.log(data + "aaaa");
-                  if(data == null ){
+              console.log(data);
+                  if(data === null ){
                     console.log("Login Failed...");
                     setError("Login Failed...");
                   }

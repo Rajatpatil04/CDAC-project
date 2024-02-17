@@ -18,8 +18,8 @@ export default function CarRegistrationForm() {
     insurance_type: { value: "", valid: false, touched: false, error: "" },
     insurance_exp_date: { value: "", valid: false, touched: false, error: "" },
     price_per_hour: { value: "", valid: false, touched: false, error: "" },
-    music_system: { value: false, valid: true, touched: false, error: "" },
-    ac: { value: false, valid: true, touched: false, error: "" },
+    music_system: { value: "", valid: true, touched: false, error: "" },
+    ac: { value: "", valid: true, touched: false, error: "" },
     mileage: { value: "", valid: false, touched: false, error: "" },
     formValid: false,
 
@@ -127,6 +127,7 @@ export default function CarRegistrationForm() {
     //console.log(JSON.parse(localStorage.getItem("loggedUser")).uid);
     console.log(formData.ac.value);
     console.log(formData.music_system.value);
+    console.log(formData)
       e.preventDefault();
       const reqOptions = {
         method :'POST',
@@ -307,7 +308,7 @@ export default function CarRegistrationForm() {
             </label>
           </div>
 
-        <div className="col-md-4">
+        {/* <div className="col-md-4">
           <label className="form-label">Music System:</label><br />
           <input type="radio"className="btn-check"name="music_system" 
             id="success-outlined-music"
@@ -321,7 +322,37 @@ export default function CarRegistrationForm() {
             <label className="btn btn-outline-danger" htmlFor="danger-outlined-music" > NO</label>
             <input type="radio" className="btn-check" name="music_system" id="danger-outlined-music" autoComplete="off" 
            onClick={(e)=>{handleChange("music_system",false)}} />
-        </div>
+        </div> */}
+
+<div className="col-md-4">
+            <label className="form-label">Music System :</label><br />
+            <input
+              type="radio"
+              className="btn-check"
+              name="music_system"
+              value={true}
+              id="success-outlined-music"
+              autoComplete="off"
+              defaultChecked
+              onClick={(e)=>{handleChange("music_system",true)}}
+              />
+            <label className="btn btn-outline-success" htmlFor="success-outlined-music">
+              YES
+            </label>
+            <span> </span>
+            <input
+              type="radio"
+              className="btn-check"
+              name="music_system"
+              value={true}
+              id="danger-outlined-music"
+              autoComplete="off"
+              onClick={(e)=>{handleChange("music_system",false)}}
+              />
+            <label className="btn btn-outline-danger" htmlFor="danger-outlined-music">
+              NO
+            </label>
+          </div>
 
         <div className="col-md-4">
             <label className="form-label">Car Fuel Type:</label>
