@@ -26,6 +26,7 @@ export default function CustomerNavbar() {
             </div>
 
             <Nav className="ml-auto croutes">
+            <NavLink to="/customer/searchcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>SEARCH CARS</b></h5></NavLink>
               <NavLink to="/customer/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
 
               <NavDropdown

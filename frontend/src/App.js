@@ -72,12 +72,14 @@ function App() {
         <Route path="/hostsignup" element={<HostSignup />} />
         <Route path="/hostsignup1" element={<Hostsignup1/>}/>
         <Route path="/viewcars" element={<ViewCars/>}/>
-        <Route path="/searchcars" element={<SearchCars/>}/>
+            {/* <Route path="/searchcars" element={<SearchCars/>}/> */}
+       
     {/* Customer side */}
         <Route path ="/customer" element={<CustomerNavbar/>}>
              <Route path="customerhome" element={<CustomerHome />} />
              <Route path="viewcars" element={<ViewCars/>}/>
              <Route path="profile" element={<CustomerProfile/>}/>
+             <Route path="searchcars" element={<SearchCars/>}/>
         </Route>
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>
