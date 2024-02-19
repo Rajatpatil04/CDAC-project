@@ -1,22 +1,34 @@
 
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const SearchCars = () => {
   const [categories, setCategories] = useState([]);
   // const [car_models, setCar_models] = useState([]);
   // const [car_brands, setCar_brands] = useState([]);
   // const [fuel_types, SetFuel_types] = useState([]);
+  const[packages, setPackages] = useState([]);
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [selectedDateTime, setSelectedDateTime] = useState('');
+  const [selectedPackage, setSelectedPackage] = useState('');
+  let navigate = useNavigate();
+
 
   useEffect(() => {
     fetch('http://localhost:8081/getallcategories')
       .then(response => response.json())
       .then(data => setCategories(data))
+      .catch(error => console.error('Error fetching categories: ', error));
+
+      fetch('http://localhost:8081/getallpackages')
+      .then(response => response.json())
+      .then(data => {setPackages(data);
+                      console.log(data)})
       .catch(error => console.error('Error fetching categories: ', error));
 
       // fetch('http://localhost:8081/getallcarmodels')
@@ -49,6 +61,36 @@ const SearchCars = () => {
                       console.log(data);})
       .catch(error => setError('Error fetching cars: ' + error.message))
       .finally(() => setLoading(false));
+  };
+
+  const handleSubmit = (carId) => {
+
+    const data = {
+      customer_id: JSON.parse(localStorage.getItem("loggedUser")).uid,
+      car_id: carId,
+      package_id: selectedPackage,
+      journey_date_time: selectedDateTime,
+      status : 0
+    };
+
+    console.log(data)
+
+    fetch('http://localhost:8081/addbookingrequest', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert('Booking successful:');
+      console.log('Booking successful:', data);
+      navigate("/customer/customerhome")
+    })
+    .catch(error => {
+      console.error('Error submitting booking:', error);
+    });
   };
 
   return (
@@ -122,11 +164,33 @@ const SearchCars = () => {
                     <Card.Text>Fuel Type: {car.fuelType.fuel_type}</Card.Text>
                     <Card.Text>Price per Hour: ₹{car.price_per_hour}</Card.Text>
                     <Card.Text>Color: {car.color}</Card.Text>
-                    {/* Add more details as needed */}
                     <Card.Text>Host: {car.host.fname} {car.host.lname}</Card.Text>
                     <Card.Text>Registration Number: {car.rc_no}</Card.Text>
-                    {/* Add more details as needed */}
-                    <Button value={"Submit"}>Book My Ride</Button>
+                    <Form.Group controlId={`datetime_${car.car_id}`}>
+                  <Form.Label>Select Date and Time</Form.Label>
+                  <Form.Control
+                    type="datetime-local"
+                    value={selectedDateTime}
+                    onChange={e => setSelectedDateTime(e.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId={`package_${car.package_id}`}>
+                  <Form.Label>Select Package</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={selectedPackage}
+                    onChange={e => setSelectedPackage(e.target.value)}
+                  >
+                    <option value="">Select Package</option>
+                    {packages.map(p => (
+                      <option key={p.package_id} value={p.package_id}>
+                        {p.hours} Hours, {p.kilometers} Kilometers
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                    <Button value={"Submit"} onClick={() => handleSubmit(car.car_id)}>Book My Ride</Button>
                   </Card.Body>
                 </Card>
               </Col>

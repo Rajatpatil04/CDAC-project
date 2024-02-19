@@ -28,6 +28,9 @@ public class Package {
     private int package_id;
 
     @Column(name = "hours")
-    private Integer hours;
+    private int hours;
+    
+    @Column(name = "kilometers")
+    private int kilometers;
 
 }
