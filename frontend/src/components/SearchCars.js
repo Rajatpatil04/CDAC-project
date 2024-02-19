@@ -188,6 +188,7 @@ const SearchCars = () => {
                         {p.hours} Hours, {p.kilometers} Kilometers
                       </option>
                     ))}
+                    
                   </Form.Control>
                 </Form.Group>
                     <Button value={"Submit"} onClick={() => handleSubmit(car.car_id)}>Book My Ride</Button>
