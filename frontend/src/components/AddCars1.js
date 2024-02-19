@@ -187,9 +187,9 @@ export default function CarRegistrationForm() {
               fd.append("file",file); 
               const reqOptions1 ={
                 method :"POST",
-                headers :{
-                   "content-type":"multipart/form-data"
-                },
+                /*headers :{
+                   "Content-Type":"multipart/form-data"
+                },*/
                 body:fd
               }
               fetch("http://localhost:8081/uploadimage/"+obj.car_id,reqOptions1)

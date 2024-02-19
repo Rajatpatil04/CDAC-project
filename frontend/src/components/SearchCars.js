@@ -113,8 +113,10 @@ const SearchCars = () => {
               <Col key={car.car_id} md={4} className="mb-4">
                 <Card>
                   <Card.Body>
+                    <Card.Img width={200} height={200} src={`data:image/jpeg;base64,${car && car.car_image}`} /><br/>
                     <Card.Title>{car.carModel.brand.brand_name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{car.carModel.model_name}</Card.Subtitle>
+
                     <Card.Text>Seating Capacity: {car.carModel.seating_capacity}</Card.Text>
                     <Card.Text>Transmission: {car.carModel.transmission_type}</Card.Text>
                     <Card.Text>Fuel Type: {car.fuelType.fuel_type}</Card.Text>
@@ -124,7 +126,6 @@ const SearchCars = () => {
                     <Card.Text>Host: {car.host.fname} {car.host.lname}</Card.Text>
                     <Card.Text>Registration Number: {car.rc_no}</Card.Text>
                     {/* Add more details as needed */}
-                    
                     <Button value={"Submit"}>Book My Ride</Button>
                   </Card.Body>
                 </Card>

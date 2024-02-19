@@ -144,6 +144,22 @@ function CustomerSignup() {
                  error="Adhar number is Invalid!!!"
                 }
                 break;
+        case 'dob':
+                var cuDate = new Date();
+                var enteredDate = new Date(value);
+                let diff = cuDate.getFullYear() - enteredDate.getFullYear();
+                if(cuDate < enteredDate){
+                    valid = false;
+                    error = "BithDate Should not be in future!!!"
+                }else if(diff < 10){
+                    console.log(diff+" hello  ")
+                    valid = false;
+                    error = "Persons age need to be above 10"
+                }else if((cuDate.getFullYear() - enteredDate.getFullYear()) > 100){
+                    valid = false;
+                    error = "Persons age need to be below 100"
+                }
+                break;
         case 'password':
                   // let weakPass = /^[a-zA-z]+$/;
                   // let avgPass = /(?=.[0-9!@#$%^&*]{1})[a-zA-z]+$/
