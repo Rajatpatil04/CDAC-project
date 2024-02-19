@@ -20,10 +20,10 @@ export default function CustomerNavbar() {
           <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <div className="input-group csearch ">
+            {/* <div className="input-group csearch ">
               <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
               <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
-            </div>
+            </div> */}
 
             <Nav className="ml-auto croutes">
             {/* <NavLink to="/customer/searchcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>SEARCH CARS</b></h5></NavLink> */}
