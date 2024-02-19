@@ -28,14 +28,21 @@ export default function CarRegistrationForm() {
   const formReducer = (state, action) => {
     switch (action.type) {
       case "update":
-        const { key, value, touched, valid, error, formValid } = action.data;
-        return { ...state, [key]: { value, touched, valid, error }, formValid };
+        if (action.data) {
+          const { key, value, touched, valid, error, formValid } = action.data;
+          return { ...state, [key]: { value, touched, valid, error }, formValid };
+        }
+       
+        return state;
+  
       case "reset":
         return initialFormState;
+  
       default:
         return state;
     }
   };
+  
   useEffect(() => {
     fetch("http://localhost:8081/getallfueltypes")
       .then((response) => response.json())
@@ -75,7 +82,7 @@ export default function CarRegistrationForm() {
        let error = "";
        switch(key){
            case'rc_no': 
-                   var  pattern = /^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{1,4}$/;
+                   var  pattern = /^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$/;
                    if(!pattern.test(value))
                    {
                        valid = false;
@@ -90,6 +97,24 @@ export default function CarRegistrationForm() {
                        error="Rent must be in numberic only!";
                    }  
                    break;
+            case 'reg_date':
+                      var cuDate = new Date();
+                      var enteredDate = new Date(value);    
+                      if( cuDate < enteredDate)
+                      {
+                         valid = false;
+                         error = "Registration Date Must be less than Today"
+                      } 
+                      break;
+            case 'insurance_exp_date':
+                        var cuDate = new Date();
+                        var enteredDate = new Date(value);
+                        if (cuDate > enteredDate) {
+                          valid = false;
+                          error = "Insurance Expiration Date must be greater than Today";
+                        }
+                        break; 
+                     
             case 'mileage':
                     var pattern = /^[0-9]+$/;
                     if(!pattern.test(value))
@@ -102,14 +127,15 @@ export default function CarRegistrationForm() {
               default:
                    break;
        }
-    return { valid: true, error: "" };
+       return { valid : valid, error:error };
+  
   };
 
   const handleChange = (key, value) => {
     const { valid, error } = validateInput(key, value);
     let formValid = true;
     for (const field in formData) {
-      if (field !== key && !formData[field].valid) {
+      if (formData[field].valid=== false) {
         formValid = false;
         break;
       }
@@ -233,7 +259,12 @@ export default function CarRegistrationForm() {
           <div className="col-md-4">
           <label className="form-label">RC Number:</label>
             <input className="form-control" name="rc_no" type="text"placeholder="RC NUMBER" 
-             onChange={(e)=>{handleChange("rc_no",e.target.value)}} required/>
+             onChange={(e)=>{handleChange("rc_no",e.target.value)}} 
+             onBlur={(e)=>{handleChange("rc_no",e.target.value)
+             checkRcNo(e.target.value)}}
+             required/>
+
+              <div style={{display: (!formData.rc_no.valid && formData.rc_no.touched)?"block":"none"}}><p className="text-danger">{formData.rc_no.error}</p></div>
              </div>
 
           <div className="col-md-4">
@@ -244,8 +275,8 @@ export default function CarRegistrationForm() {
                 className="form-control"
                 name="carImage"
                 onChange={(e) => setFile(e.target.files[0])} 
-                required
-              />
+                required/>
+                
             </div>
           </div>
 
@@ -284,11 +315,14 @@ export default function CarRegistrationForm() {
               type="date"
               id="reg_date"
               name="reg_date"
-              onChange={(e) => {
-                handleChange("reg_date", e.target.value);
-              }}
+              onChange={(e) => {handleChange("reg_date", e.target.value)}}
+              onBlur={(e)=>{handleChange("reg_date",e.target.value)}}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
               required/>
+              <div style={{ display: (!formData.reg_date.valid && formData.reg_date.touched) ? "block" : "none" }}>
+  <p className="text-danger">{formData.reg_date.error}</p>
+</div>
+
             </div>
 
 
@@ -298,13 +332,14 @@ export default function CarRegistrationForm() {
               type="date"
               id="insurance_exp_date"
               name="insurance_exp_date"
-             onChange={(e) => {
-              handleChange("insurance_exp_date", e.target.value);
-            }}
+             onChange={(e) => { handleChange("insurance_exp_date", e.target.value); }}
+             onBlur={(e) => {handleChange("insurance_exp_date",e.target.value)}}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control"
               required/>
+                <div style={{display: (!formData.insurance_exp_date.valid && formData.insurance_exp_date.touched)?"block":"none"}}><p className="text-danger">{formData.insurance_exp_date.error}</p></div>
           </div>
-                    <div className="col-md-4">
+
+             <div className="col-md-4">
             <label className="form-label">Air Conditioning:</label><br />
             <input
               type="radio"
@@ -406,14 +441,20 @@ export default function CarRegistrationForm() {
         <div className="col-md-4">
           <label className="form-label">Mileage:</label>
             <input className="form-control" name="mileage" type="text"placeholder="Mileage (Km/Litres)" 
-             onChange={(e)=>{handleChange("mileage",e.target.value)}}required/>
+             onChange={(e)=>{handleChange("mileage",e.target.value)}}
+             onBlur={(e)=>(handleChange("mileage",e.target.value))}
+             required/>
+              <div style={{display: (!formData.mileage.valid && formData.mileage.touched)?"block":"none"}}><p className="text-danger">{formData.mileage.error}</p></div>
              </div>
 
       
         <div className="col-md-4">
           <label className="form-label">Rent Per Hour:</label>
             <input className="form-control" name="price_per_hour" type="text"placeholder="Rent Per hour(In Rs)" 
-            onChange={(e)=>{handleChange("price_per_hour",e.target.value)}} required/>
+            onChange={(e)=>{handleChange("price_per_hour",e.target.value)}} 
+            onBlur={(e)=>(handleChange("price_per_hour",e.target.value))}
+            required/>
+             <div style={{display: (!formData.price_per_hour.valid && formData.price_per_hour.touched)?"block":"none"}}><p className="text-danger">{formData.price_per_hour.error}</p></div>
              </div>
 
           <div className="col-12">
@@ -422,8 +463,8 @@ export default function CarRegistrationForm() {
             </button>
           </div>
         </form>
-        <p> {file && file.name} </p>
-        <p> {file && file.size}</p>
+        {/* <p> {file && file.name} </p>
+        <p> {file && file.size}</p> */}
       </div>
     </div>
   );

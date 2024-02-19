@@ -136,6 +136,23 @@ function Hostsignup1() {
                  error="Adhar number is Invalid!!!"
                 }
                 break;
+                case 'dob':
+                  var cuDate = new Date();
+                  var enteredDate = new Date(value);
+                  let diff = cuDate.getTime() - enteredDate.getTime();
+                  let age = Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000));
+                
+                  if (cuDate < enteredDate) {
+                    valid = false;
+                    error = "BirthDate should not be in the future!!!";
+                  } else if (age < 10) {
+                    valid = false;
+                    error = "Person's age needs to be above 10";
+                  } else if (age >= 100) {
+                    valid = false;
+                    error = "Person's age needs to be below 100";
+                  }
+                  break;    
         case 'password':
                   // let weakPass = /^[a-zA-z]+$/;
                   // let avgPass = /(?=.[0-9!@#$%^&*]{1})[a-zA-z]+$/
@@ -457,7 +474,9 @@ function Hostsignup1() {
           <label className="form-label"> DATE OF BIRTH:</label>
           <input type="date" id="dob" name="dob"
             onChange={(e)=>{setDate(e.target.value)}}
+            onBlur={(e)=>handleChange("dob",e.target.value)}
             className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required/> 
+            <div style={{display: (!host.dob.valid && host.dob.touched)?"block":"none"}}><p className="text-danger">{host.dob.error}</p></div>
         </div>
 
         <div className="col-md-4">

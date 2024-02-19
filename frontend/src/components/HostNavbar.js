@@ -16,12 +16,12 @@ export default function HostNavbar(){
           <h1 className="text-dark text-bd" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <div className="input-group search">
+            {/* <div className="input-group search">
               <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
               <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
-            </div>
+            </div> */}
             
-            <Nav className="ml-auto">
+            <Nav className="ml-auto " style={{marginLeft:"70%"}}>
               {/* <NavLink to ="/" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink> */}
               <NavLink to ="/host/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
               <NavLink to ="/host/addcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>ADD CARS</b></h5></NavLink>
