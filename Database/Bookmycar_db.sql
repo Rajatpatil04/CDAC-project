@@ -46,6 +46,40 @@ INSERT INTO `area` VALUES (1,'Deccan',411004,1),(2,'Shivajinagar',411005,1),(3,'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `booking_requests`
+--
+
+DROP TABLE IF EXISTS `booking_requests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `booking_requests` (
+  `req_id` int NOT NULL,
+  `customer_id` int DEFAULT NULL,
+  `car_id` int DEFAULT NULL,
+  `package_id` int DEFAULT NULL,
+  `journey_date_time` datetime DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  PRIMARY KEY (`req_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `car_id` (`car_id`),
+  KEY `package_id` (`package_id`),
+  CONSTRAINT `booking_requests_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
+  CONSTRAINT `booking_requests_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`),
+  CONSTRAINT `booking_requests_ibfk_3` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`),
+  CONSTRAINT `booking_requests_chk_1` CHECK (((`status` >= 0) and (`status` <= 2)))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking_requests`
+--
+
+LOCK TABLES `booking_requests` WRITE;
+/*!40000 ALTER TABLE `booking_requests` DISABLE KEYS */;
+/*!40000 ALTER TABLE `booking_requests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `brands`
 --
 
@@ -340,6 +374,7 @@ DROP TABLE IF EXISTS `packages`;
 CREATE TABLE `packages` (
   `package_id` int NOT NULL AUTO_INCREMENT,
   `hours` int NOT NULL,
+  `kilometers` int NOT NULL,
   PRIMARY KEY (`package_id`),
   UNIQUE KEY `hours` (`hours`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -417,4 +452,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-19 10:37:25
+-- Dump completed on 2024-02-19 10:58:18
