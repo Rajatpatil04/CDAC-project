@@ -11,7 +11,7 @@ const handleClick =()=>{
   return(
       <div className="chome">
           <br/>
-        <marquee ><h1 style={{fontFamily:"cursive"}}> Welcome {name} </h1></marquee>
+        <h1 style={{fontFamily:"revert"}}> Welcome {name} </h1>
         <div className="outercircle">
           <div className="start" onClick={handleClick} ><br></br><b>START <br /> SEARCH<br /></b></div>
         </div>

@@ -23,7 +23,7 @@ export default function HostNavbar(){
             
             <Nav className="ml-auto " style={{marginLeft:"70%"}}>
               {/* <NavLink to ="/" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink> */}
-              <NavLink to ="/host/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
+              <NavLink to ="/host/viewbooking" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>REQUESTS</b></h5></NavLink>
               <NavLink to ="/host/addcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>ADD CARS</b></h5></NavLink>
               <NavLink to ="/logout" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>LOGOUT</b></h5></NavLink>
             </Nav>

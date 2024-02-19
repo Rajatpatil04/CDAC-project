@@ -36,7 +36,7 @@ export default function AdminApproval(){
     };
     const handleApproval = (uid) => {
       //const userId = parseInt(uid, 10);
-      fetch(`http://localhost:8081/changestatus?uid=${uid}`, {method:'PUT'})
+      fetch(`http://localhost:8081/changestatus?uid=${uid} `, {method:'PUT'})
       .then((res) => res.json())
       .then((data) => {
         console.log(data)

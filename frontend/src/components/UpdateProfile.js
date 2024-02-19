@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function UpdateCustomer() {
   const mystate = useSelector((state) => state.logged);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [customer, setCustomer] = useState({});
   const navigate = useNavigate();
 
@@ -46,9 +47,10 @@ export default function UpdateCustomer() {
     })
       .then((res) => res.json())
       .then((data) => {
+        setUpdateSuccess(true);
         console.log('Customer updated successfully:', data);
-        navigate("/customer/profile");
-        alert("Profile Updated Successfully..!")
+        // navigate("/customer/customerhome");
+        
       })
       .catch((error) => {
         console.error('Error updating customer:', error);
@@ -183,11 +185,19 @@ export default function UpdateCustomer() {
           />
         </Form.Group> */}
          <br/>
-        <div className="text-center">
+         <div className="text-center">
           <Button variant="warning" onClick={handleUpdate}>
             Update Profile
           </Button>
         </div>
+        {updateSuccess && (
+          <div className="text-success text-center mt-3">
+            Profile updated successfully!
+            <Button variant="link" onClick={() => navigate("/customer/customerhome")}>
+              Go to Home
+            </Button>
+          </div>
+        )}
       </Form>
     </div>
   );

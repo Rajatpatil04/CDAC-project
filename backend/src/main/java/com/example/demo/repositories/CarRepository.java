@@ -31,7 +31,7 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 	
 	@Transactional
 	@Modifying
-	@Query("UPDATE Car c SET c.status = NULL WHERE c.car_id = :cid")
+	@Query("UPDATE Car c SET c.status = 2 WHERE c.car_id = :cid")
 	int updateStatusToNull( int cid);
 	
 //	@Query("SELECT c FROM Car c WHERE c.model_id IN (SELECT c1.model_id FROM CarModel c1 WHERE c1.cat_id = :cat_id) AND c.model_id IN (SELECT c2.model_id FROM CarModel c2 WHERE c2.seating_capacity = :seating_capacity)")

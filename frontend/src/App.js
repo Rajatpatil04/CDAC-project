@@ -26,6 +26,7 @@ import CarRegistrationForm from './components/AddCars1';
 import SearchCars from './components/SearchCars';
 import CustomerProfile from './components/CustomerProfile';
 import UpdateCustomer from './components/UpdateProfile';
+import ApproveBooking from './components/ApproveBooking';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
@@ -95,6 +96,7 @@ function App() {
              <Route path="hosthome" element={<HostHome />} />
              <Route path="viewcars" element={<ViewCars/>}/>
              <Route path="addcars" element={<CarRegistrationForm/>}/>
+             <Route path="viewbooking" element={<ApproveBooking/>}/>
           
         </Route>
         
