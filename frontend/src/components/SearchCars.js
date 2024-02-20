@@ -189,7 +189,7 @@ const SearchCars = () => {
                     <Card.Text>Seating Capacity: {car.carModel.seating_capacity}</Card.Text>
                     <Card.Text>Transmission: {car.carModel.transmission_type}</Card.Text>
                     <Card.Text>Fuel Type: {car.fuelType.fuel_type}</Card.Text>
-                    <Card.Text>Price per Hour: ₹{car.price_per_hour}</Card.Text>
+                    <Card.Text style={{fontSize:20}}>Price per Hour: ₹{car.price_per_hour}</Card.Text>
                     <Card.Text>Color: {car.color}</Card.Text>
                     <Card.Text>Host: {car.host.fname} {car.host.lname}</Card.Text>
                     <Card.Text>Registration Number: {car.rc_no}</Card.Text>
