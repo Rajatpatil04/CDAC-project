@@ -10,7 +10,7 @@ export default function HostNavbar(){
 
     <Navbar className='navcol' style={{display: mystate.loggedIn?"block":"none"}}>
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
+          <Link to="/host/hosthome" className="navbar-brand">
             <img src={favicon} alt="Book My Car Logo" width="90" height="40"  className="d-inline-block align-text-top"/>
           </Link>
           <h1 className="text-dark text-bd" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
