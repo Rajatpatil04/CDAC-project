@@ -37,7 +37,7 @@ public class BookingRequestController {
  	        
  	}
 	
-	@PutMapping("/rejectrequest")
+	@PutMapping("/rejectbooking")
 	public int rejectStatus(@RequestParam("req_id") int req_id) {
  	    return bservice.rejectStatus(req_id);     
  	}
