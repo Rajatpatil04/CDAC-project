@@ -217,6 +217,7 @@ const SearchCars = () => {
                     ))}
                     
                   </Form.Control>
+                  <br/>
                 </Form.Group>
                     <Button value={"Submit"} onClick={() => handleSubmit(car.car_id)}>Book My Ride</Button>
                   </Card.Body>

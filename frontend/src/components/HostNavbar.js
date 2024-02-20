@@ -8,7 +8,7 @@ export default function HostNavbar(){
   return(
     <div>
 
-    <Navbar className='navcol' style={{display: mystate.loggedIn?"block":"none"}}>
+    <Navbar className='hnavcol' style={{display: mystate.loggedIn?"block":"none"}}>
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <img src={favicon} alt="Book My Car Logo" width="90" height="40"  className="d-inline-block align-text-top"/>
