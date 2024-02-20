@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -54,14 +53,42 @@ const SearchCars = () => {
   //     .catch(error => console.error('Error fetching categories: ', error));
   // }, []);
 
+
+  //4th Try
+   const validateSeatingCapacity = (value) => {
+    const intValue = parseInt(value);
+    if (isNaN(intValue) || intValue <= 0) {
+      setError('Seating capacity can not be zero or negative');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
   const handleSearch = () => {
+    if (!validateSeatingCapacity(seatingCapacity)) {
+      return;
+    }
+    setLoading(true);
+  
     fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
       .then(response => response.json())
-      .then(data => {setCars(data);
-                      console.log(data);})
+      .then(data => {
+        setCars(data);
+        console.log(data);
+      })
       .catch(error => setError('Error fetching cars: ' + error.message))
       .finally(() => setLoading(false));
   };
+
+  // const handleSearch = () => {
+  //   fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
+  //     .then(response => response.json())
+  //     .then(data => {setCars(data);
+  //                     console.log(data);})
+  //     .catch(error => setError('Error fetching cars: ' + error.message))
+  //     .finally(() => setLoading(false));
+  // };
 
   const handleSubmit = (carId) => {
 
