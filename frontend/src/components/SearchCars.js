@@ -219,7 +219,7 @@ const SearchCars = () => {
                   </Form.Control>
                   <br/>
                 </Form.Group>
-                    <Button value={"Submit"} onClick={() => handleSubmit(car.car_id)}>Book My Ride</Button>
+                    <Button value={"Submit"} onClick={() => handleSubmit(car.car_id)}>Raise Request</Button>
                   </Card.Body>
                 </Card>
               </Col>

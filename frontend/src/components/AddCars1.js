@@ -233,7 +233,6 @@ export default function CarRegistrationForm() {
       <div className="border rounded container col-mb-6 mt-4 contain">
         <h1 className="text-2xl font-bold mb-4">Car Registration</h1>
         <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit}  encType="multipart/form-data">
-
           <div className="col-md-4">
             <label className="form-label">Car Model:</label>
             <select
