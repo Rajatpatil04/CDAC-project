@@ -1,5 +1,7 @@
 package com.example.demo.repositories;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,5 +22,11 @@ public interface BookingRequestRepository extends JpaRepository<BookingRequest, 
 	@Modifying
 	@Query("UPDATE BookingRequest b SET b.status = 2 WHERE b.req_id = :req_id")
 	public int rejectStatus(int req_id);
+
+//	@Query("SELECT b From BookingRequest b WHERE b.car_id IN (SELECT c.car_id from Car c WHERE c.host_id = : host_id )")
+//	public List<BookingRequest> getAllRequests(int host_id);
+	
+	@Query(value = "SELECT * FROM booking_requests b WHERE b.car_id IN (SELECT c.car_id FROM cars c WHERE c.host_id = :host_id)", nativeQuery = true)
+	public List<BookingRequest> getAllRequestsForHost(int host_id);
 
 }
