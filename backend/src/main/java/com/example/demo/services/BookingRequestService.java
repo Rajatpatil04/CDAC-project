@@ -1,13 +1,17 @@
 package com.example.demo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.BookingRequest;
 import com.example.demo.entities.DummyRequest;
+import com.example.demo.entities.Host;
 import com.example.demo.repositories.BookingRequestRepository;
 import com.example.demo.repositories.CarRepository;
 import com.example.demo.repositories.CustomerRepository;
+import com.example.demo.repositories.HostRepository;
 import com.example.demo.repositories.PackageRepository;
 
 @Service
@@ -24,6 +28,9 @@ public class BookingRequestService {
 	
 	@Autowired
 	private PackageRepository prepo;
+	
+	@Autowired
+	private HostRepository hrepo;
 	
 	public BookingRequest addRequest(DummyRequest dr) {
 		System.out.println(dr);
@@ -42,6 +49,12 @@ public class BookingRequestService {
 
 	public int rejectStatus(int req_id) {
 		return brepo.rejectStatus(req_id);
+	}
+	
+	public List<BookingRequest> getAllRequestsForHost(int uid){
+		Host h = hrepo.findByUid(uid).get();
+		int host_id = h.getHost_id();
+		return brepo.getAllRequestsForHost(host_id);
 	}
 
 }

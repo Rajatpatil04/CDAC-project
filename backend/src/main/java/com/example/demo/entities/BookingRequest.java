@@ -50,7 +50,6 @@ public class BookingRequest {
     private Package pack;
 
     @Column(name = "journey_date_time")
-    //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime journey_date_time;
 
     @Column(name = "status")

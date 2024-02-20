@@ -6,12 +6,14 @@ export default function ApproveBooking(){
   const [Booking,setBooking] = useState([]);
   const [Approve,setApprove] = useState([]);
   const [Reject,setReject] = useState([]);
-  const hostID = JSON.parse(localStorage.getItem("loggedUser")).host_id;
+  const uid = JSON.parse(localStorage.getItem("loggedUser")).uid;
 
   const fetchBooking =() =>{
-    fetch(`http://localhost:8081/getallbookings?host_id=${hostID}`,{method:'GET'})
-    .then((resp)=>resp.json)
+    console.log(uid);
+    fetch(`http://localhost:8081/getallbookings?uid=${uid}`,{method:'GET'})
+    .then((resp)=>resp.json())
     .then((data)=>{
+      console.log(data);
         console.log("got all requests")
         setBooking(data);
     })
@@ -84,12 +86,12 @@ export default function ApproveBooking(){
                   <tbody>
                   {Booking.map((request) => (
               <tr key={request.req_id}>
-                      <td>{index++}</td>
+                      <td>{++index}</td>
                       <td>{request.customer.fname}</td>
                       <td>{request.customer.lname}</td>
                       <td>{request.customer.contact}</td>
-                      <td>{request.car.CarModel.model_name}</td>
-                      <td>{ new Date(request.pickupdate).toLocaleDateString()}</td>
+                      <td>{request.car.carModel.model_name}</td>
+                      <td>{request.journey_date_time ? new Date(request.journey_date_time).toLocaleTimeString() : 'N/A'}</td>
                       <td>{new Date(request.dropdate).toLocaleDateString()}</td>
                       <td>
               <button type="button" className={`btn ${Approve[request.req_id] ? 'btn-success' : 'btn-primary'}`}
