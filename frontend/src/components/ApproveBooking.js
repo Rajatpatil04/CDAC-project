@@ -27,10 +27,9 @@ export default function ApproveBooking(){
       .then((data) => {
         console.log(data);
         if (data === 1) {
-          // Update the state based on a successful approval
           setApprove((prevApprove) => {
             const newApprove = [...prevApprove];
-            newApprove[req_id] = true; // Assuming 'true' represents 'approved'
+            newApprove[req_id] = true; 
             return newApprove;
           });
         
@@ -50,7 +49,7 @@ export default function ApproveBooking(){
         
           setReject((prevReject) => {
             const newReject = [...prevReject];
-            newReject[req_id] = true; // Assuming 'true' represents 'approved'
+            newReject[req_id] = true; 
             return newReject;
 
           });

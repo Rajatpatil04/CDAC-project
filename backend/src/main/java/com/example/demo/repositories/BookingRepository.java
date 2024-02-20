@@ -11,8 +11,11 @@ import com.example.demo.entities.Booking;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking,Integer> {
 	
-	@Query("SELECT b FROM Booking b WHERE b.req_id IN (SELECT c.customer_id FROM Customer c WHERE c.customer_id = :customer_id)")
-	public List<Booking> getAllBookingsForCustomer(int customer_id);
+//	@Query("SELECT b FROM Booking b WHERE b.BookingRequest.req_id IN (SELECT c.customer_id FROM Customer c WHERE c.customer_id = :customer_id)")
+//	public List<Booking> getAllBookingsForCustomer(int customer_id);
+
+	@Query("SELECT b FROM Booking b WHERE b.bookingRequest.customer.customer_id = :customer_id")
+	List<Booking> getAllBookingsForCustomer(int customer_id);
 
 	
 }

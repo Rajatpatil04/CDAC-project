@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entities.Booking;
 import com.example.demo.entities.BookingRequest;
+import com.example.demo.entities.Customer;
 import com.example.demo.entities.DummyRequest;
 import com.example.demo.entities.Host;
 import com.example.demo.repositories.BookingRequestRepository;
@@ -57,4 +59,8 @@ public class BookingRequestService {
 		return brepo.getAllRequestsForHost(host_id);
 	}
 
+	public List<BookingRequest> getApprovedBookingsForCustomer(int uid){
+		Customer c = curepo.findCustomerByUid(uid);
+		return brepo.getApprovedBookingsForCustomer(c.getCustomer_id());
+	}
 }

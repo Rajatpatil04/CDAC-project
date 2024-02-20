@@ -32,28 +32,25 @@ public class Booking {
     @Column(name = "booking_id")
     private Integer bookingId;
 
-    @Column(name = "req_id")
-    private int req_id;
-
     @Column(name = "actual_pickup_date")
-    private LocalDateTime actualPickupDate;
+    private LocalDateTime actual_pickup_date;
 
     @Column(name = "actual_return_date")
-    private LocalDateTime actualReturnDate;
+    private LocalDateTime actual_return_date;
 
     @Column(name = "amount")
     private float amount;
 
     @Column(name = "payment_mode")
-    private String paymentMode;
+    private String payment_mode;
 
     @Column(name = "payment_date")
-    private Date paymentDate;
+    private Date payment_date;
 
     @Column(name = "transaction_id")
-    private String transactionId;
+    private String transaction_id;
 
     @ManyToOne
-    @JoinColumn(name = "req_id", referencedColumnName = "req_id", insertable = false, updatable = false)
+    @JoinColumn(name = "req_id")
     private BookingRequest bookingRequest;
 }

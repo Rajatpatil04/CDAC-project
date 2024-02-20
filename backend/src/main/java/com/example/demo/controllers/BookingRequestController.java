@@ -46,5 +46,10 @@ public class BookingRequestController {
 	public List<BookingRequest> getAllBookingsForHost(@RequestParam("uid")int uid){
 		return bservice.getAllRequestsForHost(uid); 
 	}
+
+	@GetMapping("/getallbookingsforCustomer")
+	public List<BookingRequest> getApprovedBookingsForCustomer(@RequestParam("uid")int uid){
+		return bservice.getApprovedBookingsForCustomer(uid); 
+	}
 		
 }

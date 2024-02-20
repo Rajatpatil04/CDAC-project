@@ -30,6 +30,7 @@ import ApproveBooking from './components/ApproveBooking';
 import BookingDetails from './components/BookingDetails';
 import PaymentGateway from './components/PaymentGateway';
 import BookingStatus from './components/BookingStatus';
+import CustomerRequests from './components/PendingBookings';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
@@ -90,6 +91,7 @@ function App() {
              <Route path="searchcars" element={<SearchCars/>}/>
              <Route path="bookingdetails" element={<BookingDetails/>}/>
              <Route path="bookingStatus" element={<BookingStatus/>}/>
+             <Route path="approvedbooking" element={<CustomerRequests/>}/>
         </Route>
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>
