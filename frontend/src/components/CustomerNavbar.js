@@ -29,6 +29,7 @@ export default function CustomerNavbar() {
             <NavLink to="/customer/customerhome" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
             <NavLink to="/customer/bookingdetails" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>MY BOOKINGS</b></h5></NavLink>
               <NavLink to="/customer/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
+              <NavLink to="/customer/bookingStatus" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>STATUS</b></h5></NavLink>
 
               <NavDropdown
                 title={<img className="pro" src={profile} alt="Profile"></img>}

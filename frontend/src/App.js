@@ -28,6 +28,8 @@ import CustomerProfile from './components/CustomerProfile';
 import UpdateCustomer from './components/UpdateProfile';
 import ApproveBooking from './components/ApproveBooking';
 import BookingDetails from './components/BookingDetails';
+import PaymentGateway from './components/PaymentGateway';
+import BookingStatus from './components/BookingStatus';
 
 function App() {
   const mystate = useSelector(state=> state.logged)
@@ -75,6 +77,8 @@ function App() {
         <Route path="/hostsignup" element={<HostSignup />} />
         <Route path="/hostsignup1" element={<Hostsignup1/>}/>
         <Route path="/viewcars" element={<ViewCars/>}/>
+        <Route path="/payment" element={<PaymentGateway/>}/>
+        <Route path="/bookingStatus" element={<BookingStatus/>}/>
             {/* <Route path="/searchcars" element={<SearchCars/>}/> */}
        
     {/* Customer side */}
@@ -85,6 +89,7 @@ function App() {
              <Route path='updatecustomer' element={<UpdateCustomer/>}/>
              <Route path="searchcars" element={<SearchCars/>}/>
              <Route path="bookingdetails" element={<BookingDetails/>}/>
+             <Route path="bookingStatus" element={<BookingStatus/>}/>
         </Route>
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>
