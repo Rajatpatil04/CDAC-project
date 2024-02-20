@@ -96,6 +96,17 @@
   z-index: 100;
 }
 
+.hnavcol{
+  background-color: rgb(187, 241, 247);
+  box-sizing: content-box;
+  color: aqua;
+  height: 65px;
+  position: fixed;
+  top: 0;
+
+  z-index: 100;
+}
+
 
 
 .nav-link:hover{
@@ -124,8 +135,6 @@
     text-align: center;
      align-items: center;
 }
-
-
 
 .demopics{
   justify-content: center;
@@ -156,7 +165,7 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
-  opacity: 80%;
+  opacity: 85%;
  
 
 }
@@ -205,6 +214,15 @@
 
   margin-left: 70%;
    width: 50px;
+}
+
+.hbody{
+  background-image: url(images/female-hands-close-up-with-car-keys.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  opacity: 85%;
 }
 
 .chome{

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -54,14 +53,42 @@ const SearchCars = () => {
   //     .catch(error => console.error('Error fetching categories: ', error));
   // }, []);
 
+
+  //4th Try
+   const validateSeatingCapacity = (value) => {
+    const intValue = parseInt(value);
+    if (isNaN(intValue) || intValue <= 0) {
+      setError('Seating capacity can not be zero or negative');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
   const handleSearch = () => {
+    if (!validateSeatingCapacity(seatingCapacity)) {
+      return;
+    }
+    setLoading(true);
+  
     fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
       .then(response => response.json())
-      .then(data => {setCars(data);
-                      console.log(data);})
+      .then(data => {
+        setCars(data);
+        console.log(data);
+      })
       .catch(error => setError('Error fetching cars: ' + error.message))
       .finally(() => setLoading(false));
   };
+
+  // const handleSearch = () => {
+  //   fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
+  //     .then(response => response.json())
+  //     .then(data => {setCars(data);
+  //                     console.log(data);})
+  //     .catch(error => setError('Error fetching cars: ' + error.message))
+  //     .finally(() => setLoading(false));
+  // };
 
   const handleSubmit = (carId) => {
 
@@ -162,7 +189,7 @@ const SearchCars = () => {
                     <Card.Text>Seating Capacity: {car.carModel.seating_capacity}</Card.Text>
                     <Card.Text>Transmission: {car.carModel.transmission_type}</Card.Text>
                     <Card.Text>Fuel Type: {car.fuelType.fuel_type}</Card.Text>
-                    <Card.Text>Price per Hour: ₹{car.price_per_hour}</Card.Text>
+                    <Card.Text style={{fontSize:20}}>Price per Hour: ₹{car.price_per_hour}</Card.Text>
                     <Card.Text>Color: {car.color}</Card.Text>
                     <Card.Text>Host: {car.host.fname} {car.host.lname}</Card.Text>
                     <Card.Text>Registration Number: {car.rc_no}</Card.Text>
@@ -190,6 +217,7 @@ const SearchCars = () => {
                     ))}
                     
                   </Form.Control>
+                  <br/>
                 </Form.Group>
                     <Button value={"Submit"} onClick={() => handleSubmit(car.car_id)}>Book My Ride</Button>
                   </Card.Body>

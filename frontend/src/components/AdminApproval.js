@@ -138,8 +138,7 @@ export default function AdminApproval(){
               <button
                   type="button"
                   className={`btn ${approve[host.user.uid] ? 'btn-success' : 'btn-primary'}`}
-                  onClick={() => handleApproval(host.user.uid)}
-                  >
+                  onClick={() => handleApproval(host.user.uid)} >
                   {approve[host.user.uid] ? 'Approved' : 'Approve'}
                 </button>
                   </td>
