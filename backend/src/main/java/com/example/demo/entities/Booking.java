@@ -30,10 +30,10 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "booking_id")
-    private Long bookingId;
+    private Integer bookingId;
 
     @Column(name = "req_id")
-    private Long reqId;
+    private int req_id;
 
     @Column(name = "actual_pickup_date")
     private LocalDateTime actualPickupDate;

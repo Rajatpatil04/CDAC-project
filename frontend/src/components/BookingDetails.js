@@ -26,6 +26,7 @@ export default  function BookingDetails(){
       fetch(`http://localhost:8081/bookingdetails?uid=${uid}`,{method:'GET'})
       .then((resp)=>resp.json())
       .then((data)=>{
+        console.log(data);
         console.log("Bookings fetched");
         setBooking(data);
       })
