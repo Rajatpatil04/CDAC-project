@@ -82,7 +82,6 @@ function App() {
         <Route path="/hostsignup" element={<HostSignup />} />
         <Route path="/hostsignup1" element={<Hostsignup1/>}/>
         <Route path="/viewcars" element={<ViewCars/>}/>
-        <Route path="/payment" element={<PaymentGateway/>}/>
         <Route path="/bookingStatus" element={<BookingStatus/>}/>
             {/* <Route path="/searchcars" element={<SearchCars/>}/> */}
        
@@ -96,6 +95,7 @@ function App() {
              <Route path="bookingdetails" element={<BookingDetails/>}/>
              <Route path="bookingStatus" element={<BookingStatus/>}/>
              <Route path="approvedbooking" element={<CustomerRequests/>}/>
+            <Route path="payment" element={<PaymentGateway/>}/>
         </Route>
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>

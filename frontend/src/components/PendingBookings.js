@@ -66,7 +66,7 @@ const CustomerRequests = () => {
       .then(data => {
         console.log(data);
         alert('Booking Confirmed:', data);
-        navigate("/customer/payment");
+        navigate("../payment", { state: { booking } });
        // navigate("/customer/customerhome"); // Navigate to the next component
       })
       .catch(error => {

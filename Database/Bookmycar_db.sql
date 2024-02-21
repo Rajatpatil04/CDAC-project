@@ -59,6 +59,7 @@ CREATE TABLE `booking_requests` (
   `package_id` int DEFAULT NULL,
   `journey_date_time` datetime DEFAULT NULL,
   `status` int DEFAULT '0',
+  `expected_return_date` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`req_id`),
   KEY `customer_id` (`customer_id`),
   KEY `car_id` (`car_id`),
@@ -66,8 +67,8 @@ CREATE TABLE `booking_requests` (
   CONSTRAINT `booking_requests_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
   CONSTRAINT `booking_requests_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`),
   CONSTRAINT `booking_requests_ibfk_3` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`),
-  CONSTRAINT `booking_requests_chk_1` CHECK (((`status` >= 0) and (`status` <= 2)))
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `booking_requests_chk_1` CHECK (((`status` >= 0) and (`status` <= 3)))
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +77,7 @@ CREATE TABLE `booking_requests` (
 
 LOCK TABLES `booking_requests` WRITE;
 /*!40000 ALTER TABLE `booking_requests` DISABLE KEYS */;
-INSERT INTO `booking_requests` VALUES (6,69,10,2,'2024-02-20 06:11:00',1),(7,69,9,2,'2024-02-16 01:29:00',1),(8,69,9,2,'2024-02-16 01:29:00',0),(9,69,10,1,'2024-02-16 06:33:00',0),(10,69,35,1,'2024-02-20 03:30:00',0),(11,69,12,2,'2024-02-20 04:37:00',0),(12,69,10,2,'2024-02-22 21:00:00',0),(13,69,14,1,'2024-02-20 11:48:00',0);
+INSERT INTO `booking_requests` VALUES (6,69,10,2,'2024-02-20 06:11:00',3,NULL),(7,69,9,2,'2024-02-16 01:29:00',3,NULL),(8,69,9,2,'2024-02-16 01:29:00',3,NULL),(9,69,10,1,'2024-02-16 06:33:00',0,NULL),(10,69,35,1,'2024-02-20 03:30:00',3,NULL),(11,69,12,2,'2024-02-20 04:37:00',3,NULL),(12,69,10,2,'2024-02-22 21:00:00',0,NULL),(13,69,14,1,'2024-02-20 11:48:00',3,NULL),(14,69,9,1,'2024-02-23 12:54:00',3,'2024-02-23 18:54:00.000000'),(15,69,10,1,'2024-02-25 12:00:00',3,'2024-02-25 18:00:00.000000'),(16,69,10,1,'2024-02-24 16:00:00',3,'2024-02-24 22:00:00.000000');
 /*!40000 ALTER TABLE `booking_requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +100,7 @@ CREATE TABLE `bookings` (
   PRIMARY KEY (`booking_id`),
   KEY `req_id` (`req_id`),
   CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`req_id`) REFERENCES `booking_requests` (`req_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=314 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,6 +109,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+INSERT INTO `bookings` VALUES (303,7,NULL,NULL,3120.00,'Credit Card','2024-02-20 00:00:00','aaaaaaaaaaaaaaaaa'),(304,6,NULL,NULL,3120.00,'Credit Card','2024-02-20 00:00:00','bbbbbbbbbb'),(305,8,NULL,NULL,3120.00,'','2024-02-20 00:00:00',''),(306,7,NULL,NULL,3120.00,'','2024-02-20 00:00:00',''),(307,10,NULL,NULL,1560.00,'Credit Card','2024-02-21 00:00:00','ccccccccccccc'),(308,11,NULL,NULL,3120.00,'Credit Card','2024-02-21 00:00:00','zzzzzzzzz'),(309,16,NULL,NULL,1560.00,'','2024-02-21 00:00:00',''),(310,13,NULL,NULL,1560.00,'','2024-02-21 00:00:00',''),(311,14,NULL,NULL,1560.00,'','2024-02-21 00:00:00',''),(312,15,NULL,NULL,1560.00,'','2024-02-21 00:00:00',''),(313,16,NULL,NULL,1560.00,'','2024-02-21 00:00:00','');
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,8 +302,37 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (22,'John','Doe','123456','1234567890','9876543210','1990-01-01','2022-01-01','ABCDE1234F','1234-5678-9012',21,1,'123 Main Street','john@gmail.com'),(48,'Ajay','Patil','7635353532','6875236897','8768378762','1999-12-31','2024-02-11','BDCSW5643G','876876865345',47,1,'jkgjk','ajay@gmail.com'),(50,'Omkar','Balwe','7635353512','9878564311','8966754367','1990-11-24','2024-02-12','BDCSA5643H','988755575464',49,1,'Near Gym','omkar@gmail.com'),(54,'Rajat','Patil','7532465756','8757986755','9866567656','1981-10-25','2024-02-12','BDCSW5643A','878979798676',53,2,'Near PG','rajat@gmail.com'),(56,'Aditya','Fand','7635353515','9866567656','7858557454','2024-01-01','2024-02-12','BDCSW5643Z','876876865344',55,2,'jhsxajh','aditya@gmail.com'),(58,'Vishwajit','Shinde','7635353556','5675876578','9867787896','2001-07-02','2024-02-13','BDCSW5640A','678969966576',57,2,'near goodluck cafe','vishwajit@gmail.com'),(68,'Rajat1','Patil1','123456789012','9876543210','9876543210','1990-01-01','2024-02-13','ABCYX1234F','892176538976',67,2,'123 Main Street','rajat@gmail.com'),(69,'Rohit','Jadhav','8978768756','9067576570','8765984388','1990-10-25','2024-02-13','JDCSW5643Z','567567655775',68,1,'Pune, Maharashtra','rohit@gmail.com'),(70,'Omkar','Mohite','90988877793','9988734567','9768432387','1984-10-12','2024-02-13','BDCSW5643S','345423445535',69,2,'kjbnjg','omkarm@gmail.com'),(71,'Rajat2','Patil2','153456789012','9877543210','9870543210','1990-01-01','2024-02-13','AwcYX1234F','899176538976',70,2,'123 Main Street','rajat1@gmail.com'),(72,'Vaibhav','Kale','7635353531','7987967877','8898779778','1992-07-26','2024-02-13','BDCNW5643H','876876865905',71,1,'kjjjbm','vaibhav@gmail.com'),(77,'Aditya','Madhavi','6879678678','5675757674','8968765755','1999-09-24','2024-02-14','BDCSW5649Z','567575476647',77,1,'jhvcs','aditya1@gmail.com'),(79,'Aditya','Patil','7635353588','9878564353','7858517454','1998-11-29','2024-02-14','BDCSA5647J','878979798341',80,2,'near college','aditya11@gmail.com');
+INSERT INTO `customers` VALUES (22,'John','Doe','123456','1234567890','9876543210','1990-01-01','2022-01-01','ABCDE1234F','1234-5678-9012',21,1,'123 Main Street','john@gmail.com'),(48,'Ajay','Patil','7635353532','6875236897','8768378762','1999-12-31','2024-02-11','BDCSW5643G','876876865345',47,1,'jkgjk','ajay@gmail.com'),(50,'Omkar','Balwe','7635353512','9878564311','8966754367','1990-11-24','2024-02-12','BDCSA5643H','988755575464',49,1,'Near Gym','omkar@gmail.com'),(54,'Rajat','Patil','7532465756','8757986755','9866567656','1981-10-25','2024-02-12','BDCSW5643A','878979798676',53,2,'Near PG','rajat@gmail.com'),(56,'Aditya','Fand','7635353515','9866567656','7858557454','2024-01-01','2024-02-12','BDCSW5643Z','876876865344',55,2,'jhsxajh','aditya@gmail.com'),(58,'Vishwajit','Shinde','7635353556','5675876578','9867787896','2001-07-02','2024-02-13','BDCSW5640A','678969966576',57,2,'near goodluck cafe','vishwajit@gmail.com'),(68,'Rajat1','Patil1','123456789012','9876543210','9876543210','1990-01-01','2024-02-13','ABCYX1234F','892176538976',67,2,'123 Main Street','rajat@gmail.com'),(69,'Rohit','Jadhav','8978768756','9067576511','8765984388','1990-10-25','2024-02-13','JDCSW5643Z','567567655775',68,1,'Pune, Maharashtra','rohit@gmail.com'),(70,'Omkar','Mohite','90988877793','9988734567','9768432387','1984-10-12','2024-02-13','BDCSW5643S','345423445535',69,2,'kjbnjg','omkarm@gmail.com'),(71,'Rajat2','Patil2','153456789012','9877543210','9870543210','1990-01-01','2024-02-13','AwcYX1234F','899176538976',70,2,'123 Main Street','rajat1@gmail.com'),(72,'Vaibhav','Kale','7635353531','7987967877','8898779778','1992-07-26','2024-02-13','BDCNW5643H','876876865905',71,1,'kjjjbm','vaibhav@gmail.com'),(77,'Aditya','Madhavi','6879678678','5675757674','8968765755','1999-09-24','2024-02-14','BDCSW5649Z','567575476647',77,1,'jhvcs','aditya1@gmail.com'),(79,'Aditya','Patil','7635353588','9878564353','7858517454','1998-11-29','2024-02-14','BDCSA5647J','878979798341',80,2,'near college','aditya11@gmail.com');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `feedbacks`
+--
+
+DROP TABLE IF EXISTS `feedbacks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `feedbacks` (
+  `feedback_id` int NOT NULL AUTO_INCREMENT,
+  `feedback` text,
+  `customer_id` int DEFAULT NULL,
+  `car_id` int DEFAULT NULL,
+  PRIMARY KEY (`feedback_id`),
+  KEY `car_id` (`car_id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `feedbacks_ibfk_1` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`),
+  CONSTRAINT `feedbacks_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `feedbacks`
+--
+
+LOCK TABLES `feedbacks` WRITE;
+/*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -516,4 +547,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-20 12:09:58
+-- Dump completed on 2024-02-21 17:18:51

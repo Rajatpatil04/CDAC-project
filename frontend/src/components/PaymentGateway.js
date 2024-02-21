@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import payment_img from'../images/payment_gateway.jpg';
+import { useLocation } from 'react-router-dom';
 
 const PaymentGateway = () => {
   const [cardNumber, setCardNumber] = useState('');
@@ -12,6 +13,13 @@ const PaymentGateway = () => {
   const [paymentStatus, setPaymentStatus] = useState('');
   const [paymentInitiated, setPaymentInitiated] = useState(false);
   const [paymentMode, setPaymentMode] = useState("");
+  const[request, setRequest] = useState([]);
+  
+  const location = useLocation();
+
+  useEffect(() => {
+      setRequest(location.state.request);
+  }, [location.state]);
 
   const handleCardNumberChange = (event) => {
     setCardNumber(event.target.value.replace(/\D/g, ''));
@@ -146,7 +154,7 @@ const PaymentGateway = () => {
             </div>
           )}
 
-          <div className='fw-bolder mb-2 fs-2 text-primary'><span className='text-danger'>Total</span> : {car.price_per_hour}</div>
+          <div className='fw-bolder mb-2 fs-2 text-primary'><span className='text-danger'>Total</span> : {request.car.price_per_hour}</div>
           <button type="submit" className="btn btn-success container-fluid" disabled={isProcessing}>
             {isProcessing ? 'Processing...' : 'Confirm Payment'}
           </button>
