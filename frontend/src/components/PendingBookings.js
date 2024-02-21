@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -44,13 +46,11 @@ const CustomerRequests = () => {
 
   const handleSaveBooking = (request) => {
     const booking = {
-      // actual_pickup_date: null,
-      // actual_return_date: null,
       amount: request.car.price_per_hour * request.pack.hours * 1.3,
       payment_mode: paymentMode,
       payment_date: new Date().toISOString().split('T')[0], // Today's date
       transaction_id: transactionId,
-      req_id : request.req_id
+      req_id: request.req_id
     };
 
     console.log(booking);
@@ -66,7 +66,8 @@ const CustomerRequests = () => {
       .then(data => {
         console.log(data);
         alert('Booking Confirmed:', data);
-        navigate("/customer/customerhome")
+        navigate("/customer/payment");
+       // navigate("/customer/customerhome"); // Navigate to the next component
       })
       .catch(error => {
         console.error('Error saving booking:', error);
@@ -76,19 +77,19 @@ const CustomerRequests = () => {
   return (
     <div className="container">
       <h1 style={{ textAlign: "center" }}>Customer Requests</h1>
-      <div>
-        <label htmlFor="paymentMode">Select Payment Mode: </label>
+      {/* <div>
+        <label htmlFor="paymentMode">Select Payment Mode:</label>
         <select id="paymentMode" value={paymentMode} onChange={handlePaymentModeChange}>
           <option value="" disabled>-- Select Payment Mode --</option>
           <option value="Credit Card">Credit Card</option>
           <option value="Debit Card">Debit Card</option>
           <option value="Cash">Cash</option>
         </select>
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <label htmlFor="transactionId">Enter Transaction ID: </label>
         <input type="text" id="transactionId" value={transactionId} onChange={handleTransactionIdChange} />
-      </div>
+      </div> */}
       <table border="2" className="table table-striped">
         <thead>
           <tr>
@@ -124,3 +125,5 @@ const CustomerRequests = () => {
 };
 
 export default CustomerRequests;
+
+
