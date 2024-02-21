@@ -64,23 +64,24 @@ export default  function BookingDetails(){
           {Booking.map((booking) => (
               <tr key={booking.booking_id}>
                       <td>{++index}</td>
-                      <td>{booking.req_id.car.host.fname} {booking.car.host.lname} </td>
-                      <td>{booking.req_id.car.host.area}</td>
-                      <td>{booking.req_id.car.carModel.model_name}</td>
-                      <td>{booking.req_id.car.fueltype.fueltype}</td>
-                      <td>{booking.req_id.car.carModel.transmission_type}</td>
-                      <td>{booking.req_id.car.host.mileage}</td>
-                      <td>{booking.req_id.car.color}</td>
-                      <td>{booking.req_id.car.music_system}</td>
-                      <td>{booking.req_id.car.ac}</td>
-                      <td>{booking.req_id.car.rc_no}</td>
-                      <td>{booking.req_id.pack.hours} hrs ,{booking.req_id.pack.kilometers} kms </td>
-                      <td>{formatDate(booking.req_id.journey_date_time)}</td>
-                      <td>{1000}</td>
-                      <td>{(booking.req_id.car.price_per_hour)*(booking.req_id.pack.hours) }</td>
-                      <td style={{ color: booking.req_id.status === 0 ? "blue" : booking.req_id.status === 1 ? "green" : "red" }}>
-                        {booking.req_id.status === 0 ? "Pending" : booking.req_id.status === 1 ? "Approved" : "Rejected"}
-                          </td>
+                      <td>{booking.bookingRequest.car.host.fname} {booking.bookingRequest.car.host.lname} </td>
+                      <td>{booking.bookingRequest.car.host.address},{booking.bookingRequest.car.host.area.area_name}</td>
+                      <td>{booking.bookingRequest.car.carModel.model_name}</td>
+                      <td>{booking.bookingRequest.car.fuelType.fuel_type}</td>
+                      <td>{booking.bookingRequest.car.carModel.transmission_type}</td>
+                      <td>{booking.bookingRequest.car.mileage}</td>
+                      <td>{booking.bookingRequest.car.color}</td>
+                      <td>{booking.bookingRequest.car.music_system === 1 ? "Yes" : "No"}</td>
+                      <td>{booking.bookingRequest.car.ac === 1 ? "Yes" : "No"}</td>
+                      <td>{booking.bookingRequest.car.rc_no}</td>
+                      <td>{booking.bookingRequest.pack.hours} hrs <br/>{booking.bookingRequest.pack.kilometers} kms </td>
+                      <td>{formatDate(booking.bookingRequest.journey_date_time)}</td>
+                      <td>{booking.amount * 0.3}</td>
+                      <td>{booking.amount}</td>
+                      <td style={{ color: booking.bookingRequest.status === 0 ? "blue" : booking.bookingRequest.status === 1 ? "yellow" : booking.bookingRequest.status === 2 ? "red" : "green" }}>
+                          {booking.bookingRequest.status === 0 ? "Initiated" : booking.bookingRequest.status === 1 ? "Approved" : booking.bookingRequest.status === 2 ? "Rejected" : "Confirmed"}
+                      </td>
+
                      </tr>
                          ))}
          
