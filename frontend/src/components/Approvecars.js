@@ -71,8 +71,10 @@ export default function ApproveCar(){
     var indexc =1;
     
   return(
-    <div className="container">
+    <div className="container-fluid">
             <h2 style={{fontFamily:"initial" ,textAlign:"center"}}>CARS</h2><br/><br/> 
+            <div className="table-responsive">
+
       <table border="1" className="table table-striped">
         <thead>
           <tr>
@@ -94,7 +96,7 @@ export default function ApproveCar(){
         </thead>
         <tbody>
           {cars.map((car) => (
-              <tr key={car.car_id}>
+            <tr key={car.car_id}>
                 <td>{indexc++}</td>
               <td>{car.carModel.model_name}</td>
               <td>{car.host.host_id}</td>
@@ -125,6 +127,7 @@ export default function ApproveCar(){
           ))}
         </tbody>
       </table>
+          </div>
 
     </div>
   )

@@ -70,7 +70,7 @@ function App() {
             </Navbar.Collapse>
           </div>
         </Navbar>
-      );
+     
     
     
    

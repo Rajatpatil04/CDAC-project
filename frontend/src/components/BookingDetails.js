@@ -38,7 +38,8 @@ export default  function BookingDetails(){
   },[])
    var index=0;
   return(
-    <div className="container">
+    <div className="container-fluid">
+      <div className="table-responsive">
       <table border={1} className="table table-striped" >
           <thead>
             <tr>
@@ -62,7 +63,7 @@ export default  function BookingDetails(){
           </thead>
           <tbody>
           {Booking.map((booking) => (
-              <tr key={booking.booking_id}>
+            <tr key={booking.booking_id}>
                       <td>{++index}</td>
                       <td>{booking.bookingRequest.car.host.fname} {booking.bookingRequest.car.host.lname} </td>
                       <td>{booking.bookingRequest.car.host.address},{booking.bookingRequest.car.host.area.area_name}</td>
@@ -87,6 +88,7 @@ export default  function BookingDetails(){
          
           </tbody>
       </table>
+      </div>
 
 
     </div>
