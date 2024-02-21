@@ -51,7 +51,7 @@ function App() {
             <Navbar.Collapse id="basic-navbar-nav">
             
               <Nav className="ml-auto routes">
-                <NavLink to="/" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
+               <NavLink to="/" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
                 <NavLink to="/viewcars" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
                 <NavDropdown
                   title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>}
