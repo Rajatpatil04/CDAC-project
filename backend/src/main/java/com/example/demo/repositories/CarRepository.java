@@ -1,5 +1,6 @@
 package com.example.demo.repositories;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -43,9 +44,10 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 //List<Car> getSpecificCars(@Param("cat_id") int cat_id, @Param("seating_capacity") int seating_capacity);
 	
 	@Query(value = "SELECT * FROM cars c " +
-            "WHERE c.model_id IN (SELECT c1.model_id FROM models c1 WHERE c1.cat_id = :cat_id) " +
-            "AND c.model_id IN (SELECT c2.model_id FROM models c2 WHERE c2.seating_capacity = :seating_capacity)", nativeQuery = true)
-List<Car> getSpecificCars(@Param("cat_id") int cat_id, @Param("seating_capacity") int seating_capacity);
+            "WHERE c.model_id IN (SELECT m.model_id FROM models m WHERE m.cat_id = :cat_id) " +
+            "AND c.model_id IN (SELECT m.model_id FROM models m WHERE m.seating_capacity = :seating_capacity) " +
+            "AND c.car_id NOT IN (SELECT br.car_id FROM booking_requests br WHERE br.journey_date_time <= :journeyDate AND :journeyDate <= br.expected_return_date )", nativeQuery = true) // status pending
+	List<Car> getSpecificCars(@Param("cat_id") int cat_id, @Param("seating_capacity") int seating_capacity, @Param("journeyDate") LocalDateTime journeyDate);
 
 
 }

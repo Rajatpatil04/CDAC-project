@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const SearchCars = () => {
   const [categories, setCategories] = useState([]);
-  // const [car_models, setCar_models] = useState([]);
-  // const [car_brands, setCar_brands] = useState([]);
-  // const [fuel_types, SetFuel_types] = useState([]);
   const[packages, setPackages] = useState([]);
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -31,31 +28,9 @@ const SearchCars = () => {
                       console.log(data)})
       .catch(error => console.error('Error fetching categories: ', error));
 
-      // fetch('http://localhost:8081/getallcarmodels')
-      // .then(response => response.json())
-      // .then(data => setCar_models(data))
-      // .catch(error => console.error('Error fetching car models: ', error));
-
-      // fetch('http://localhost:8081/getallfueltypes')
-      // .then(response => response.json())
-      // .then(data => SetFuel_types(data))
-      // .catch(error => console.error('Error fetching car models: ', error));
-
-      // fetch('http://localhost:8081/getallbrands')
-      // .then(response => response.json())
-      // .then(data => setCar_brands(data))
-      // .catch(error => console.error('Error fetching car models: ', error));
   }, []);
 
-  // useEffect(() => {
-  //   fetch('http://localhost:8081/getallcarmodelswithseatingcapacity?seating_capacity='+seatingCapacity)
-  //     .then(response => response.json())
-  //     .then(data => setCar_models(data))
-  //     .catch(error => console.error('Error fetching categories: ', error));
-  // }, []);
 
-
-  //4th Try
    const validateSeatingCapacity = (value) => {
     const intValue = parseInt(value);
     if (isNaN(intValue) || intValue <= 0) {
@@ -93,18 +68,7 @@ const SearchCars = () => {
       .catch(error => setError('Error fetching cars: ' + error.message))
       .finally(() => setLoading(false));
   };
-
-  // const handleSearch = () => {
-  //   fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
-  //     .then(response => response.json())
-  //     .then(data => {setCars(data);
-  //                     console.log(data);})
-  //     .catch(error => setError('Error fetching cars: ' + error.message))
-  //     .finally(() => setLoading(false));
-  // };
-
   const handleSubmit = (carId) => {
-
     const data = {
       customer_id: JSON.parse(localStorage.getItem("loggedUser")).uid,
       car_id: carId,
@@ -194,23 +158,6 @@ const SearchCars = () => {
         <div className="mt-4 text-info">No cars available for the selected criteria.</div>
       )}
 
-      {/* <Row className="mt-4">
-        {cars.map(car => (
-          <Col key={car.car_id} md={4} className="mb-4">
-            <Card>
-              <Card.Body>
-                <Card.Title>{car.carModel.brand.brand_name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{car.model_name}</Card.Subtitle>
-                <Card.Text>Seating Capacity: {seatingCapacity}</Card.Text>
-                <Card.Text>Transmission: {car.transmission_type}</Card.Text>
-                <Card.Text>Fuel Type: {car.fuel_type}</Card.Text>
-                <Card.Text>Price per Hour: ₹{car.price_per_hour}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row> */}
-
           <Row className="mt-4">
             {cars.map(car => (
               <Col key={car.car_id} md={4} className="mb-4">
@@ -227,14 +174,6 @@ const SearchCars = () => {
                     <Card.Text>Color: {car.color}</Card.Text>
                     <Card.Text>Host: {car.host.fname} {car.host.lname}</Card.Text>
                     <Card.Text>Registration Number: {car.rc_no}</Card.Text>
-                    {/* <Form.Group controlId={`datetime_${car.car_id}`}>
-                  <Form.Label>Select Date and Time</Form.Label>
-                  <Form.Control
-                    type="datetime-local"
-                    value={selectedDateTime}
-                    onChange={e => setSelectedDateTime(e.target.value)}
-                  />
-                </Form.Group> */}
 
                 <Form.Group controlId={`package_${car.package_id}`}>
                   <Form.Label>Select Package</Form.Label>

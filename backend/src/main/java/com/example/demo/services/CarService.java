@@ -100,6 +100,6 @@ public class CarService {
 //	}
 	
 	public List<Car> getSpecificCars(int cat_id, int seating_capacity,  LocalDateTime journeyDate) {
-		return crepo.getSpecificCars(cat_id, seating_capacity);
+		return crepo.getSpecificCars(cat_id, seating_capacity, journeyDate);
 	}
 }

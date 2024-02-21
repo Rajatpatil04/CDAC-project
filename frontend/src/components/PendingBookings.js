@@ -29,20 +29,13 @@ const CustomerRequests = () => {
       if (isNaN(journeyDate.getTime())) {
         throw new Error('Invalid date');
       }
-      return `${journeyDate.toLocaleDateString()} ${journeyDate.toLocaleTimeString()}`;
+      return ` ${journeyDate.toLocaleDateString()} | Time: ${journeyDate.toLocaleTimeString()}`;
     } catch (error) {
       console.error('Error formatting journey date:', error);
       return 'Invalid date';
     }
   };
 
-  const handlePaymentModeChange = (event) => {
-    setPaymentMode(event.target.value);
-  };
-
-  const handleTransactionIdChange = (event) => {
-    setTransactionId(event.target.value);
-  };
 
   const handleSaveBooking = (request) => {
     const booking = {
@@ -54,42 +47,12 @@ const CustomerRequests = () => {
     };
 
     console.log(booking);
-
-    fetch("http://localhost:8081/confirmbooking", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(booking),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        alert('Booking Confirmed:', data);
-        navigate("../payment", { state: { booking } });
-       // navigate("/customer/customerhome"); // Navigate to the next component
-      })
-      .catch(error => {
-        console.error('Error saving booking:', error);
-      });
+    navigate("../payment", { state: { booking } });
   };
 
   return (
     <div className="container">
       <h1 style={{ textAlign: "center" }}>Customer Requests</h1>
-      {/* <div>
-        <label htmlFor="paymentMode">Select Payment Mode:</label>
-        <select id="paymentMode" value={paymentMode} onChange={handlePaymentModeChange}>
-          <option value="" disabled>-- Select Payment Mode --</option>
-          <option value="Credit Card">Credit Card</option>
-          <option value="Debit Card">Debit Card</option>
-          <option value="Cash">Cash</option>
-        </select>
-      </div> */}
-      {/* <div>
-        <label htmlFor="transactionId">Enter Transaction ID: </label>
-        <input type="text" id="transactionId" value={transactionId} onChange={handleTransactionIdChange} />
-      </div> */}
       <table border="2" className="table table-striped">
         <thead>
           <tr>
@@ -98,8 +61,6 @@ const CustomerRequests = () => {
             <th>Pickup and Drop location</th>
             <th>Pickup Date</th>
             <th>Total Cost</th>
-            <th>Payment Mode</th>
-            <th>Transaction ID</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -110,9 +71,7 @@ const CustomerRequests = () => {
               <td>{request.car.rc_no}</td>
               <td>{request.car.host.address}, {request.car.host.area.area_name}</td>
               <td>{formatDate(request.journey_date_time)}</td>
-              <td>{request.car.price_per_hour * request.pack.hours} <br /> + Deposit: {request.car.price_per_hour * request.pack.hours * 1.3 - request.car.price_per_hour * request.pack.hours} <br /> = {request.car.price_per_hour * request.pack.hours * 1.3}</td>
-              <td>{paymentMode}</td>
-              <td>{transactionId}</td>
+              <td>{request.car.price_per_hour * request.pack.hours} <br /> + Deposit({request.car.price_per_hour * request.pack.hours * 1.3 - request.car.price_per_hour * request.pack.hours}) <br /> = {request.car.price_per_hour * request.pack.hours * 1.3}</td>
               <td>
                 <button onClick={() => handleSaveBooking(request)}>Confirm Booking</button>
               </td>
