@@ -37,9 +37,14 @@ export default function Home() {
           <div className="col-md-3 carhome car3"></div>
         </div>
       </div>
-      <footer className="footer text-center">
-        <div>
-          {/* Your footer content */}
+      <br/><br/>
+      <footer className="footer text-center text-white">
+        <div><br/>
+          <h5> RAJAT PATIL || ADITYA FAND || VISHWAJEET SHINDE || ADITYA MADHAVI || NILAY WAGHDE </h5>
+          <a href="https://know-it.co.in/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 18 }}>
+                        https://know-it.co.in/
+                                </a>
+
         </div>
       </footer>
     </div>
