@@ -2,7 +2,6 @@ export default function Home() {
   return (
     <div>
       <div className="Home container-fluid">
-
         <div className="rent">
           <h1 id="r1">RENT</h1>
           <h1 id="r2">AND</h1>

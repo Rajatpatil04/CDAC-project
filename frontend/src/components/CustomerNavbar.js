@@ -19,25 +19,26 @@ export default function CustomerNavbar() {
           <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto croutes">
-              <NavLink to="/customer/customerhome"  className="nav-link text-danger"><b>HOME</b></NavLink>
-              <NavLink to="/customer/bookingdetails" className="nav-link text-danger"><b>MY BOOKINGS</b></NavLink>
-              <NavLink to="/customer/viewcars" className="nav-link text-danger"><b>CARS</b></NavLink>
-              <NavLink to="/customer/bookingStatus" className="nav-link text-danger"><b>STATUS</b></NavLink>
-              <NavLink to="/customer/approvedbooking" className="nav-link text-danger"><b>APPROVED REQUESTS</b></NavLink>
+                  <Nav className="ml-auto" style={{ marginLeft: "auto" }}>
+          <NavLink to="/customer/customerhome" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>HOME</b></NavLink>
+          <NavLink to="/customer/bookingdetails" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>MY BOOKINGS</b></NavLink>
+          <NavLink to="/customer/viewcars" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>CARS</b></NavLink>
+          <NavLink to="/customer/bookingStatus" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>STATUS</b></NavLink>
+          <NavLink to="/customer/approvedbooking" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>CONFIRMED</b></NavLink>
 
-              <NavDropdown
-                title={<img className="pro" src={profile} alt="Profile" />}
-                id="basic-nav-dropdown"
-                className="text-dark"
-                show={showDropdown}
-                onMouseEnter={() => setShowDropdown(true)}
-                onMouseLeave={() => setShowDropdown(false)}
-              >
-                <NavLink to="/customer/profile" className="dropdown-item"><b>Profile</b></NavLink>
-                <NavLink to="/logout" className="dropdown-item"><b>Logout</b></NavLink>
-              </NavDropdown>
-            </Nav>
+          <NavDropdown
+            title={<img className="pro" src={profile} alt="Profile" />}
+            id="basic-nav-dropdown"
+            className="text-dark"
+            show={showDropdown}
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+          >
+            <NavLink to="/customer/profile" className="dropdown-item" style={{ fontSize: '15px' }}><b>Profile</b></NavLink>
+            <NavLink to="/logout" className="dropdown-item" style={{ fontSize: '15px' }}><b>Logout</b></NavLink>
+          </NavDropdown>
+        </Nav>
+
           </Navbar.Collapse>
         </Container>
       </Navbar>

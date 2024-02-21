@@ -8,7 +8,7 @@ export default function AdminNavbar(){
   return(
 
       <div>
-<Navbar  className='navcol' style={{display: mystate.loggedIn?"block":"none"}}>
+<Navbar  className='navcol container-fluid'expand="md" style={{display: mystate.loggedIn?"block":"none"}}>
         <div className="container-fluid">
           <Link to="/admin/adminhome" className="navbar-brand">
             <img src={favicon} alt="Book My Car Logo" width="90" height="40" className="d-inline-block align-text-top"/>

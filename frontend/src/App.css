@@ -10,7 +10,7 @@
 .aroutes{
   float: right;
   margin-right: 0px;
-  margin-left: 40%;
+  margin-left: auto;
 }
 .routes{
   float: right;
@@ -109,10 +109,6 @@
 
 
 
-.nav-link:hover{
-  text-decoration: underline;
-  transition: 0.9s;
-}
 .car1{
   background-image: url("images/sven-d-a4S6KUuLeoM-unsplash.jpg");
 }
@@ -176,6 +172,7 @@
     padding: 30px;
     margin-left: 150px;
     margin-top: 70px;
+    background: transparent;
     background-color: rgba(255, 255, 255, 0.4);
 }
 .App-header {
