@@ -33,42 +33,46 @@ import BookingStatus from './components/BookingStatus';
 import CustomerRequests from './components/PendingBookings';
 
 function App() {
-  const mystate = useSelector(state=> state.logged)
-  const [showDropdown, setShowDropdown] = useState(false);
-  return (
-    <div  >
-      <Navbar className='navcol'  style={{display: mystate.loggedIn?"none":"block"}}>
-        <div className="container ">
-          <Link to="/" className="navbar-brand">
-            <img src={favicon} alt="Book My Car Logo" width="90" height="40" className="d-inline-block align-text-top"/>
-          </Link>
-          <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            {/* <div className="input-group search">
-              <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-              <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
-            </div> */}
-            
-            <Nav className="ml-auto routes" >
-              <NavLink to ="/" className="nav-link text-dark "><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
-              <NavLink to ="/viewcars" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
-              <NavDropdown
-                title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>}
-                id="basic-nav-dropdown"
-                className="text-dark"
-                show={showDropdown}
-                onMouseEnter={() => setShowDropdown(true)}
-                onMouseLeave={() => setShowDropdown(false)}
-              >
-                <NavLink to="/customersignup" className="dropdown-item"><h6>Customer</h6></NavLink>
-                <NavLink to="/hostsignup1" className="dropdown-item"><h6>Host</h6></NavLink>
-              </NavDropdown>
-              <NavLink to ="/login" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>LOGIN</b></h5></NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </div>
-      </Navbar>
+      const mystate = useSelector((state) => state.logged);
+      const [showDropdown, setShowDropdown] = useState(false);
+    
+      return (
+        <div>
+        <Navbar className='navcol container-fluid' expand="md" style={{ display: mystate.loggedIn ? "none" : "block" }}>
+          <div className="container">
+            <Link to="/" className="navbar-brand">
+              <img src={favicon} alt="Book My Car Logo" width="90" height="40" className="d-inline-block align-text-top"/>
+            </Link>
+            <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              {/* <div className="input-group search">
+                <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+              </div> */}
+              
+              <Nav className="ml-auto routes">
+                <NavLink to="/" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
+                <NavLink to="/viewcars" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
+                <NavDropdown
+                  title={<h5 style={{ fontFamily: "serif" }}><b>REGISTER</b></h5>}
+                  id="basic-nav-dropdown"
+                  className="text-dark"
+                  show={showDropdown}
+                  onMouseEnter={() => setShowDropdown(true)}
+                  onMouseLeave={() => setShowDropdown(false)}
+                >
+                  <NavLink to="/customersignup" className="dropdown-item"><h6>Customer</h6></NavLink>
+                  <NavLink to="/hostsignup1" className="dropdown-item"><h6>Host</h6></NavLink>
+                </NavDropdown>
+                <NavLink to="/login" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>LOGIN</b></h5></NavLink>
+              </Nav>
+            </Navbar.Collapse>
+          </div>
+        </Navbar>
+      );
+    
+    
    
       <Routes>
         <Route path="/" element={<Home/>} />

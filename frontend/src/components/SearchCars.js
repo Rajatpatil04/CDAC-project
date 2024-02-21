@@ -13,6 +13,7 @@ const SearchCars = () => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [error1, setError1] = useState('');
   const [selectedDateTime, setSelectedDateTime] = useState('');
   const [selectedPackage, setSelectedPackage] = useState('');
   let navigate = useNavigate();
@@ -65,8 +66,20 @@ const SearchCars = () => {
     return true;
   };
 
+  const validatejourneyDate = (value) =>{
+       const selectedDate = new Date(value);
+      const currentDate = new Date();
+
+      if (selectedDate < currentDate) {
+        setError1('Journey date should not be in the past');
+        return false;
+    }
+        setError1('');
+        return true;     
+  }
+
   const handleSearch = () => {
-    if (!validateSeatingCapacity(seatingCapacity)) {
+    if (!validateSeatingCapacity(seatingCapacity) || !validatejourneyDate(selectedDateTime)) {
       return;
     }
     setLoading(true);
@@ -129,7 +142,11 @@ const SearchCars = () => {
               <Col>
                 <Form.Group controlId="category">
                   <Form.Label><b>Category</b></Form.Label>
-                  <Form.Control as="select" onChange={e => setSelectedCategory(e.target.value)}>
+                  <Form.Control as="select" onChange={e => setSelectedCategory(e.target.value)}
+                    onBlur={(e) => {
+                      validateSeatingCapacity(e.target.value);
+                    }}
+                  >
                     <option value="">Select Category</option>
                     {categories.map(category => (
                       <option key={category.cat_id} value={category.cat_id}>{category.cat_name}</option>
@@ -144,6 +161,22 @@ const SearchCars = () => {
                 </Form.Group>
               </Col>
               <Col>
+              <Form.Group controlId={`datetime_${cars.car_id}`}>
+              <Form.Label>Select Journey Date and Time</Form.Label>
+              <Form.Control
+                type="datetime-local"
+                value={selectedDateTime}
+                onChange={(e) => {
+                  setSelectedDateTime(e.target.value);
+                }}
+                onBlur={(e) => {
+                  validatejourneyDate(e.target.value);
+                }}
+              />                 
+            </Form.Group>
+
+              </Col>
+              <Col>
                 <Button className='col-12' variant="primary" onClick={handleSearch}>Search</Button>
               </Col>
             </Row>
@@ -155,8 +188,9 @@ const SearchCars = () => {
         <span className="sr-only">Loading...</span>
       </Spinner>}
 
-      {error && <div className="mt-4 text-danger">{error}</div>}
-      {cars.length === 0 && !loading && !error && (
+      
+      {error && <div className="mt-4 text-danger">{error}</div>}  {error1 && <div className="mt-4 text-danger">{error1}</div>}
+      {cars.length === 0 && !loading && !error && !error1 && (
         <div className="mt-4 text-info">No cars available for the selected criteria.</div>
       )}
 
@@ -193,22 +227,21 @@ const SearchCars = () => {
                     <Card.Text>Color: {car.color}</Card.Text>
                     <Card.Text>Host: {car.host.fname} {car.host.lname}</Card.Text>
                     <Card.Text>Registration Number: {car.rc_no}</Card.Text>
-                    <Form.Group controlId={`datetime_${car.car_id}`}>
+                    {/* <Form.Group controlId={`datetime_${car.car_id}`}>
                   <Form.Label>Select Date and Time</Form.Label>
                   <Form.Control
                     type="datetime-local"
                     value={selectedDateTime}
                     onChange={e => setSelectedDateTime(e.target.value)}
                   />
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group controlId={`package_${car.package_id}`}>
                   <Form.Label>Select Package</Form.Label>
                   <Form.Control
                     as="select"
                     value={selectedPackage}
-                    onChange={e => setSelectedPackage(e.target.value)}
-                  >
+                    onChange={e => setSelectedPackage(e.target.value)}>
                     <option value="">Select Package</option>
                     {packages.map(p => (
                       <option key={p.package_id} value={p.package_id}>

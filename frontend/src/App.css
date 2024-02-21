@@ -15,7 +15,7 @@
 .routes{
   float: right;
   margin-right: 0px;
-  margin-left: 60%;
+  margin-left: auto;
 }
 
 .pro{
@@ -210,10 +210,23 @@
 
 }
 
-.croutes{
+/* .croutes{
 
-  margin-left: 70%;
+  margin-left: 40%;
    width: 50px;
+} */
+@media (max-width: 767px) {
+  .croutes {
+    margin-left: 20%; /* Adjust as needed */
+    width: 30px; /* Adjust as needed */
+  }
+}
+
+@media (min-width: 768px) {
+  .croutes {
+    margin-left: 50%;
+    width: 50px;
+  }
 }
 
 .hbody{
