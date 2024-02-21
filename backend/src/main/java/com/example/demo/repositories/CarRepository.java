@@ -37,6 +37,11 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 //	@Query("SELECT c FROM Car c WHERE c.model_id IN (SELECT c1.model_id FROM CarModel c1 WHERE c1.cat_id = :cat_id) AND c.model_id IN (SELECT c2.model_id FROM CarModel c2 WHERE c2.seating_capacity = :seating_capacity)")
 //	List<Car> getSpecificCars(@Param("cat_id") int cat_id, @Param("seating_capacity") int seating_capacity);
 	
+//	@Query(value = "SELECT * FROM cars c " +
+//            "WHERE c.model_id IN (SELECT c1.model_id FROM models c1 WHERE c1.cat_id = :cat_id) " +
+//            "AND c.model_id IN (SELECT c2.model_id FROM models c2 WHERE c2.seating_capacity = :seating_capacity)", nativeQuery = true)
+//List<Car> getSpecificCars(@Param("cat_id") int cat_id, @Param("seating_capacity") int seating_capacity);
+	
 	@Query(value = "SELECT * FROM cars c " +
             "WHERE c.model_id IN (SELECT c1.model_id FROM models c1 WHERE c1.cat_id = :cat_id) " +
             "AND c.model_id IN (SELECT c2.model_id FROM models c2 WHERE c2.seating_capacity = :seating_capacity)", nativeQuery = true)

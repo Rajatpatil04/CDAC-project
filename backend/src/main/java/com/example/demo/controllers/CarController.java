@@ -1,8 +1,10 @@
 package com.example.demo.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,10 +68,16 @@ public class CarController {
 	    return cservice.updateStatusToReject(cid);
      }
      
+//     @GetMapping("/cars")
+// 	public List<Car> getSpecificCars(@RequestParam("category") int cat_id, @RequestParam("seatingCapacity") int seating_capacity) {
+//    	 System.out.println(cat_id+" : "+ seating_capacity);
+//         return cservice.getSpecificCars(cat_id, seating_capacity);
+//     }
+     
      @GetMapping("/cars")
- 	public List<Car> getSpecificCars(@RequestParam("category") int cat_id, @RequestParam("seatingCapacity") int seating_capacity) {
-    	 System.out.println(cat_id+" : "+ seating_capacity);
-         return cservice.getSpecigicCars(cat_id, seating_capacity);
-     }
+  	public List<Car> getSpecificCars(@RequestParam("category") int cat_id, @RequestParam("seatingCapacity") int seating_capacity, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime journeyDate) {
+     	 System.out.println(cat_id+" : "+ seating_capacity);
+          return cservice.getSpecificCars(cat_id, seating_capacity,journeyDate);
+      }
      
 }

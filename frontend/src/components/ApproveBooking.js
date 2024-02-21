@@ -109,7 +109,7 @@ export default function ApproveBooking(){
                       <td>{request.customer.contact}</td>
                       <td>{request.car.carModel.model_name}</td>
                       <td>{formatDate(request.journey_date_time)}</td>
-                      <td>{formatDate(request.journey_date_time)}</td>
+                      <td>{formatDate(request.expected_return_date)}</td>
                       <td>{request.pack.hours}</td>
                       <td>{request.pack.kilometers}</td>
                       <td>

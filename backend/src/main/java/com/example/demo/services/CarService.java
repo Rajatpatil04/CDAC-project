@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +95,11 @@ public class CarService {
 		return crepo.findAll();
 	}
 	
-	public List<Car> getSpecigicCars(int cat_id, int seating_capacity) {
+//	public List<Car> getSpecificCars(int cat_id, int seating_capacity) {
+//		return crepo.getSpecificCars(cat_id, seating_capacity);
+//	}
+	
+	public List<Car> getSpecificCars(int cat_id, int seating_capacity,  LocalDateTime journeyDate) {
 		return crepo.getSpecificCars(cat_id, seating_capacity);
 	}
 }

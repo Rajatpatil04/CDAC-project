@@ -84,7 +84,7 @@ const SearchCars = () => {
     }
     setLoading(true);
   
-    fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}`)
+    fetch(`http://localhost:8081/cars?category=${selectedCategory}&seatingCapacity=${seatingCapacity}&journeyDate=${selectedDateTime}`)
       .then(response => response.json())
       .then(data => {
         setCars(data);

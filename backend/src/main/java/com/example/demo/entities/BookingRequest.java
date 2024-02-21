@@ -51,6 +51,9 @@ public class BookingRequest {
 
     @Column(name = "journey_date_time")
     private LocalDateTime journey_date_time;
+    
+    @Column(name = "expected_return_date")
+    private LocalDateTime expected_return_date;
 
     @Column(name = "status")
     private int status;

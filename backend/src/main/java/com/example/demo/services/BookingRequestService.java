@@ -10,6 +10,7 @@ import com.example.demo.entities.BookingRequest;
 import com.example.demo.entities.Customer;
 import com.example.demo.entities.DummyRequest;
 import com.example.demo.entities.Host;
+import com.example.demo.entities.Package;
 import com.example.demo.repositories.BookingRequestRepository;
 import com.example.demo.repositories.CarRepository;
 import com.example.demo.repositories.CustomerRepository;
@@ -39,8 +40,10 @@ public class BookingRequestService {
 		BookingRequest br = new BookingRequest();
 		br.setCar(crepo.findById(dr.getCar_id()).get());
 		br.setCustomer(curepo.findCustomerByUid(dr.getCustomer_id()));
-		br.setPack(prepo.findById(dr.getPackage_id()).get());
+		Package p = prepo.findById(dr.getPackage_id()).get();
+		br.setPack(p);
 		br.setJourney_date_time(dr.getJourney_date_time());
+		br.setExpected_return_date(dr.getJourney_date_time().plusHours(p.getHours()));
 		
 		return brepo.save(br);
 	}
