@@ -31,6 +31,7 @@ import BookingDetails from './components/BookingDetails';
 import PaymentGateway from './components/PaymentGateway';
 import BookingStatus from './components/BookingStatus';
 import CustomerRequests from './components/PendingBookings';
+import GiveFeedback from './components/GiveFeedback';
 
 function App() {
       const mystate = useSelector((state) => state.logged);
@@ -46,11 +47,7 @@ function App() {
             <h1 className="text-dark" style={{ fontFamily: "-moz-initial" }}>BOOK MY CAR</h1>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              {/* <div className="input-group search">
-                <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
-              </div> */}
-              
+            
               <Nav className="ml-auto routes">
                 <NavLink to="/" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>HOME</b></h5></NavLink>
                 <NavLink to="/viewcars" className="nav-link text-dark"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
@@ -95,7 +92,9 @@ function App() {
              <Route path="bookingdetails" element={<BookingDetails/>}/>
              <Route path="bookingStatus" element={<BookingStatus/>}/>
              <Route path="approvedbooking" element={<CustomerRequests/>}/>
+             <Route path="givefeedback" element={<GiveFeedback/>}/>
             <Route path="payment" element={<PaymentGateway/>}/>
+            
         </Route>
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>
