@@ -91,7 +91,7 @@ export default function ApproveBooking() {
               <th>Customer Contact</th>
               <th>Selected Car</th>
               <th>Date of Pick-Up</th>
-              <th>Date of Pick-Up</th>
+              <th>Date of Drop</th>
               <th>Duration (hours)</th>
               <th>Distance (Km)</th>
               <th>Approve</th>

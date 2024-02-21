@@ -32,6 +32,8 @@ import PaymentGateway from './components/PaymentGateway';
 import BookingStatus from './components/BookingStatus';
 import CustomerRequests from './components/PendingBookings';
 import GiveFeedback from './components/GiveFeedback';
+import BookingHistory from './components/BookingHistory';
+import ErrorPage from './components/ErrorPage';
 
 function App() {
       const mystate = useSelector((state) => state.logged);
@@ -79,6 +81,7 @@ function App() {
         <Route path="/hostsignup" element={<HostSignup />} />
         <Route path="/hostsignup1" element={<Hostsignup1/>}/>
         <Route path="/viewcars" element={<ViewCars/>}/>
+        <Route path="/errorpage" element={<ErrorPage/>}/>
         <Route path="/bookingStatus" element={<BookingStatus/>}/>
             {/* <Route path="/searchcars" element={<SearchCars/>}/> */}
        
@@ -93,6 +96,7 @@ function App() {
              <Route path="bookingStatus" element={<BookingStatus/>}/>
              <Route path="approvedbooking" element={<CustomerRequests/>}/>
              <Route path="givefeedback" element={<GiveFeedback/>}/>
+             <Route path="bookinghistory" element={<BookingHistory/>}/>
             <Route path="payment" element={<PaymentGateway/>}/>
             
         </Route>
