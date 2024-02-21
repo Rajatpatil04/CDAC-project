@@ -89,21 +89,20 @@ export default function CarRegistrationForm() {
                        error="Registration Number is not valid!";
                    }
                    break;
-           case'price_per_hour': 
-                   var  pattern = /^[0-9]+$ /;
-                   if(!pattern.test(value))
-                   {
-                       valid = false;
-                       error="Rent must be in numberic only!";
-                   }  
-                   break;
+             case 'price_per_hour':
+                    var pattern = /^[0-9]+$/;
+                    if (!pattern.test(value)) {
+                      valid = false;
+                      error = "Rent must be in numeric only!";
+                    }
+                    break;
             case 'reg_date':
                       var cuDate = new Date();
                       var enteredDate = new Date(value);    
                       if( cuDate < enteredDate)
                       {
                          valid = false;
-                         error = "Registration Date Must be less than Today"
+                         error = "Registration Date Must Be Before Than Today"
                       } 
                       break;
             case 'insurance_exp_date':
@@ -111,7 +110,7 @@ export default function CarRegistrationForm() {
                         var enteredDate = new Date(value);
                         if (cuDate > enteredDate) {
                           valid = false;
-                          error = "Insurance Expiration Date must be greater than Today";
+                          error = "Insurance Expiration Date Must Be After Than Today";
                         }
                         break; 
                      
@@ -127,7 +126,7 @@ export default function CarRegistrationForm() {
               default:
                    break;
        }
-       return { valid : valid, error:error };
+       return { valid : valid, error: error };
   
   };
 
