@@ -238,7 +238,7 @@ const Login = () => {
                      <input type="password" id="password" name='password' className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <br />
-                <button type="submit" className='btn btn-block btn-primary'>Login</button>
+                <button type="submit" className='login'>Login</button>
                 <span> </span>
                 
             </form>

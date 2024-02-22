@@ -162,6 +162,7 @@ const SearchCars = () => {
             {cars.map(car => (
               <Col key={car.car_id} md={4} className="mb-4">
                 <Card>
+                   
                   <Card.Body>
                     <Card.Img width={200} height={200} src={`data:image/jpeg;base64,${car && car.car_image}`} /><br/>
                     <Card.Title>{car.carModel.brand.brand_name}</Card.Title>
@@ -193,6 +194,7 @@ const SearchCars = () => {
                 </Form.Group>
                     <Button value={"Submit"} onClick={() => handleSubmit(car.car_id)}>Raise Request</Button>
                   </Card.Body>
+                
                 </Card>
               </Col>
             ))}

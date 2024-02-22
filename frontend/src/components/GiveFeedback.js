@@ -29,12 +29,14 @@ export default function GiveFeedback() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //  const reqOption = {
-    //   method : 'POST',
-    //   headers :{"content-type":"application/json"},
-    //   body : 
+     const reqOption = {
+      method : 'POST',
+      headers :{"content-type":"application/json"},
+      body : {
+        
+      }
 
-    //  }
+     }
     console.log('Feedback submitted:', feedback);
     // Clear the feedback input after submission
     setFeedback('');

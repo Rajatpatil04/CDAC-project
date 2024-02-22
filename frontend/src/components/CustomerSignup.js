@@ -153,9 +153,9 @@ function CustomerSignup() {
                   if (cuDate < enteredDate) {
                     valid = false;
                     error = "BirthDate should not be in the future!!!";
-                  } else if (age < 10) {
+                  } else if (age < 18) {
                     valid = false;
-                    error = "Person's age needs to be above 10";
+                    error = "Person's age needs to be above 18";
                   } else if (age >= 100) {
                     valid = false;
                     error = "Person's age needs to be below 100";
@@ -414,7 +414,7 @@ function CustomerSignup() {
             value={customer.Fname.value}
             onChange={(e)=>{handleChange("Fname",e.target.value)}}
             onBlur={(e)=>{handleChange("Fname",e.target.value)}}
-            className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control" required/>
+            className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300 form-control inputGroup" required/>
           <div style={{display: (!customer.Fname.valid && customer.Fname.touched)?"block":"none"}}><p className="text-danger">{customer.Fname.error}</p></div>
         </div>
 

@@ -40,7 +40,7 @@ export default function Home() {
       <br/><br/>
       <footer className="footer text-center text-white">
         <div><br/>
-          <h5> RAJAT PATIL || ADITYA FAND || VISHWAJEET SHINDE || ADITYA MADHAVI || NILAY WAGHDE </h5>
+          <h5> RAJAT PATIL || ADITYA FAND || VISHWAJEET SHINDE || ADITYA MADHAVI || NILAY WAGDE </h5>
           <a href="https://know-it.co.in/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 18 }}>
                         https://know-it.co.in/
                                 </a>

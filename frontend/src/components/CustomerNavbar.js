@@ -34,7 +34,7 @@ export default function CustomerNavbar() {
             onMouseEnter={() => setShowDropdown(true)}
             onMouseLeave={() => setShowDropdown(false)}
           >
-             <NavLink to="/customer/bookinghistory" className="dropdown-item" style={{ fontSize: '15px' }}><b>History</b></NavLink>
+             <NavLink to="/customer/bookingdetails" className="dropdown-item" style={{ fontSize: '15px' }}><b>History</b></NavLink>
             <NavLink to="/customer/profile" className="dropdown-item" style={{ fontSize: '15px' }}><b>Profile</b></NavLink>
             <NavLink to="/logout" className="dropdown-item" style={{ fontSize: '15px' }}><b>Logout</b></NavLink>
           </NavDropdown>

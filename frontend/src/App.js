@@ -103,6 +103,7 @@ function App() {
      {/* Admin side    */}
      <Route path ="/admin" element={<AdminNavbar/>}>
              <Route path="adminhome" element={<AdminHome />} />
+             <Route path="bookingdetails" element={<BookingDetails/>}/>
              <Route path='carrequests' element={<ApproveCar/>}/> 
              <Route path="viewcars" element={<ViewCars/>}/>
              <Route path="loginrequests" element={<AdminApproval/>}/>
