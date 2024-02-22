@@ -1,32 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function BookingHistory() {
   const mystate = useSelector((state) => state.logged);
   const [requests, setRequests] = useState([]);
-  const [customer, setCustomer] = useState('');
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchRequests();
-    // fetchCustomer();
   }, []);
 
-  // const fetchCustomer = () => {
-  //   fetch(`http://localhost:8081/getCustomer?uid=${JSON.parse(localStorage.getItem("loggedUser")).uid}`, { method: 'GET' })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setCustomer(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching customer:', error);
-  //     });
-  // };
-
   const fetchRequests = () => {
-    var customer_id = customer.customer_id;
     fetch(`http://localhost:8081/bookingdetails?uid=${JSON.parse(localStorage.getItem("loggedUser")).uid}`, { method: 'GET' })
       .then((res) => res.json())
       .then((data) => {
@@ -38,15 +23,16 @@ export default function BookingHistory() {
       });
   };
 
-  const handleFeedback = (customer_id) => {
-    navigate("/customer/givefeedback")
-    console.log(`Feedback for car ID: ${customer_id}`); 
+  const handleFeedback = (car_id) => {
+    // Navigate to the feedback page and pass the car_id
+    navigate(`/customer/givefeedback/${car_id}`);
+    console.log(`Feedback for car ID: ${car_id}`);
   };
 
   var index = 0;
   return (
     <div className="container-fluid">
-      <h1 style={{fontFamily:"serif"}} className="text-center">Booking History</h1><br/><br/>
+      <h1 style={{ fontFamily: "serif" }} className="text-center">Booking History</h1><br/><br/>
       <div className="table-responsive">
         <table border={1} className="table table-striped">
           <thead>
@@ -72,7 +58,7 @@ export default function BookingHistory() {
                 <td>{request.amount} Rs.</td>
                 <td>{request.payment_date}</td>
                 <td>
-                  <button className="btn btn-primary" onClick={() => handleFeedback(request.bookingRequest.customer)}>
+                  <button className="btn btn-primary" onClick={() => handleFeedback(request.bookingRequest.car.car_id)}>
                     Give Feedback
                   </button>
                 </td>
