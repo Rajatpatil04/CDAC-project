@@ -24,7 +24,7 @@ const init = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'update':
-      const formValid = Object.values(state).every((field) => field.valid);
+      const formValid = Object.values(state).every((field) => field.valid) ;
       console.log(formValid); 
       return {
         ...state,[action.field]: {...state[action.field],
@@ -47,6 +47,7 @@ function CustomerSignup() {
   const [areas, setAreas] = useState([]);
   const[customers, setCustomers] = useState([]);
   const[users, setUsers] = useState([]);
+const [checkboxChecked, setCheckboxChecked] = useState(false);
   
   useEffect(() => {
     fetchAreas();
@@ -641,7 +642,7 @@ function CustomerSignup() {
 
         <div className="col-md-4">
           <div className="custom-control custom-checkbox mb-3">
-            <input type="checkbox" className="custom-control-input"  id="customControlValidation1" required />
+            <input type="checkbox" className="custom-control-input"  id="customControlValidation1" onChange={() => setCheckboxChecked(!checkboxChecked)} required />
             <label className="custom-control-label" htmlFor="customControlValidation1">Agree to terms and conditions </label>
             <div className="invalid-feedback"> Please tick the checkbox first </div>
           </div>
@@ -650,7 +651,7 @@ function CustomerSignup() {
         {registrationSuccess && (<div className="alert alert-success" role="alert">Registered successfully!</div>)}
         
       <div className='container '>
-        <button type=" button" className="text-white p-2 col-md-6 rounded bg-dark bd" onClick={(e)=>{handleSubmit(e)}} disabled={customer.formValid}>Register</button>
+        <button type=" button" className="text-white p-2 col-md-6 rounded bg-dark bd" onClick={(e)=>{handleSubmit(e)}} disabled={customer.formValid || !checkboxChecked}>Register</button>
         <button type="reset" value={"Reset"} className="btn p-2 col-md-6 btn-danger bd">Reset</button>
       </div>
       </form>
