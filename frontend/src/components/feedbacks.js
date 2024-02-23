@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 export default function Feedbacks(){
 
   const mystate = useSelector((state) => state.logged);
-  const [feedbacks,setfeedbacks] = useState("");
+  const [feedbacks,setfeedbacks] = useState([]);
 
   useEffect(()=>{
      fetchFeedbacks();
@@ -16,9 +16,9 @@ export default function Feedbacks(){
   const fetchFeedbacks=()=>{
       fetch(`https://localhost:7081/api/Feedback`,{method:'GET'})
       .then((resp) => resp.json())
-      .then((data)=> { console.log(data)
+      .then((data)=> { 
+        console.log(data);
         setfeedbacks(data)}
-
       ).catch(error=>console.log("Error in fetching feedbacks "+ error))      
   };
 
@@ -26,6 +26,7 @@ export default function Feedbacks(){
   var index=0;
   return(
     <div className="container">
+          <h2 className="text-center" style={{ fontFamily: "initial" }}>FeedBacks</h2> <br/><br/>
          <div className="table-responsive">
            <table className="table table-striped table-bordered">
              <thead className="table-success">
@@ -40,13 +41,13 @@ export default function Feedbacks(){
              </thead>
              <tbody>
              {feedbacks.map((fd) => (
-               <tr key={fd.feedback_id}> 
+               <tr key={fd.feedbackId}> 
                <td>{++index}</td>
-               <td>{fd.customer.fname} {fd.customer.lname}</td>
-               <td>{fd.car.car_id}</td>
-               <td>{fd.car.carModel.model_name}</td>
-               <td>{fd.car.host.fname} {fd.car.host.lname}</td>
-               <td>{fd.Feedback}</td>                  
+               <td>{fd.customer?.fname} {fd.customer?.lname}</td>
+               <td>{fd.carId}</td>
+               <td>{fd.carId?.modelId?.modelName}</td>
+               <td>{fd.carId?.hostId?.fname} {fd.carId?.hostId?.fname}</td>
+               <td>{fd.feedback1}</td>                  
                 </tr>
              ))}
              </tbody>

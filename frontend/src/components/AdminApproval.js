@@ -64,7 +64,6 @@ export default function AdminApproval() {
              return newdisable;
 
            });
-           alert('Car successfully rejected!');
          } else {
            console.error('Failed to update status.....');
          }
@@ -77,6 +76,7 @@ export default function AdminApproval() {
 
   return (
     <div className="container-fluid">
+      <br/><br/>
       <h2 className="text-center" style={{ fontFamily: "initial" }}>Customers</h2>
       <div className="table-responsive">
         <table  border={1} className="table table-striped table-bordered  ">
@@ -94,7 +94,7 @@ export default function AdminApproval() {
               <th>Adhar card</th>
               <th>Address</th>
               <th>Email ID</th>
-              <th></th>
+              <th>Approve</th>
             </tr>
           </thead>
           <tbody  className="text-center">
@@ -142,6 +142,7 @@ export default function AdminApproval() {
               <th>Adhar card</th>
               <th>Address</th>
               <th> Approve</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody className="text-center">
@@ -168,7 +169,7 @@ export default function AdminApproval() {
                 <td>
                   <button type='button' className={`btn ${disable[host.user.uid]? 'btn-danger':'btn-primary'}`} 
                    onClick={()=>handledisable(host.user.uid)}> 
-                  {disable[host.user.uid] ? 'Disabled' : 'Disabled'}
+                  {disable[host.user.uid] ? 'Disabled' : 'Disable'}
                   </button>
                 </td>
               </tr>

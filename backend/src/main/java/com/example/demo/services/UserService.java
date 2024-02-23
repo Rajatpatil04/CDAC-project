@@ -26,4 +26,8 @@ public class UserService {
 	 public int updateStatus(int uid) {
 		    return urepo.updateStatus(uid);
 	 }
+	 
+	 public int updateStatustoReject(int uid) {
+		    return urepo.updateStatusToReject(uid);
+	 }
 }

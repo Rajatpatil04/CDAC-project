@@ -49,4 +49,8 @@ public class UserController {
 	public int updateStatus(@RequestParam int uid) {
 	    return uservice.updateStatus(uid);
 	}
+	@PutMapping("/disablehost")
+	public int updateStatusToRejetc(@RequestParam int uid) {
+	    return uservice.updateStatustoReject(uid);
+	}
 }
