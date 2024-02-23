@@ -31,7 +31,7 @@ function ViewCars() {
     {
       id: 3,
       name: 'Ford Mustang',
-      pricePerHour: '₹350',
+      pricePerHour: '₹3500',
       transmission: 'Manual',
       fuelType: 'Petrol',
       image: mustang,

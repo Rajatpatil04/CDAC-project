@@ -80,7 +80,7 @@ export default  function BookingDetailsForHost(){
                       <td>{booking.bookingRequest.car.rc_no}</td>
                       <td>{booking.bookingRequest.pack.hours} hrs <br/>{booking.bookingRequest.pack.kilometers} kms </td>
                       <td>{formatDate(booking.bookingRequest.journey_date_time)}</td>
-                      <td>{booking.amount * 0.3}</td>
+                      <td>{booking.amount - booking.amount / 1.3}</td>
                       <td>{booking.amount}</td>
                       <td style={{ color: booking.bookingRequest.status === 0 ? "blue" : booking.bookingRequest.status === 1 ? "yellow" : booking.bookingRequest.status === 2 ? "red" : "green" }}>
                           {booking.bookingRequest.status === 0 ? "Initiated" : booking.bookingRequest.status === 1 ? "Approved" : booking.bookingRequest.status === 2 ? "Rejected" : "Confirmed"}
