@@ -34,6 +34,8 @@ import CustomerRequests from './components/PendingBookings';
 import GiveFeedback from './components/GiveFeedback';
 import BookingHistory from './components/BookingHistory';
 import ErrorPage from './components/ErrorPage';
+import BookingDetailsForHost from './components/BookingDetailsForHost';
+import Feedbacks from './components/feedbacks';
 
 function App() {
       const mystate = useSelector((state) => state.logged);
