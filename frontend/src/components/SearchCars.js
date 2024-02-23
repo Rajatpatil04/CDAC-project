@@ -53,8 +53,26 @@ const SearchCars = () => {
         return true;     
   }
 
+  const validatePackage = (value) => {
+    if (!value) {
+      alert('Please select a package');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+  
+  const validateDate = (value) => {
+    if (!value) {
+      setError1('Please select a date and time');
+      return false;
+    }
+    setError1('');
+    return true;
+  };  
+
   const handleSearch = () => {
-    if (!validateSeatingCapacity(seatingCapacity) || !validatejourneyDate(selectedDateTime)) {
+    if (!validateSeatingCapacity(seatingCapacity) || !validatejourneyDate(selectedDateTime) || !validateDate(selectedDateTime)) {
       return;
     }
     setLoading(true);
@@ -69,6 +87,13 @@ const SearchCars = () => {
       .finally(() => setLoading(false));
   };
   const handleSubmit = (carId) => {
+    if (
+      !validatePackage(selectedPackage) ||
+      !validateDate(selectedDateTime)
+    ) {
+
+      return;
+    }
     const data = {
       customer_id: JSON.parse(localStorage.getItem("loggedUser")).uid,
       car_id: carId,
@@ -76,6 +101,11 @@ const SearchCars = () => {
       journey_date_time: selectedDateTime,
       status : 0
     };
+
+    if (!selectedPackage) {
+      setError('Please select a package before raising the request');
+      return;
+    }
 
     console.log(data)
 
@@ -88,8 +118,8 @@ const SearchCars = () => {
     })
     .then(response => response.json())
     .then(data => {
-      alert('Booking successful:');
-      console.log('Booking successful:', data);
+      alert('Request raised successfully....!');
+      console.log('Request raised successfully:', data);
       navigate("/customer/customerhome")
     })
     .catch(error => {
@@ -136,6 +166,7 @@ const SearchCars = () => {
                 onBlur={(e) => {
                   validatejourneyDate(e.target.value);
                 }}
+                required
               />                 
             </Form.Group>
 

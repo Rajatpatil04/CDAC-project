@@ -396,7 +396,7 @@ const [checkboxChecked, setCheckboxChecked] = useState(false);
   fetch("http://localhost:8081/registercustomer",reqOption)
   .then((res)=>{return res.text()})
   .then((msg)=>{setRegistrationSuccess(true);})
-  if(customer.formValid == true){
+  if( checkboxChecked == true){
     console.log("login")
     navigate("/login");  
     console.log('Form submitted:', customer);
