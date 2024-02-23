@@ -52,7 +52,7 @@ const CustomerRequests = () => {
 
   return (
     <div className="container">
-      <h1 style={{ textAlign: "center" }}>Customer Requests</h1>
+      <h1 style={{ textAlign: "center" }}>Requests Confirmed By Host</h1>
       <table border="2" className="table table-striped">
         <thead>
           <tr>

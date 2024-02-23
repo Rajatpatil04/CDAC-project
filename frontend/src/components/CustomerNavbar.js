@@ -22,8 +22,8 @@ export default function CustomerNavbar() {
                   <Nav className="ml-auto" style={{ marginLeft: "auto" }}>
           <NavLink to="/customer/customerhome" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>HOME</b></NavLink>
           <NavLink to="/customer/bookingdetails" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>MY BOOKINGS</b></NavLink>
-          <NavLink to="/customer/viewcars" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>CARS</b></NavLink>
-          <NavLink to="/customer/bookingStatus" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>STATUS</b></NavLink>
+          {/* <NavLink to="/customer/viewcars" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>CARS</b></NavLink>
+          <NavLink to="/customer/bookingStatus" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>STATUS</b></NavLink> */}
           <NavLink to="/customer/approvedbooking" className="nav-link text-dark" style={{ fontSize: '22px',fontFamily:'serif' }}><b>CONFIRMED</b></NavLink>
 
           <NavDropdown

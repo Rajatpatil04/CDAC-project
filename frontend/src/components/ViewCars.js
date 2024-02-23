@@ -7,6 +7,7 @@ import wagonR from '../images/wagonR.jpg';
 import { useSelector } from 'react-redux';
 import harrier from '../images/harrier.jpg';
 import banner from '../images/banner.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function ViewCars() {
   useSelector(state => state.logged)
@@ -61,6 +62,8 @@ function ViewCars() {
     },
   ];
 
+  const navigate = useNavigate();
+
   const uniqueCars = cars.filter((car, index, self) =>
     index === self.findIndex(c => c.name === car.name && c.id === car.id)
   );
@@ -83,7 +86,7 @@ function ViewCars() {
                 <p className="card-text">Fuel Type: {car.fuelType}</p>
               </div>
               <div className="card-footer d-flex justify-content-center">
-                <button className="btn btn-primary">Book This Car</button>
+                <button className="btn btn-primary" onClick={() => navigate("/login")}>Book This Car</button>
               </div>
             </div>
           </div>

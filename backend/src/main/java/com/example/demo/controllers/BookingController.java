@@ -22,7 +22,19 @@ public class BookingController {
 	
 	@GetMapping("/bookingdetails")
 	public List<Booking> getAllBookingsForCustomer(@RequestParam("uid") int uid){
+		System.out.println(uid);
 		return bservice.getaAllBookingsForCustomer(uid);
+	}
+	
+	@GetMapping("/getallbookingdetails")
+	public List<Booking> getAllBookings(){
+		return bservice.getaAllBookings();
+	}
+	
+	@GetMapping("/getallbookingdetailsforhost")
+	public List<Booking> getAllBookingsForHost(@RequestParam("uid") int uid){
+		System.out.println(uid);
+		return bservice.getaAllBookingsForHost(uid);
 	}
 	
 	@PostMapping("/confirmbooking")

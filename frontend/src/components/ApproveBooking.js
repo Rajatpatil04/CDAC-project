@@ -38,6 +38,16 @@ export default function ApproveBooking() {
       .catch((error) => console.error('Error in changing status:', error));
   };
 
+  // const formatDate = (dateString) => {
+  //   try {
+  //     const formattedDate = new Date(dateString).toLocaleString();
+  //     return formattedDate;
+  //   } catch (error) {
+  //     console.error('Error formatting date:', error);
+  //     return 'Invalid date';
+  //   }
+  // };
+
   const handleDeletion = (req_id) => {
     fetch(`http://localhost:8081/rejectbooking?req_id=${req_id}`, { method: 'PUT' })
       .then((res) => res.json())
@@ -56,21 +66,21 @@ export default function ApproveBooking() {
       .catch((error) => console.error('Error in changing status:', error));
   };
 
-  // const formatDate = (dateArray) => {
-  //   try {
-  //     const [year, month, day, hour, minute] = dateArray;
-  //     const journeyDate = new Date(year, month - 1, day, hour, minute);
+  const formatDate = (dateArray) => {
+    try {
+      const [year, month, day, hour, minute] = dateArray;
+      const journeyDate = new Date(year, month - 1, day, hour, minute);
 
-  //     if (isNaN(journeyDate.getTime())) {
-  //       throw new Error('Invalid date');
-  //     }
+      if (isNaN(journeyDate.getTime())) {
+        throw new Error('Invalid date');
+      }
 
-  //     return `${journeyDate.toLocaleDateString()} ${journeyDate.toLocaleTimeString()}`;
-  //   } catch (error) {
-  //     console.error('Error formatting journey date:', error);
-  //     return 'Invalid date';
-  //   }
-  // };
+      return `${journeyDate.toLocaleDateString()} ${journeyDate.toLocaleTimeString()}`;
+    } catch (error) {
+      console.error('Error formatting journey date:', error);
+      return 'Invalid date';
+    }
+  };
 
   useEffect(() => {
     fetchBooking();
@@ -107,8 +117,8 @@ export default function ApproveBooking() {
                 <td>{request.customer.lname}</td>
                 <td>{request.customer.contact}</td>
                 <td>{request.car.carModel.model_name}</td>
-                <td>{(request.journey_date_time)}</td>
-                <td>{(request.expected_return_date)}</td>
+                <td>{formatDate(request.journey_date_time)}</td>
+                <td>{formatDate(request.expected_return_date)}</td>
                 <td>{request.pack.hours}</td>
                 <td>{request.pack.kilometers}</td>
                 <td>

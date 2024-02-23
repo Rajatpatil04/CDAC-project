@@ -27,7 +27,7 @@ public interface BookingRequestRepository extends JpaRepository<BookingRequest, 
 //	@Query("SELECT b From BookingRequest b WHERE b.car_id IN (SELECT c.car_id from Car c WHERE c.host_id = : host_id )")
 //	public List<BookingRequest> getAllRequests(int host_id);
 	
-	@Query(value = "SELECT * FROM booking_requests b WHERE b.car_id IN (SELECT c.car_id FROM cars c WHERE c.host_id = :host_id)", nativeQuery = true)
+	@Query(value = "SELECT * FROM booking_requests b WHERE b.car_id IN (SELECT c.car_id FROM cars c WHERE c.host_id = :host_id )AND b.status = 0", nativeQuery = true)
 	public List<BookingRequest> getAllRequestsForHost(int host_id);
 
 //	@Query("SELECT b FROM BookingRequest b WHERE b.customer_id = :customer_id AND b.status = 1")

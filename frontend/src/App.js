@@ -34,6 +34,7 @@ import CustomerRequests from './components/PendingBookings';
 import GiveFeedback from './components/GiveFeedback';
 import BookingHistory from './components/BookingHistory';
 import ErrorPage from './components/ErrorPage';
+import BookingDetailsForHost from './components/BookingDetailsForHost';
 
 function App() {
       const mystate = useSelector((state) => state.logged);
@@ -114,6 +115,7 @@ function App() {
              <Route path="viewcars" element={<ViewCars/>}/>
              <Route path="addcars" element={<CarRegistrationForm/>}/>
              <Route path="viewbooking" element={<ApproveBooking/>}/>
+             <Route path="hostbookings" element={<BookingDetailsForHost/>}/>
           
         </Route>
         

@@ -46,7 +46,10 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 	@Query(value = "SELECT * FROM cars c " +
             "WHERE c.model_id IN (SELECT m.model_id FROM models m WHERE m.cat_id = :cat_id) " +
             "AND c.model_id IN (SELECT m.model_id FROM models m WHERE m.seating_capacity = :seating_capacity) " +
-            "AND c.car_id NOT IN (SELECT br.car_id FROM booking_requests br WHERE br.journey_date_time <= :journeyDate AND :journeyDate <= br.expected_return_date )", nativeQuery = true) // status pending
+            "AND c.car_id NOT IN (SELECT br.car_id FROM booking_requests br WHERE br.journey_date_time <= :journeyDate AND :journeyDate <= br.expected_return_date )" 
+       //     + "AND c.car_id IN (SELECT b.car_id FROM booking_requests b WHERE b.status IN (1,2) )"
+            +"AND c.status = 1"
+            ,nativeQuery = true) // status pending
 	List<Car> getSpecificCars(@Param("cat_id") int cat_id, @Param("seating_capacity") int seating_capacity, @Param("journeyDate") LocalDateTime journeyDate);
 
 

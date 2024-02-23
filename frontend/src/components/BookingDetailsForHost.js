@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default  function BookingDetails(){
+export default  function BookingDetailsForHost(){
 
   const mystate =useSelector(state=>state.logged)
   const [Booking,setBooking] = useState([]);
@@ -24,7 +24,7 @@ export default  function BookingDetails(){
   var uid = JSON.parse(localStorage.getItem("loggedUser")).uid;
   const fetchBooking =()=>{
     console.log(uid);
-      fetch(`http://localhost:8081/getallbookingdetails`,{method:'GET'})
+      fetch(`http://localhost:8081/getallbookingdetailsforhost?uid=${uid}`,{method:'GET'})
       .then((resp)=>resp.json())
       .then((data)=>{
         console.log(data);
@@ -45,9 +45,9 @@ export default  function BookingDetails(){
           <thead>
             <tr>
             <th>SR. NO.</th>
-            <th>Host Name</th>
+            {/* <th>Host Name</th> */}
             <th>Customer Name</th>
-            <th>Area</th>
+            {/* <th>Area</th> */}
             <th>Car Name</th>
             {/* <th>Fuel type</th>
             <th>Transmission</th>
@@ -67,9 +67,9 @@ export default  function BookingDetails(){
           {Booking.map((booking) => (
             <tr key={booking.booking_id}>
                       <td>{++index}</td>
-                      <td>{booking.bookingRequest.car.host.fname} {booking.bookingRequest.car.host.lname} </td>
+                      {/* <td>{booking.bookingRequest.car.host.fname} {booking.bookingRequest.car.host.lname} </td> */}
                       <td>{booking.bookingRequest.customer.fname} {booking.bookingRequest.customer.lname} </td>
-                      <td>{booking.bookingRequest.car.host.address},{booking.bookingRequest.car.host.area.area_name}</td>
+                      {/* <td>{booking.bookingRequest.car.host.address},{booking.bookingRequest.car.host.area.area_name}</td> */}
                       <td>{booking.bookingRequest.car.carModel.model_name}</td>
                       {/* <td>{booking.bookingRequest.car.fuelType.fuel_type}</td>
                       <td>{booking.bookingRequest.car.carModel.transmission_type}</td>

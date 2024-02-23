@@ -8,6 +8,7 @@ export default function CarRegistrationForm() {
     const [fuelTypes, setFuelTypes] = useState([]);
     const [carModels, setCarModels] = useState([]);
     const [cars, setCars] = useState([]);
+    const[msg, setMsg] = useState("");
 
 
   const initialFormState = {
@@ -18,8 +19,8 @@ export default function CarRegistrationForm() {
     insurance_type: { value: "", valid: false, touched: false, error: "" },
     insurance_exp_date: { value: "", valid: false, touched: false, error: "" },
     price_per_hour: { value: "", valid: false, touched: false, error: "" },
-    music_system: { value: "", valid: true, touched: false, error: "" },
-    ac: { value: "", valid: true, touched: false, error: "" },
+    music_system: { value: true, valid: true, touched: false, error: "" },
+    ac: { value: true, valid: true, touched: false, error: "" },
     mileage: { value: "", valid: false, touched: false, error: "" },
     formValid: false,
 
@@ -66,6 +67,7 @@ export default function CarRegistrationForm() {
       fetch("http://localhost:8081/getallcars")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setCars(data);
       })
       .catch((error) => {
@@ -139,35 +141,39 @@ export default function CarRegistrationForm() {
         break;
       }
     }
-    dispatch({ type: "update", data: { key, value, touched: true, valid, error, formValid } });
 
-    // if (key === "rc_no") {
-    //   checkRcNo(value);
-    // }
+      console.log(formData.rc_no.error);
+      console.log(value);
+      checkRcNo(value.trim());
+
+    dispatch({ type: "update", data: { key, value, touched: true, valid, error, formValid } });
   };
 
   const checkRcNo = (value) => {
     const isRc_No_Taken = cars.some((car) => car.rc_no === value);
-  
+    console.log(msg);
     if (isRc_No_Taken) {
+      setMsg("Car is already registered!")
+      console.log(msg);
       dispatch({
-        type: 'update',
-        key: 'rc_no',
+        type: "update",
+        key: "rc_no",
         value,
         valid: false,
-        error: 'Car is already registered!',
+        error: "Car is already registered!",
       });
     } else {
+      setMsg("")
       dispatch({
-        type: 'update',
-        key: 'rc_no',
+        type: "update",
+        key: "rc_no",
         value,
         valid: true,
-        error: '',
+        error: "",
       });
     }
   };
-
+  
   // const handleFileChange = (event) => {
   //   const file = event.target.files[0];
   //   dispatch({ type: "update", data: { key: "carImage", value: file, touched: true, valid: true, error: "" } });
@@ -176,9 +182,9 @@ export default function CarRegistrationForm() {
  
   const handleSubmit = (e)=>{
     //console.log(JSON.parse(localStorage.getItem("loggedUser")).uid);
-    console.log(formData.ac.value);
-    console.log(formData.music_system.value);
-    console.log(formData)
+    //console.log(formData.ac.value);
+    //console.log(formData.music_system.value);
+    //console.log(formData)
       e.preventDefault();
       const reqOptions = {
         method :'POST',
@@ -207,7 +213,7 @@ export default function CarRegistrationForm() {
            throw new Error("server error");  
       })
       .then(obj => {
-              console.log(JSON.stringify(obj))
+              //console.log(JSON.stringify(obj))
               var fd = new FormData();
               fd.append("file",file); 
               const reqOptions1 ={
@@ -219,8 +225,8 @@ export default function CarRegistrationForm() {
               }
               fetch("http://localhost:8081/uploadimage/"+obj.car_id,reqOptions1)
               .then(resp => resp.json())
-              .then(data => console.log(JSON.stringify(data)))
-
+              .then(data => JSON.stringify(data))
+              alert("Car Added successfully...!");
               navigate('/host/hosthome');
       })
       .catch((error)=> {console.log("Error:" + error)})
@@ -258,11 +264,17 @@ export default function CarRegistrationForm() {
           <label className="form-label">RC Number:</label>
             <input className="form-control" name="rc_no" type="text"placeholder="RC NUMBER" 
              onChange={(e)=>{handleChange("rc_no",e.target.value)}} 
-             onBlur={(e)=>{handleChange("rc_no",e.target.value)
+             onBlur={(e)=>{handleChange("rc_no",e.target.value);
              checkRcNo(e.target.value)}}
              required/>
 
-              <div style={{display: (!formData.rc_no.valid && formData.rc_no.touched)?"block":"none"}}><p className="text-danger">{formData.rc_no.error}</p></div>
+              {/* <div style={{display: (!formData.rc_no.valid && formData.rc_no.touched)?"block":"none"}}><p className="text-danger">{formData.rc_no.error}</p></div> */}
+              {/* <div style={{display: (!formData.rc_no.valid && formData.rc_no.touched)?"block":"none"}}>
+  <p className="text-danger">{formData.rc_no.error}</p> {msg}
+</div> */}
+              <p className="text-danger">{formData.rc_no.error}{msg}</p> 
+
+
              </div>
 
           <div className="col-md-4">
@@ -291,7 +303,7 @@ export default function CarRegistrationForm() {
               <option value="silver">Silver</option>
               <option value="brown">Brown</option>
               <option value="gold">Gold</option>
-              <option value="others">Gold</option>
+              <option value="others">Other</option>
             </select>
           </div>
 
@@ -456,7 +468,7 @@ export default function CarRegistrationForm() {
              </div>
 
           <div className="col-12">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" disabled = {!formData.formValid}>
               Submit
             </button>
           </div>
