@@ -75,8 +75,8 @@ export default function ApproveCar(){
             <h2 style={{fontFamily:"initial" ,textAlign:"center"}}>CARS</h2><br/><br/> 
             <div className="table-responsive">
 
-      <table border="1" className="table table-striped">
-        <thead>
+      <table border="1" className="table table-striped table-bordered">
+        <thead className=" table-success text-center">
           <tr>
             <th>Sr. no</th>
             <th>Model Name</th>
@@ -94,7 +94,7 @@ export default function ApproveCar(){
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-center">
           {cars.map((car) => (
             <tr key={car.car_id}>
                 <td>{indexc++}</td>

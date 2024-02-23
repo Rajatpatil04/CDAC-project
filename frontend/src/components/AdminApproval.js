@@ -6,6 +6,7 @@ export default function AdminApproval() {
   const [customers, setCustomers] = useState([]);
   const [hosts, setHosts] = useState([]);
   const [approve, setApprove] = useState([]);
+  const [disable, setdisable] = useState([]);
 
   useEffect(() => {
     fetchCustomers();
@@ -50,16 +51,37 @@ export default function AdminApproval() {
       .catch((error) => console.error('Error in changing status:', error));
   };
 
+  const handledisable=(uid)=>{
+    fetch(`http://localhost:8081/disablehost?uid=${uid}`,{method:'PUT'})
+    .then((res)=>res.json())
+    .then((data)=>{
+         console.log(data);
+         console.log(data);
+         if (data === 1) {
+           setdisable((prevdisable) => {
+             const newdisable = [...disable];
+             newdisable[uid] = true; 
+             return newdisable;
+
+           });
+         } else {
+           console.error('Failed to update status.....');
+         }
+       })
+       .catch((error) => console.error('Error in disabling host:', error));
+   };
+
   var indexc = 1;
   var indexh = 1;
 
   return (
     <div className="container-fluid">
+      <br/><br/>
       <h2 className="text-center" style={{ fontFamily: "initial" }}>Customers</h2>
       <div className="table-responsive">
-        <table  border={1} className="table table-striped">
-          <thead>
-            <tr>
+        <table  border={1} className="table table-striped table-bordered  ">
+          <thead className=" table-success text-center">
+            <tr >
               <th>Sr. no</th>
               <th>First Name</th>
               <th>Last Name</th>
@@ -72,10 +94,10 @@ export default function AdminApproval() {
               <th>Adhar card</th>
               <th>Address</th>
               <th>Email ID</th>
-              <th></th>
+              <th>Approve</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody  className="text-center">
             {customers.map((customer) => (
               <tr key={customer.customer_id}>
                 <td>{indexc++}</td>
@@ -106,8 +128,8 @@ export default function AdminApproval() {
       <br /><br /><br />
       <h2 className="text-center" style={{ fontFamily: "initial" }}>Hosts</h2>
       <div className="table-responsive">
-        <table border={1} className="table table-striped">
-          <thead>
+        <table border={1} className="table table-striped table-bordered">
+          <thead className="table-success text-center" >
             <tr>
               <th>Sr. no</th>
               <th>First Name</th>
@@ -120,9 +142,10 @@ export default function AdminApproval() {
               <th>Adhar card</th>
               <th>Address</th>
               <th> Approve</th>
+              <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {hosts.map((host) => (
               <tr key={host.host_id}>
                 <td>{indexh++}</td>
@@ -141,6 +164,12 @@ export default function AdminApproval() {
                     className={`btn ${approve[host.user.uid] ? 'btn-success' : 'btn-primary'}`}
                     onClick={() => handleApproval(host.user.uid)}>
                     {approve[host.user.uid] ? 'Approved' : 'Approve'}
+                  </button>
+                </td>
+                <td>
+                  <button type='button' className={`btn ${disable[host.user.uid]? 'btn-danger':'btn-primary'}`} 
+                   onClick={()=>handledisable(host.user.uid)}> 
+                  {disable[host.user.uid] ? 'Disabled' : 'Disable'}
                   </button>
                 </td>
               </tr>

@@ -34,7 +34,6 @@ import CustomerRequests from './components/PendingBookings';
 import GiveFeedback from './components/GiveFeedback';
 import BookingHistory from './components/BookingHistory';
 import ErrorPage from './components/ErrorPage';
-import BookingDetailsForHost from './components/BookingDetailsForHost';
 
 function App() {
       const mystate = useSelector((state) => state.logged);
@@ -105,6 +104,7 @@ function App() {
      <Route path ="/admin" element={<AdminNavbar/>}>
              <Route path="adminhome" element={<AdminHome />} />
              <Route path="bookingdetails" element={<BookingDetails/>}/>
+             <Route path="viewfeedback" element={<Feedbacks/>}/>
              <Route path='carrequests' element={<ApproveCar/>}/> 
              <Route path="viewcars" element={<ViewCars/>}/>
              <Route path="loginrequests" element={<AdminApproval/>}/>
