@@ -40,8 +40,8 @@ export default  function BookingDetails(){
   return(
     <div className="container-fluid">
       <div className="table-responsive">
-      <table border={1} className="table table-striped" >
-          <thead>
+      <table border={1} className="table table-striped table-bordered" >
+          <thead className=" table-success text-center">
             <tr>
             <th>SR. NO.</th>
             <th>Host Name</th>
@@ -61,7 +61,7 @@ export default  function BookingDetails(){
             <th>Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
           {Booking.map((booking) => (
             <tr key={booking.booking_id}>
                       <td>{++index}</td>

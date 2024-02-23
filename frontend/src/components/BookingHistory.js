@@ -24,9 +24,12 @@ export default function BookingHistory() {
   };
 
   const handleFeedback = (car_id) => {
-    // Navigate to the feedback page and pass the car_id
-    navigate(`/customer/givefeedback/${car_id}`);
-    console.log(`Feedback for car ID: ${car_id}`);
+  const request = {
+       car_id: car_id,    
+  };
+     console.log(request);
+     navigate("../givefeedback", { state: { request } });
+    
   };
 
   var index = 0;
@@ -34,8 +37,8 @@ export default function BookingHistory() {
     <div className="container-fluid">
       <h1 style={{ fontFamily: "serif" }} className="text-center">Booking History</h1><br/><br/>
       <div className="table-responsive">
-        <table border={1} className="table table-striped">
-          <thead>
+        <table border={1} className="table table-striped table-bordered">
+          <thead className="text-center table-success">
             <tr>
               <th>SR. NO.</th>
               <th>Selected Car</th>

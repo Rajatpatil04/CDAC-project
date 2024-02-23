@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const GiveFeedback = (props) => {
+const GiveFeedback = () => {
   const [feedback, setFeedback] = useState('');
   const [customer, setCustomer] = useState(null);
+   const [car_id,setcar_id] = useState("");
 
+   const location = useLocation();
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
   };
 
+  useEffect(()=>{
+    if (location.state) {
+      setcar_id(location.state.request.car_id || "");
+      console.log(location.state.request.car_id);
+  
+  }
+  },[]);
   useEffect(() => {
     fetchCustomer();
   }, []);
@@ -27,6 +37,7 @@ const GiveFeedback = (props) => {
    
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(car_id);
     
     // Check if customer data is available
     if (!customer) {
@@ -34,18 +45,18 @@ const GiveFeedback = (props) => {
       return;
     }
 
-  const carid = props.car_id;
+ 
     const reqOption = {
       method: 'POST',
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
         Feedback1: feedback,
-        CustomerId: customer.Customer_id,
-        CarId: carid  
+        CustomerId: customer.customer_id,
+        CarId: car_id 
       })
     };
 
-    fetch('http://localhost:8081/api/Feedback/givefeedback', reqOption)
+    fetch('https://localhost:7081/api/Feedback/givefeedback', reqOption)
       .then(response => response.json())
       .then(data => {
         console.log('Feedback submitted successfully:', data);

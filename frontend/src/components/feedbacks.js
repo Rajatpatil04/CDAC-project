@@ -1,18 +1,25 @@
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 
 
-export default function ViewFeedback(){
+export default function Feedbacks(){
+
   const mystate = useSelector((state) => state.logged);
   const [feedbacks,setfeedbacks] = useState("");
 
   useEffect(()=>{
      fetchFeedbacks();
-
-  })
+  },[])
 
   const fetchFeedbacks=()=>{
-      fetch(`http://localhost:7050`)
+      fetch(`https://localhost:7081/api/Feedback`,{method:'GET'})
+      .then((resp) => resp.json())
+      .then((data)=> { console.log(data)
+        setfeedbacks(data)}
+
+      ).catch(error=>console.log("Error in fetching feedbacks "+ error))      
   };
 
 
@@ -20,8 +27,8 @@ export default function ViewFeedback(){
   return(
     <div className="container">
          <div className="table-responsive">
-           <table className="table table-striped">
-             <thead>
+           <table className="table table-striped table-bordered">
+             <thead className="table-success">
               <tr>
                  <th>SR. No.</th>
                  <th>Customer Name</th>

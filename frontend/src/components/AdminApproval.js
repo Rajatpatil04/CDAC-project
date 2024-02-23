@@ -57,9 +57,9 @@ export default function AdminApproval() {
     <div className="container-fluid">
       <h2 className="text-center" style={{ fontFamily: "initial" }}>Customers</h2>
       <div className="table-responsive">
-        <table  border={1} className="table table-striped">
-          <thead>
-            <tr>
+        <table  border={1} className="table table-striped table-bordered  ">
+          <thead className=" table-success text-center">
+            <tr >
               <th>Sr. no</th>
               <th>First Name</th>
               <th>Last Name</th>
@@ -75,7 +75,7 @@ export default function AdminApproval() {
               <th></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody  className="text-center">
             {customers.map((customer) => (
               <tr key={customer.customer_id}>
                 <td>{indexc++}</td>
@@ -106,8 +106,8 @@ export default function AdminApproval() {
       <br /><br /><br />
       <h2 className="text-center" style={{ fontFamily: "initial" }}>Hosts</h2>
       <div className="table-responsive">
-        <table border={1} className="table table-striped">
-          <thead>
+        <table border={1} className="table table-striped table-bordered">
+          <thead className="table-success text-center" >
             <tr>
               <th>Sr. no</th>
               <th>First Name</th>
@@ -122,7 +122,7 @@ export default function AdminApproval() {
               <th> Approve</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {hosts.map((host) => (
               <tr key={host.host_id}>
                 <td>{indexh++}</td>

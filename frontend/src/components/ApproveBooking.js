@@ -82,8 +82,8 @@ export default function ApproveBooking() {
     <div className="container-fluid">
       <h1 style={{ textAlign: "center" }}>REQUESTS FOR CARS</h1>
       <div className="table-responsive">
-        <table  border={1} className="table table-striped">
-          <thead>
+        <table  border={1} className="table table-striped table-bordered">
+          <thead className=" table-success text-center">
             <tr>
               <th>SR. NO.</th>
               <th>Customer First Name</th>
@@ -98,7 +98,7 @@ export default function ApproveBooking() {
               <th>Reject</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {Booking.map((request) => (
               <tr key={request.req_id}>
 
