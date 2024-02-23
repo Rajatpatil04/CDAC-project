@@ -6,6 +6,7 @@ export default function AdminApproval() {
   const [customers, setCustomers] = useState([]);
   const [hosts, setHosts] = useState([]);
   const [approve, setApprove] = useState([]);
+  const [disable, setdisable] = useState([]);
 
   useEffect(() => {
     fetchCustomers();
@@ -49,6 +50,27 @@ export default function AdminApproval() {
       })
       .catch((error) => console.error('Error in changing status:', error));
   };
+
+  const handledisable=(uid)=>{
+    fetch(`http://localhost:8081/disablehost?uid=${uid}`,{method:'PUT'})
+    .then((res)=>res.json())
+    .then((data)=>{
+         console.log(data);
+         console.log(data);
+         if (data === 1) {
+           setdisable((prevdisable) => {
+             const newdisable = [...disable];
+             newdisable[uid] = true; 
+             return newdisable;
+
+           });
+           alert('Car successfully rejected!');
+         } else {
+           console.error('Failed to update status.....');
+         }
+       })
+       .catch((error) => console.error('Error in disabling host:', error));
+   };
 
   var indexc = 1;
   var indexh = 1;
@@ -141,6 +163,12 @@ export default function AdminApproval() {
                     className={`btn ${approve[host.user.uid] ? 'btn-success' : 'btn-primary'}`}
                     onClick={() => handleApproval(host.user.uid)}>
                     {approve[host.user.uid] ? 'Approved' : 'Approve'}
+                  </button>
+                </td>
+                <td>
+                  <button type='button' className={`btn ${disable[host.user.uid]? 'btn-danger':'btn-primary'}`} 
+                   onClick={()=>handledisable(host.user.uid)}> 
+                  {disable[host.user.uid] ? 'Disabled' : 'Disabled'}
                   </button>
                 </td>
               </tr>
