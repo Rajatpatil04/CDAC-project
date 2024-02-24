@@ -108,7 +108,11 @@ export default function ApproveCar(){
               <td>{car.mileage}</td>
               <td>{car.color}</td>
               <td>{car.price_per_hour}</td>
-              <td></td>
+              <td><img
+                    src={`data:image/jpeg;base64,${car && car.car_image}`}
+                    alt={`Car Image ${car.car_id}`}
+                    style={{ maxWidth: "1000px", maxHeight: "1000px" }}
+                  /></td>
               <td>
               <button type="button" className={`btn ${approve[car.car_id] ? 'btn-success' : 'btn-primary'}`}
                   onClick={() => handleApproval(car.car_id)} >

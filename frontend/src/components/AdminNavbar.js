@@ -22,7 +22,7 @@ export default function AdminNavbar(){
             </div> */}
             
             <Nav className="ml-auto aroutes">
-              <NavLink to ="/admin/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink>
+              {/* <NavLink to ="/admin/viewcars" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CARS</b></h5></NavLink> */}
               <NavLink to ="/admin/viewfeedback" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>FEEDBACKS</b></h5></NavLink>
               <NavLink to ="/admin/bookingdetails" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>BOOKINGS</b></h5></NavLink>
               <NavLink to ="/admin/carrequests" className="nav-link text-danger"><h5 style={{ fontFamily: "serif" }}><b>CAR REQUESTS</b></h5></NavLink>
