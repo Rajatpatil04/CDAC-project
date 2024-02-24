@@ -34,8 +34,8 @@ export default function Feedbacks(){
                  <th>SR. No.</th>
                  <th>Customer Name</th>
                  <th>Car ID</th>
-                 <th>Car Name</th>
-                 <th>Host Name</th>
+                 {/* <th>Car Name</th>
+                 <th>Host Name</th> */}
                  <th>Feedback</th>
               </tr>
              </thead>
@@ -45,8 +45,8 @@ export default function Feedbacks(){
                <td>{++index}</td>
                <td>{fd.customer?.fname} {fd.customer?.lname}</td>
                <td>{fd.carId}</td>
-               <td>{fd.carId?.modelId?.modelName}</td>
-               <td>{fd.carId?.hostId?.fname} {fd.carId?.hostId?.fname}</td>
+               {/* <td>{fd.carId?.modelId?.modelName}</td>
+               <td>{fd.carId?.hostId?.fname} {fd.carId?.hostId?.fname}</td> */}
                <td>{fd.feedback1}</td>                  
                 </tr>
              ))}
