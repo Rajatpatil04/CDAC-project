@@ -30,7 +30,6 @@ const Login = () => {
           const resp = await fetch('http://localhost:8081/login', req);
   
           if (!resp.ok) {
-              // Handle non-OK status (e.g., 401 Unauthorized)
               if (resp.status === 401) {
                   console.log("Login Failed...");
                   setError("Login Failed...");
@@ -40,6 +39,7 @@ const Login = () => {
           }
   
           const data = await resp.json();
+          console.log(data);
   
           if (data === null) {
               console.log("Login Failed...");
@@ -70,6 +70,65 @@ const Login = () => {
           setError("Invalid Credentials. Try again.");
       }
   };
+
+// const handleLogin = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//         const req = {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({
+//                 username: username,
+//                 password: password,
+//             }),
+//         };
+
+//         const resp = await fetch('http://localhost:8081/login', req);
+
+//         if (!resp.ok) {
+//             if (resp.status === 401) {
+//                 console.log("Login Failed...");
+//                 setError("Login Failed...");
+//             } else {
+//                 throw new Error(`HTTP error! Status: ${resp.status}`);
+//             }
+//         }
+
+//         const data = await resp.json();
+//         console.log(data);
+
+//         if (data === null) {
+//             console.log("Login Failed...");
+//             setError("Login Failed...");
+//         } else {
+//             if (data.status === false) {
+//                 console.log("Pending Approval...");
+//                 setError("Pending Approval...");
+//             } else if (data.role_id === 1) {
+//                 console.log("login successful")
+//                 localStorage.setItem("loggedUser", JSON.stringify(data));
+//                 dispatch(login());
+//                 navigate("/admin/adminhome");
+//             } else if (data.role_id === 2) {
+//                 console.log("login successful")
+//                 localStorage.setItem("loggedUser", JSON.stringify(data));
+//                 dispatch(login());
+//                 navigate("/host/hosthome");
+//             } else if (data.role_id === 3) {
+//                 console.log("login successful")
+//                 localStorage.setItem("loggedUser", JSON.stringify(data));
+//                 dispatch(login());
+//                 navigate("/customer/customerhome");
+//             }
+//         }
+//     } catch (error) {
+//         //console.error('Login failed:', error.message);
+//         setError("Invalid Credentials. Try again.");
+//     }
+// };
   
     
         
