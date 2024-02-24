@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const GiveFeedback = () => {
   const [feedback, setFeedback] = useState('');
@@ -10,6 +10,8 @@ const GiveFeedback = () => {
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
   };
+
+  const navigate = useNavigate();
 
   useEffect(()=>{
     if (location.state) {
@@ -60,7 +62,7 @@ const GiveFeedback = () => {
       .then(response => response.json())
       .then(data => {
         console.log('Feedback submitted successfully:', data);
-      
+       navigate("/customer/customerhome");
         setFeedback('');
       })
       .catch(error => {
@@ -84,7 +86,7 @@ const GiveFeedback = () => {
           ></textarea>
         </div>
         <br/>
-        <button type="submit" className="btn btn-primary col-sm-6">
+        <button type="submit" className="btn btn-primary col-sm-6"  >
           Submit Feedback
         </button>
       </form>
