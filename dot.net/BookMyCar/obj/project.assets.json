@@ -7253,24 +7253,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Escanor\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\adity\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\cdac\\CDAC-project\\BookMyCar\\BookMyCar.csproj",
+      "projectUniqueName": "C:\\Users\\adity\\Documents\\GitHub\\CDAC-project\\dot.net\\BookMyCar\\BookMyCar.csproj",
       "projectName": "BookMyCar",
-      "projectPath": "D:\\cdac\\CDAC-project\\BookMyCar\\BookMyCar.csproj",
-      "packagesPath": "C:\\Users\\Escanor\\.nuget\\packages\\",
-      "outputPath": "D:\\cdac\\CDAC-project\\BookMyCar\\obj\\",
+      "projectPath": "C:\\Users\\adity\\Documents\\GitHub\\CDAC-project\\dot.net\\BookMyCar\\BookMyCar.csproj",
+      "packagesPath": "C:\\Users\\adity\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\adity\\Documents\\GitHub\\CDAC-project\\dot.net\\BookMyCar\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Escanor\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\adity\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
